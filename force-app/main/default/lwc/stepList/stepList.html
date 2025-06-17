@@ -1,0 +1,8 @@
+<template>
+    <template for:each={groupedSteps} for:item="group">
+        <h3 key={group.groupName}>{group.groupName}</h3>
+        <template for:each={group.steps} for:item="step">
+            <c-step-detail key={step.Id} step={step} is-admin={isAdmin}></c-step-detail>
+        </template>
+    </template>
+</template>
