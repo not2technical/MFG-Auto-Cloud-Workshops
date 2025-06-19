@@ -68,10 +68,31 @@ public static void markStepComplete(Id stepId, Boolean isComplete) {
         step.Image_URL__c = newUrl;
         update step;
     }
-    @AuraEnabled(cacheable=true)
+    /* original
+       @AuraEnabled(cacheable=true)
 public static List<Workshop__c> getAllWorkshops() {
     return [SELECT Id, Name FROM Workshop__c ORDER BY CreatedDate DESC];
 }
+*/
+    @AuraEnabled(cacheable=true)
+public static List<Map<String, Object>> getAllWorkshops() {
+    List<Workshop__c> workshops = [
+        SELECT Id, Name, 
+            (SELECT Id FROM Workshop_Steps__r)
+        FROM Workshop__c
+    ];
+    
+    List<Map<String, Object>> results = new List<Map<String, Object>>();
+    for (Workshop__c w : workshops) {
+        Map<String, Object> wsMap = new Map<String, Object>();
+        wsMap.put('Id', w.Id);
+        wsMap.put('Name', w.Name);
+        wsMap.put('StepCount', w.Workshop_Steps__r != null ? w.Workshop_Steps__r.size() : 0);
+        results.add(wsMap);
+    }
+    return results;
+}
+
     @AuraEnabled
 public static void startWorkshop(Id workshopId) {
     List<Workshop_Step__c> steps = [SELECT Id FROM Workshop_Step__c WHERE Workshop__c = :workshopId];
