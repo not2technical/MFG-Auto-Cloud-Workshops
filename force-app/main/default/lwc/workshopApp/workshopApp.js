@@ -27,37 +27,48 @@ export default class WorkshopApp extends LightningElement {
     get isLastPage() { return this.currentPage === this.totalPages; }
 
     connectedCallback() {
-        getAllWorkshops().then(data => {
-            if (!data || !Array.isArray(data) || data.length === 0) {
-                this.workshops = [];
-                this.workshopOptions = [];
-                this.steps = [];
-                this.paginatedSteps = [];
-                this.showStartButton = true;
-                return;
-            }
-            this.workshops = data;
-            this.workshopOptions = data.map(ws => ({ label: ws.Name, value: ws.Id }));
-            this.selectedWorkshopId = data[0].Id;
-            this.loadSteps();
-        }).catch(error => {
-            console.error('Error loading workshops:', error);
+    getAllWorkshops().then(data => {
+        if (!data || !Array.isArray(data) || data.length === 0) {
             this.workshops = [];
             this.workshopOptions = [];
             this.steps = [];
             this.paginatedSteps = [];
             this.showStartButton = true;
-        });
-    }
+            return;
+        }
+
+        // ✅ NEW: safely inject StepCount = 0 for each
+        this.workshops = data.map(ws => ({
+            Id: ws.Id,
+            Name: ws.Name,
+            StepCount: ws.StepCount,
+            displayLabel: `${ws.Name} (${ws.StepCount} Steps)`
+        }));
+         console.log('✅ Mapped workshops with StepCount:', JSON.stringify(this.workshops));
+        this.workshopOptions = this.workshops.map(ws => ({ label: ws.Name, value: ws.Id }));
+        this.selectedWorkshopId = this.workshops[0].Id;
+        this.loadSteps();
+    }).catch(error => {
+        console.error('Error loading workshops:', error);
+        this.workshops = [];
+        this.workshopOptions = [];
+        this.steps = [];
+        this.paginatedSteps = [];
+        this.showStartButton = true;
+    });
+}
+
+
     sortSteps() {
     this.steps = [...this.steps].sort((a, b) => (a.Step_Order__c || 0) - (b.Step_Order__c || 0));
 }
 
-    handleWorkshopChange(event) {
-        this.selectedWorkshopId = event.detail.value;
-        this.currentPage = 1;
-        this.loadSteps();
-    }
+   handleWorkshopSelect(event) {
+    const workshopId = event.detail.name;
+    this.selectedWorkshopId = workshopId;
+    this.currentPage = 1;
+    this.loadSteps();
+}
 
 loadSteps() {
     console.log('Calling loadSteps for workshop:', this.selectedWorkshopId);
@@ -69,6 +80,12 @@ loadSteps() {
 
         this.steps = steps;
         this.sortSteps();
+        // ✅ Update the StepCount for this workshop
+this.workshops = this.workshops.map(ws => 
+    ws.Id === this.selectedWorkshopId 
+        ? { ...ws, StepCount: steps.length }
+        : ws
+);
         this.showStartButton = steps.length === 0;
 
         if (!this.showStartButton) {

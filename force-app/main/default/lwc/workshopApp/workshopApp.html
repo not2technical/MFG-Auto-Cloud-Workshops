@@ -1,53 +1,70 @@
 <template>
-    <template if:true={showRestartModal}>
-        <section role="dialog" class="slds-modal slds-fade-in-open">
-            <div class="slds-modal__container">
-                <header class="slds-modal__header">
-                    <h2 class="slds-text-heading_medium">Restart Workshop</h2>
-                </header>
-                <div class="slds-modal__content">
-                    <p>This workshop is already in progress. Do you want to restart and clear your progress?</p>
-                </div>
-                <footer class="slds-modal__footer">
-                    <lightning-button variant="neutral" label="Cancel" onclick={handleRestartCancel}></lightning-button>
-                    <lightning-button variant="brand" label="Restart" onclick={handleRestartConfirm}></lightning-button>
-                </footer>
-            </div>
-        </section>
-        <div class="slds-backdrop slds-backdrop_open"></div>
+    <!-- ✅ NEW: TWO-COLUMN LAYOUT USING SLDS GRID -->
+    <div class="slds-grid slds-wrap">
+
+        <!-- ✅ LEFT NAVIGATION PANEL -->
+        <div class="slds-size_1-of-4 slds-p-around_medium slds-box slds-theme_default">
+            <h2 class="slds-text-heading_small">Workshops</h2>
+   <lightning-vertical-navigation selected-item={selectedWorkshopId} onselect={handleWorkshopSelect}>
+  <lightning-vertical-navigation-section>
+    <template for:each={workshops} for:item="ws">
+      <div key={ws.Id} class="slds-grid slds-grid_align-spread slds-m-vertical_x-small">
+        <lightning-vertical-navigation-item 
+          label={ws.Name} 
+          name={ws.Id}>
+        </lightning-vertical-navigation-item>
+        <span class="slds-badge ">{ws.StepCount} Steps</span>
+      </div>
     </template>
+  </lightning-vertical-navigation-section>
+</lightning-vertical-navigation>
 
-    <lightning-card title="Agentforce Workshop">
-        <div class="slds-p-around_medium">
-            <lightning-combobox name="workshopSelector" label="Select Workshop" value={selectedWorkshopId} options={workshopOptions} onchange={handleWorkshopChange}></lightning-combobox>
 
+        </div>
+
+        <!-- ✅ RIGHT CONTENT PANEL -->
+        <div class="slds-size_3-of-4 slds-p-around_medium slds-box slds-theme_default">
+
+            <!-- ⚙️ UNCHANGED: START BUTTON -->
             <template if:true={showStartButton}>
-                <lightning-button label="Start Workshop" onclick={handleStartWorkshop} class="slds-m-vertical_medium"></lightning-button>
-                <template for:each={paginatedSteps} for:item="step">
-    <div key={step.Id} class="slds-box slds-m-vertical_small">
-        <h3>{step.Name}</h3>
-        <p>{step.Instructions__c}</p>
-        <img src={step.Image_URL__c} alt="Step Image" />
-        <lightning-input type="checkbox" checked={step.isComplete} onchange={handleStepComplete} data-id={step.Id}></lightning-input>
-    </div>
-</template>
+                <lightning-button label="Start Workshop" onclick={handleStartWorkshop}></lightning-button>
             </template>
 
+            <!-- ⚙️ UNCHANGED: STEPS, PROGRESS, PAGINATION -->
             <template if:false={showStartButton}>
-                <c-progress-tracker progress={progress}></c-progress-tracker>
-                <c-step-list steps={paginatedSteps} onstepcomplete={handleStepComplete} is-admin={isAdmin}></c-step-list>
-                <lightning-button
-                    label="Save Progress"
-                    onclick={handleSaveProgress}
-                    class="slds-m-vertical_medium">
-                </lightning-button>
+                <lightning-progress-bar value={progress} size="large"></lightning-progress-bar>
+
+                <template for:each={paginatedSteps} for:item="step">
+                    <c-step-detail 
+                        key={step.Id} 
+                        step={step} 
+                        is-admin={isAdmin} 
+                        onstepcomplete={handleStepComplete}>
+                    </c-step-detail>
+                </template>
 
                 <div class="slds-m-top_medium">
-                    <lightning-button label="Previous" onclick={handlePrev} disabled={isFirstPage}></lightning-button>
-                    <lightning-button label="Next" onclick={handleNext} disabled={isLastPage} class="slds-m-left_small"></lightning-button>
-                    <p> Page {currentPage} of {totalPages} </p>
+                    <lightning-button 
+                        label="Previous" 
+                        onclick={handlePrev} 
+                        disabled={isFirstPage}>
+                    </lightning-button>
+
+                    <lightning-button 
+                        label="Next" 
+                        onclick={handleNext} 
+                        disabled={isLastPage} 
+                        class="slds-m-left_small">
+                    </lightning-button>
+
+                    <lightning-button 
+                        label="Save Progress" 
+                        onclick={handleSaveProgress} 
+                        class="slds-m-left_small">
+                    </lightning-button>
                 </div>
             </template>
+
         </div>
-    </lightning-card>
+    </div>
 </template>

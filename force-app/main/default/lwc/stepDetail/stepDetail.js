@@ -49,7 +49,7 @@ get isComplete() {
     }
 
     renderedCallback() {
-        const instructionsDiv = this.template.querySelector('.slds-text-longform');
+        const instructionsDiv = this.template.querySelector('.instructions-container');
         if (instructionsDiv && this.step?.Instructions__c) {
             instructionsDiv.innerHTML = this.step.Instructions__c;
         }

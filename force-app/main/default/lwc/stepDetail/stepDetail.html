@@ -1,31 +1,51 @@
 <template>
-    <lightning-card title={step.Name}>
-        <div class="slds-p-around_medium">
-            <div class="slds-text-longform" lwc:dom="manual"></div>
-            <img if:true={step.Image_URL__c} src={step.Image_URL__c} alt="Step Image" class="slds-m-vertical_medium"/>
-            <template if:true={isAdmin}>
-                <lightning-button-icon icon-name="utility:edit" alternative-text="Edit Image URL" onclick={handleEditImageClick}></lightning-button-icon>
-            </template>
-            <lightning-input 
-  type="checkbox" 
-  label="Mark Complete" 
-  checked={isComplete} 
-  data-id={step.Id} 
-  onchange={handleCheckboxChange}>
-</lightning-input>
+    <lightning-card class="slds-m-around_medium">
+        <div class="slds-grid slds-wrap">
+            <!-- Left: Image & Edit -->
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4 slds-var-p-around_medium">
+                <img src={step.Image_URL__c} alt="Step Image"
+                    class="slds-border_bottom slds-border_right slds-border_left slds-border_top  slds-size_full" />
+                <lightning-button-icon
+                    icon-name="utility:edit"
+                    alternative-text="Edit Image"
+                    title="Edit Image"
+                    onclick={handleEditImageClick}
+                    class="slds-m-top_small">
+                </lightning-button-icon>
+            </div>
+
+            <!-- Right: Step title, instructions, checkbox -->
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-4 slds-p-around_medium">
+                <h2 class="slds-text-heading_medium slds-m-bottom_small">{step.Name}</h2>
+
+                <div class="instructions-container slds-text-longform slds-m-bottom_medium"></div>
+
+                <lightning-input
+                    type="checkbox"
+                    label="Mark Complete"
+                    checked={isComplete}
+                    onchange={handleCheckboxChange}
+                    class="slds-m-top_medium">
+                </lightning-input>
+            </div>
         </div>
 
+        <!-- Modal -->
         <template if:true={showModal}>
-            <section role="dialog" class="slds-modal slds-fade-in-open">
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
                 <div class="slds-modal__container">
                     <header class="slds-modal__header">
                         <h2 class="slds-text-heading_medium">Edit Image URL</h2>
                     </header>
                     <div class="slds-modal__content">
-                        <lightning-input label="Image URL" value={newImageUrl} onchange={handleUrlChange}></lightning-input>
+                        <lightning-input
+                            label="Image URL"
+                            value={newImageUrl}
+                            onchange={handleUrlChange}>
+                        </lightning-input>
                     </div>
                     <footer class="slds-modal__footer">
-                        <lightning-button variant="neutral" label="Cancel" onclick={handleModalCancel}></lightning-button>
+                        <lightning-button label="Cancel" onclick={handleModalCancel}></lightning-button>
                         <lightning-button variant="brand" label="Save" onclick={handleModalSave}></lightning-button>
                     </footer>
                 </div>
