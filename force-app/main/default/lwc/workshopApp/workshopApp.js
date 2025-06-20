@@ -1,6 +1,7 @@
 import { LightningElement, track } from 'lwc';
 import getAllWorkshops from '@salesforce/apex/WorkshopController.getAllWorkshops';
 import getStepsAndProgress from '@salesforce/apex/WorkshopController.getStepsAndProgress';
+import getFreshStepsAndProgress from '@salesforce/apex/WorkshopController.getFreshStepsAndProgress';
 import startWorkshop from '@salesforce/apex/WorkshopController.startWorkshop';
 import resetWorkshop from '@salesforce/apex/WorkshopController.resetWorkshop';
 import markStepComplete from '@salesforce/apex/WorkshopController.markStepComplete';
@@ -19,6 +20,8 @@ export default class WorkshopApp extends LightningElement {
     @track currentPage = 1;
     @track showStartButton = true;
     @track showRestartModal = false;
+    @track savedSteps = [];
+
     pageSize = PAGE_SIZE;
     isAdmin = true;
 
@@ -26,37 +29,59 @@ export default class WorkshopApp extends LightningElement {
     get isFirstPage() { return this.currentPage === 1; }
     get isLastPage() { return this.currentPage === this.totalPages; }
 
-    connectedCallback() {
+   connectedCallback() {
     getAllWorkshops().then(data => {
         if (!data || !Array.isArray(data) || data.length === 0) {
+            // No workshops found — clear everything safely
             this.workshops = [];
             this.workshopOptions = [];
             this.steps = [];
             this.paginatedSteps = [];
+            this.selectedWorkshopId = '';
+            this.selectedWorkshopDescription = '';
             this.showStartButton = true;
             return;
         }
 
-        // ✅ NEW: safely inject StepCount = 0 for each
+        // ✅ Map workshops safely
         this.workshops = data.map(ws => ({
             Id: ws.Id,
             Name: ws.Name,
             StepCount: ws.StepCount,
-            displayLabel: `${ws.Name} (${ws.StepCount} Steps)`
+            Description: ws.Description,
+            displayLabel: `${ws.Name} (${ws.StepCount} Steps)`,
+            UserProgressCount: 0
         }));
-         console.log('✅ Mapped workshops with StepCount:', JSON.stringify(this.workshops));
+
+        console.log('✅ Mapped workshops:', JSON.stringify(this.workshops));
+
         this.workshopOptions = this.workshops.map(ws => ({ label: ws.Name, value: ws.Id }));
-        this.selectedWorkshopId = this.workshops[0].Id;
-        this.loadSteps();
+
+        // ✅ Pick first workshop ONLY IF valid
+        const first = this.workshops[0];
+        if (first && first.Id) {
+            this.selectedWorkshopId = first.Id;
+            this.selectedWorkshopDescription = first.Description;
+            this.loadSteps();
+        } else {
+            console.warn('⚠️ First workshop is missing Id — skipping loadSteps.');
+            this.selectedWorkshopId = '';
+            this.selectedWorkshopDescription = '';
+            this.showStartButton = true;
+        }
+
     }).catch(error => {
-        console.error('Error loading workshops:', error);
+        console.error('❌ Error loading workshops:', error);
         this.workshops = [];
         this.workshopOptions = [];
         this.steps = [];
         this.paginatedSteps = [];
+        this.selectedWorkshopId = '';
+        this.selectedWorkshopDescription = '';
         this.showStartButton = true;
     });
 }
+
 
 
     sortSteps() {
@@ -66,55 +91,98 @@ export default class WorkshopApp extends LightningElement {
    handleWorkshopSelect(event) {
     const workshopId = event.detail.name;
     this.selectedWorkshopId = workshopId;
+     const selected = this.workshops.find(ws => ws.Id === workshopId);
+    this.selectedWorkshopDescription = selected ? selected.Description : '';
     this.currentPage = 1;
     this.loadSteps();
 }
 
 loadSteps() {
-    console.log('Calling loadSteps for workshop:', this.selectedWorkshopId);
-    getStepsAndProgress({ workshopId: this.selectedWorkshopId }).then(result => {
-        console.log('Raw result:', result);
+    console.log('🔄 Calling loadSteps for workshop:', this.selectedWorkshopId);
+  if (!this.selectedWorkshopId) {
+        console.warn('⏭️ Skipping loadSteps because selectedWorkshopId is empty.');
+        return; // 🚫 Prevent Apex call with bad Id
+    }
+    getStepsAndProgress({ workshopId: this.selectedWorkshopId })
+        .then(result => {
+            const steps = Array.isArray(result) ? result : [];
+            console.log('✅ Steps loaded:', steps);
 
-        const steps = result && Array.isArray(result) ? result : [];
-        console.log('Safe steps:', steps);
+            // Total steps is static
+            const selectedWs = this.workshops.find(ws => ws.Id === this.selectedWorkshopId);
+            const totalSteps = selectedWs ? selectedWs.StepCount : 0;
 
-        this.steps = steps;
-        this.sortSteps();
-        // ✅ Update the StepCount for this workshop
-this.workshops = this.workshops.map(ws => 
-    ws.Id === this.selectedWorkshopId 
-        ? { ...ws, StepCount: steps.length }
-        : ws
-);
-        this.showStartButton = steps.length === 0;
+            // User progress steps (progress rows)
+            const userProgressSteps = steps.filter(s => s.progress).length;
 
-        if (!this.showStartButton) {
+            console.log(`🧮 Total steps: ${totalSteps}, UserProgressCount: ${userProgressSteps}`);
+
+            // Store fresh steps
+            this.steps = steps;
+            this.sortSteps();
+            this.savedSteps = JSON.parse(JSON.stringify(this.steps));
+
+            // ✅ Update workshop nav bar counts for this workshop
+            this.workshops = this.workshops.map(ws =>
+                ws.Id === this.selectedWorkshopId
+                    ? { ...ws, UserProgressCount: userProgressSteps }
+                    : ws
+            );
+
+            // ✅ Set Start button based on actual user progress count
+             const hasProgress = steps.some(s => s.progress !== undefined);
+        this.showStartButton = !hasProgress;
+
+            if (!this.showStartButton) {
+                this.paginate();
+                this.refreshProgress();
+            } else {
+                this.paginatedSteps = [];
+            }
+        })
+        .catch(error => {
+            console.error('❌ Error loading steps:', error);
+            this.steps = [];
+            this.savedSteps = [];
+            this.paginatedSteps = [];
+            this.showStartButton = true;
+        });
+}
+
+
+
+    handleStartWorkshop() {
+    if (this.steps && this.steps.some(s => s.isComplete !== undefined)) {
+        this.showRestartModal = true;
+        return;
+    }
+
+    startWorkshop({ workshopId: this.selectedWorkshopId }).then(() => {
+        console.log('✅ Workshop started, now force re-load from server');
+
+        // Use NON-CACHE version
+        getFreshStepsAndProgress({ workshopId: this.selectedWorkshopId }).then(result => {
+            this.steps = result;
+            this.sortSteps();
+            this.savedSteps = JSON.parse(JSON.stringify(this.steps));
+            this.showStartButton = false;
+
+            // Refresh nav counts too
+            this.workshops = this.workshops.map(ws =>
+                ws.Id === this.selectedWorkshopId
+                    ? { ...ws, UserProgressCount: 0 }
+                    : ws
+            );
+
             this.paginate();
             this.refreshProgress();
-        } else {
-            this.paginatedSteps = [];
-        }
+        });
 
     }).catch(error => {
-        console.error('Error loading steps:', error);
-        this.steps = [];
-        this.paginatedSteps = [];
-        this.showStartButton = true;
+        console.error('Error starting workshop:', error);
     });
 }
 
-    handleStartWorkshop() {
-        if (this.steps && this.steps.some(s => s.isComplete !== undefined)) {
-            this.showRestartModal = true;
-            return;
-        }
-        startWorkshop({ workshopId: this.selectedWorkshopId }).then(() => {
-            this.showStartButton = false;
-            this.loadSteps();
-        }).catch(error => {
-            console.error('Error starting workshop:', error);
-        });
-    }
 
     handleRestartConfirm() {
         resetWorkshop({ workshopId: this.selectedWorkshopId }).then(() => {
@@ -129,9 +197,14 @@ this.workshops = this.workshops.map(ws =>
     handleRestartCancel() {
         this.showRestartModal = false;
     }
+// compute first incomplete step index + 1 (path steps are 1-based)
+get currentPathStep() {
+  const completed = this.savedSteps.filter(s => s.progress).length;
+    return completed;
+}
 
     refreshProgress() {
-        const completed = this.steps.filter(s => s.isComplete).length;
+        const completed = this.steps.filter(s => s.progress).length;
         this.progress = Math.floor((completed / this.steps.length) * 100);
     }
 
@@ -155,7 +228,6 @@ this.workshops = this.workshops.map(ws =>
 handleSaveProgress() {
     const promises = [];
 
-    // Instead of querySelector for parent, listen for explicit child detail
     this.steps.forEach(s => {
         console.log(`Preparing to save step ${s.Id} with progress ${s.progress}`);
         promises.push(markStepComplete({ stepId: s.Id, isComplete: s.progress === true }));
@@ -170,7 +242,10 @@ handleSaveProgress() {
                 variant: 'success'
             }));
             // Safe reload to re-pull server truth
-            this.loadSteps();
+            this.savedSteps = JSON.parse(JSON.stringify(this.steps));
+
+            // Also refresh progress using savedSteps for Path:
+            this.refreshProgress();
         })
         .catch(error => {
             console.error('Error saving progress:', error);

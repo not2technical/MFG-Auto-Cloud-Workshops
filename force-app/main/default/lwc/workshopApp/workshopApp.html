@@ -13,7 +13,7 @@
           label={ws.Name} 
           name={ws.Id}>
         </lightning-vertical-navigation-item>
-        <span class="slds-badge ">{ws.StepCount} Steps</span>
+        <span class="slds-badge "> {ws.UserProgressCount} of {ws.StepCount} Steps</span>
       </div>
     </template>
   </lightning-vertical-navigation-section>
@@ -24,24 +24,51 @@
 
         <!-- ✅ RIGHT CONTENT PANEL -->
         <div class="slds-size_3-of-4 slds-p-around_medium slds-box slds-theme_default">
-
             <!-- ⚙️ UNCHANGED: START BUTTON -->
             <template if:true={showStartButton}>
+                <!-- ✅ Show description if available -->
+   <p class="slds-text-body_regular slds-m-bottom_medium">
+        {selectedWorkshopDescription}
+    </p>
+
                 <lightning-button label="Start Workshop" onclick={handleStartWorkshop}></lightning-button>
             </template>
 
             <!-- ⚙️ UNCHANGED: STEPS, PROGRESS, PAGINATION -->
             <template if:false={showStartButton}>
-                <lightning-progress-bar value={progress} size="large"></lightning-progress-bar>
+                <!-- ✅ NEW PATH INDICATOR -->
+<lightning-progress-indicator 
+    type="path" 
+    variant="base" 
+    current-step={currentPathStep}>
 
-                <template for:each={paginatedSteps} for:item="step">
-                    <c-step-detail 
-                        key={step.Id} 
-                        step={step} 
-                        is-admin={isAdmin} 
-                        onstepcomplete={handleStepComplete}>
-                    </c-step-detail>
-                </template>
+    <template for:each={steps} for:item="step" for:index="index">
+        <lightning-progress-step 
+            key={step.Id}
+            label={step.Name}
+            value={index}>
+        </lightning-progress-step>
+    </template>
+
+</lightning-progress-indicator>
+
+                <lightning-accordion allow-multiple-sections-open class="slds-m-vertical_medium">
+    <template for:each={paginatedSteps} for:item="step">
+        <lightning-accordion-section
+            key={step.Id}
+            name={step.Id}
+            label={step.Name}>
+
+            <c-step-detail 
+                step={step} 
+                is-admin={isAdmin} 
+                onstepcomplete={handleStepComplete}>
+            </c-step-detail>
+
+        </lightning-accordion-section>
+    </template>
+</lightning-accordion>
+
 
                 <div class="slds-m-top_medium">
                     <lightning-button 

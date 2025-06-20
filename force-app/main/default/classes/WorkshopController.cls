@@ -1,23 +1,34 @@
 public with sharing class WorkshopController {
 @AuraEnabled(cacheable=true)
 public static List<Map<String, Object>> getStepsAndProgress(Id workshopId) {
-    List<Workshop_Step__c> steps = [
-        SELECT Id, Name, Step_Group__c, Step_Order__c, Instructions__c, Image_URL__c
-        FROM Workshop_Step__c
-        WHERE Workshop__c = :workshopId
-        ORDER BY Step_Group__c, Step_Order__c
+    // ✅ 1) Get all User_Progress__c for this workshop & user
+    List<User_Progress__c> progresses = [
+        SELECT Id, Workshop_Step__c, IsCompleted__c
+        FROM User_Progress__c
+        WHERE User__c = :UserInfo.getUserId()
+          AND Workshop_Step__r.Workshop__c = :workshopId
     ];
 
+    // ✅ 2) Collect step Ids
+    Set<Id> stepIds = new Set<Id>();
     Map<Id, Boolean> progressMap = new Map<Id, Boolean>();
-    for (User_Progress__c up : [
-        SELECT Workshop_Step__c, IsCompleted__c 
-        FROM User_Progress__c 
-        WHERE Workshop_Step__c IN :steps AND User__c = :UserInfo.getUserId()
-    ]) {
+    for (User_Progress__c up : progresses) {
+        stepIds.add(up.Workshop_Step__c);
         progressMap.put(up.Workshop_Step__c, up.IsCompleted__c);
     }
 
-    // ✅ Use JSON.serialize to avoid illegal field errors entirely
+    // ✅ 3) Query only steps that have progress
+    List<Workshop_Step__c> steps = new List<Workshop_Step__c>();
+    if (!stepIds.isEmpty()) {
+        steps = [
+            SELECT Id, Name, Step_Group__c, Step_Order__c, Instructions__c, Image_URL__c
+            FROM Workshop_Step__c
+            WHERE Id IN :stepIds
+            ORDER BY Step_Group__c, Step_Order__c
+        ];
+    }
+
+    // ✅ 4) Return same JSON structure
     List<Map<String, Object>> result = new List<Map<String, Object>>();
     for (Workshop_Step__c s : steps) {
         Map<String, Object> row = new Map<String, Object>();
@@ -32,6 +43,12 @@ public static List<Map<String, Object>> getStepsAndProgress(Id workshopId) {
     }
 
     return result;
+}
+
+// ✅ NEW: non-cacheable version
+@AuraEnabled
+public static List<Map<String, Object>> getFreshStepsAndProgress(Id workshopId) {
+    return getStepsAndProgress(workshopId);
 }
 
 
@@ -77,7 +94,7 @@ public static List<Workshop__c> getAllWorkshops() {
     @AuraEnabled(cacheable=true)
 public static List<Map<String, Object>> getAllWorkshops() {
     List<Workshop__c> workshops = [
-        SELECT Id, Name, 
+        SELECT Id, Name, Description__c,
             (SELECT Id FROM Workshop_Steps__r)
         FROM Workshop__c
     ];
@@ -87,6 +104,7 @@ public static List<Map<String, Object>> getAllWorkshops() {
         Map<String, Object> wsMap = new Map<String, Object>();
         wsMap.put('Id', w.Id);
         wsMap.put('Name', w.Name);
+        wsMap.put('Description', w.Description__c);
         wsMap.put('StepCount', w.Workshop_Steps__r != null ? w.Workshop_Steps__r.size() : 0);
         results.add(wsMap);
     }
