@@ -1,9 +1,9 @@
 <template>
     <!-- ✅ NEW: TWO-COLUMN LAYOUT USING SLDS GRID -->
-    <div class="slds-grid slds-wrap">
+    <div class="slds-grid slds-gutters slds-wrap">
 
         <!-- ✅ LEFT NAVIGATION PANEL -->
-        <div class="slds-size_1-of-4 slds-p-around_medium slds-box slds-theme_default">
+        <div class="slds-size_1-of-3 slds-p-around_medium slds-box slds-theme_default">
             <h2 class="slds-text-heading_small">Workshops</h2>
    <lightning-vertical-navigation selected-item={selectedWorkshopId} onselect={handleWorkshopSelect}>
   <lightning-vertical-navigation-section>
@@ -23,13 +23,15 @@
         </div>
 
         <!-- ✅ RIGHT CONTENT PANEL -->
-        <div class="slds-size_3-of-4 slds-p-around_medium slds-box slds-theme_default">
+        <div class="slds-size_2-of-3 slds-p-around_medium slds-box slds-theme_default">
             <!-- ⚙️ UNCHANGED: START BUTTON -->
             <template if:true={showStartButton}>
                 <!-- ✅ Show description if available -->
-   <p class="slds-text-body_regular slds-m-bottom_medium">
-        {selectedWorkshopDescription}
-    </p>
+  <lightning-formatted-rich-text 
+    value={selectedWorkshopDescription}
+    class="slds-m-bottom_medium">
+</lightning-formatted-rich-text>
+
 
                 <lightning-button label="Start Workshop" onclick={handleStartWorkshop}></lightning-button>
             </template>
