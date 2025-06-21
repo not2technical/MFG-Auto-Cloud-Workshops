@@ -3,27 +3,35 @@
     <div class="slds-grid slds-wrap">
 
         <!-- ✅ LEFT NAVIGATION PANEL -->
-        <div class="slds-size_1-of-4 slds-p-around_medium slds-box slds-theme_default">
-            <h2 class="slds-text-heading_small">Workshops</h2>
-   <lightning-vertical-navigation selected-item={selectedWorkshopId} onselect={handleWorkshopSelect}>
-  <lightning-vertical-navigation-section>
-    <template for:each={workshops} for:item="ws">
-      <div key={ws.Id} class="slds-grid slds-grid_align-spread slds-m-vertical_x-small">
-        <lightning-vertical-navigation-item 
-          label={ws.Name} 
-          name={ws.Id}>
-        </lightning-vertical-navigation-item>
-        <span class="slds-badge "> {ws.UserProgressCount} of {ws.StepCount} Steps</span>
-      </div>
-    </template>
-  </lightning-vertical-navigation-section>
-</lightning-vertical-navigation>
-
-
-        </div>
+        <template if:false={isNavCollapsed}>
+            <div class="slds-size_1-of-4 slds-p-around_medium slds-box slds-theme_default">
+                <div class="slds-grid slds-grid_align-spread slds-m-bottom_small">
+                    <h2 class="slds-text-heading_small">Workshops</h2>
+                    <lightning-button-icon icon-name="utility:chevronleft" variant="border-filled" alternative-text="Collapse" onclick={toggleNav}></lightning-button-icon>
+                </div>
+                <lightning-vertical-navigation selected-item={selectedWorkshopId} onselect={handleWorkshopSelect}>
+                    <lightning-vertical-navigation-section>
+                        <template for:each={workshops} for:item="ws">
+                            <div key={ws.Id} class="slds-grid slds-grid_align-spread slds-m-vertical_x-small">
+                                <lightning-vertical-navigation-item
+                                    label={ws.Name}
+                                    name={ws.Id}>
+                                </lightning-vertical-navigation-item>
+                                <span class="slds-badge "> {ws.UserProgressCount} of {ws.StepCount} Steps</span>
+                            </div>
+                        </template>
+                    </lightning-vertical-navigation-section>
+                </lightning-vertical-navigation>
+            </div>
+        </template>
+        <template if:true={isNavCollapsed}>
+            <div class="slds-p-around_medium slds-box slds-theme_default slds-m-right_small">
+                <lightning-button-icon icon-name="utility:chevronright" variant="border-filled" alternative-text="Expand" onclick={toggleNav}></lightning-button-icon>
+            </div>
+        </template>
 
         <!-- ✅ RIGHT CONTENT PANEL -->
-        <div class="slds-size_3-of-4 slds-p-around_medium slds-box slds-theme_default">
+        <div class={rightPanelClass}>
             <!-- ⚙️ UNCHANGED: START BUTTON -->
             <template if:true={showStartButton}>
                 <!-- ✅ Show description if available -->
