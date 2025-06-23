@@ -1,0 +1,29 @@
+.0ld-nav-wrapper {
+  position: relative;
+}
+/*
+.nav-panel {
+  width:250px;
+  transition: width 0.3s ease;
+}
+
+.nav-panel.collapsed {
+  width: 0;
+  overflow: hidden;
+}
+
+.collapsed-rail {
+  width: 5px;
+  background: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.right-panel {
+  flex: 1;
+  padding: 1rem;
+}
+*/
+/* This ensures the collapsed rail stays visible as a vertical bar */

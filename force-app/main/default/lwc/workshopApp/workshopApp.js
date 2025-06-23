@@ -8,7 +8,7 @@ import markStepComplete from '@salesforce/apex/WorkshopController.markStepComple
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 10;
 
 export default class WorkshopApp extends LightningElement {
     @track workshops = [];
@@ -21,7 +21,6 @@ export default class WorkshopApp extends LightningElement {
     @track showStartButton = true;
     @track showRestartModal = false;
     @track savedSteps = [];
-    @track isNavCollapsed = false;
 
     pageSize = PAGE_SIZE;
     isAdmin = true;
@@ -29,9 +28,6 @@ export default class WorkshopApp extends LightningElement {
     get totalPages() { return Math.ceil(this.steps.length / this.pageSize); }
     get isFirstPage() { return this.currentPage === 1; }
     get isLastPage() { return this.currentPage === this.totalPages; }
-    get rightPanelClass() {
-        return `slds-p-around_medium slds-box slds-theme_default ${this.isNavCollapsed ? 'slds-size_1-of-1' : 'slds-size_3-of-4'}`;
-    }
 
    connectedCallback() {
     getAllWorkshops().then(data => {
@@ -217,10 +213,6 @@ get currentPathStep() {
         const end = start + this.pageSize;
         this.paginatedSteps = this.steps.slice(start, end);
     }
-    toggleNav() {
-        this.isNavCollapsed = !this.isNavCollapsed;
-    }
-
 
     handlePrev() { if (this.currentPage > 1) { this.currentPage--; this.paginate(); } }
     handleNext() { if (this.currentPage < this.totalPages) { this.currentPage++; this.paginate(); } }
