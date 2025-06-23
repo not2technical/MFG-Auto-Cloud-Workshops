@@ -39,6 +39,12 @@
 
             <!-- ⚙️ UNCHANGED: STEPS, PROGRESS, PAGINATION -->
             <template if:false={showStartButton}>
+                <!-- ✅ Show completion message if all steps are complete -->
+                <template if:true={allStepsComplete}>
+                    <div class="slds-text-color_success slds-text-heading_small slds-m-bottom_small">
+                        🎉 Workshop Complete!
+                    </div>
+                </template>
                 <!-- ✅ NEW PATH INDICATOR -->
 <lightning-progress-indicator 
     type="path" 

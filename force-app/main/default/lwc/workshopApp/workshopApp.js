@@ -199,8 +199,15 @@ loadSteps() {
     }
 // compute first incomplete step index + 1 (path steps are 1-based)
 get currentPathStep() {
-  const completed = this.savedSteps.filter(s => s.progress).length;
+    if (this.savedSteps.length > 0 && this.savedSteps.every(s => s.progress === true || s.isComplete === true)) {
+        return this.steps.length - 1; // last step index
+    }
+    const completed = this.savedSteps.filter(s => s.progress === true || s.isComplete === true).length;
     return completed;
+}
+
+get allStepsComplete() {
+    return this.savedSteps.length > 0 && this.savedSteps.every(s => s.progress === true || s.isComplete === true);
 }
 
     refreshProgress() {
@@ -229,23 +236,36 @@ handleSaveProgress() {
     const promises = [];
 
     this.steps.forEach(s => {
-        console.log(`Preparing to save step ${s.Id} with progress ${s.progress}`);
         promises.push(markStepComplete({ stepId: s.Id, isComplete: s.progress === true }));
     });
 
     Promise.all(promises)
         .then(() => {
-            console.log('All steps saved');
+            // Fetch fresh steps from server (non-cached)
+            return getFreshStepsAndProgress({ workshopId: this.selectedWorkshopId });
+        })
+        .then(freshSteps => {
+            this.steps = freshSteps;
+            this.sortSteps();
+            this.savedSteps = JSON.parse(JSON.stringify(this.steps));
+            console.log('Fresh steps after save:', this.steps);
+
+            // Update badge count (UserProgressCount) for the selected workshop
+            const userProgressSteps = this.steps.filter(s => s.progress === true || s.isComplete === true).length;
+            this.workshops = this.workshops.map(ws =>
+                ws.Id === this.selectedWorkshopId
+                    ? { ...ws, UserProgressCount: userProgressSteps }
+                    : ws
+            );
+
+            this.refreshProgress();
+            this.paginate();
+
             this.dispatchEvent(new ShowToastEvent({
                 title: 'Success',
                 message: 'Your progress has been saved.',
                 variant: 'success'
             }));
-            // Safe reload to re-pull server truth
-            this.savedSteps = JSON.parse(JSON.stringify(this.steps));
-
-            // Also refresh progress using savedSteps for Path:
-            this.refreshProgress();
         })
         .catch(error => {
             console.error('Error saving progress:', error);
