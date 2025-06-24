@@ -50,3 +50,28 @@
   position: relative;
   cursor: zoom-out;
 }
+
+.camo-background {
+    background-image: url('/resource/blue_camo');
+    background-size: cover;
+    background-repeat: repeat;
+    border-radius: 0.5rem;
+}
+
+.camo-background .center-rich-text ::slotted(img),
+.camo-background .center-rich-text img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.camo-background .center-flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-yellow .slds-icon {
+    fill: #FFD600 !important;
+    color: #FFD600 !important;
+}

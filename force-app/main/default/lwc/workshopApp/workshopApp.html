@@ -27,12 +27,48 @@
             <!-- ⚙️ UNCHANGED: START BUTTON -->
             <template if:true={showStartButton}>
                 <!-- ✅ Show description if available -->
-   <!-- ✅ Show description with rendered HTML -->
-<lightning-formatted-rich-text 
-  value={selectedWorkshopDescription}
-  class="slds-m-bottom_medium">
-</lightning-formatted-rich-text>
+                <!-- Description and Image Section: 2 columns -->
+                <div class="slds-grid slds-wrap slds-m-bottom_medium">
+                    <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
+                        <lightning-formatted-rich-text 
+                            value={selectedWorkshopDescription}
+                            class="slds-m-bottom_medium">
+                        </lightning-formatted-rich-text>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small slds-text-align_center">
+                        <template if:true={selectedWorkshopImageUrl}>
+                            <img src={selectedWorkshopImageUrl} alt="Workshop Image" style="max-width: 100%; max-height: 400px; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" />
+                        </template>
+                    </div>
+                </div>
 
+                <!-- Workshop Details Section: 3 columns, improved labels -->
+                <div class="slds-grid slds-wrap slds-m-bottom_medium slds-p-around_medium camo-background">
+                    <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
+                        <div class="slds-text-title_bold slds-text-color_default slds-m-bottom_xx-small slds-text-align_center">
+                            <lightning-icon icon-name="action:new_group" size="small" class="slds-m-right_x-small"></lightning-icon>
+                            Recommended Audience
+                        </div>
+                        <div class="slds-text-body_regular slds-text-align_center">{selectedWorkshopAudience}</div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
+                        <div class="slds-text-title_bold slds-text-color_default slds-m-bottom_xx-small slds-text-align_center">
+                            <lightning-icon icon-name="action:new_custom95" size="small" class="slds-m-right_x-small"></lightning-icon>
+                            Workshop Duration
+                        </div>
+                        <div class="slds-text-body_regular slds-text-align_center">{selectedWorkshopDuration}</div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small center-flex-col">
+                        <div class="slds-text-title_bold slds-text-color_default slds-m-bottom_xx-small slds-text-align_center">
+                            <lightning-icon icon-name="action:new_custom3" size="small" class="slds-m-right_x-small"></lightning-icon>
+                            Challenge Rating
+                        </div>
+                        <lightning-formatted-rich-text 
+                            value={selectedWorkshopStarRating}
+                            class="slds-text-body_regular slds-text-align_center center-rich-text">
+                        </lightning-formatted-rich-text>
+                    </div>
+                </div>
 
                 <lightning-button label="Start Workshop" onclick={handleStartWorkshop}></lightning-button>
             </template>

@@ -91,10 +91,10 @@ public static List<Workshop__c> getAllWorkshops() {
     return [SELECT Id, Name FROM Workshop__c ORDER BY CreatedDate DESC];
 }
 */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
 public static List<Map<String, Object>> getAllWorkshops() {
     List<Workshop__c> workshops = [
-        SELECT Id, Name, Description__c,
+        SELECT Id, Name, Description__c, Audience__c, Star_Rating__c, Technical_Rating__c, Duration__c, Workshop_Image__c,
             (SELECT Id FROM Workshop_Steps__r)
         FROM Workshop__c
     ];
@@ -105,6 +105,11 @@ public static List<Map<String, Object>> getAllWorkshops() {
         wsMap.put('Id', w.Id);
         wsMap.put('Name', w.Name);
         wsMap.put('Description', w.Description__c);
+        wsMap.put('Audience', w.Audience__c);
+        wsMap.put('StarRating', w.Star_Rating__c);
+        wsMap.put('TechnicalRating', w.Technical_Rating__c);
+        wsMap.put('Duration', w.Duration__c);
+        wsMap.put('ImageUrl', w.Workshop_Image__c);
         wsMap.put('StepCount', w.Workshop_Steps__r != null ? w.Workshop_Steps__r.size() : 0);
         results.add(wsMap);
     }
