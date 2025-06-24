@@ -27,3 +27,26 @@
 }
 */
 /* This ensures the collapsed rail stays visible as a vertical bar */
+
+.fixed-accordion-controls {
+  position: sticky;
+  top: 15%;
+  right: 0;
+  z-index: 10;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  
+}
+
+.zoomable {
+  cursor: zoom-in;
+  transition: transform 0.2s;
+  max-width: 100%;
+  height: auto;
+}
+
+.zoomable:active {
+  transform: scale(2); /* or any zoom factor */
+  z-index: 1000;
+  position: relative;
+  cursor: zoom-out;
+}

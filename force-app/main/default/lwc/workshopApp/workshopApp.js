@@ -21,6 +21,9 @@ export default class WorkshopApp extends LightningElement {
     @track showStartButton = true;
     @track showRestartModal = false;
     @track savedSteps = [];
+    @track openSections = [];
+    @track isModalOpen = false;
+    @track zoomedImgSrc = '';
 
     pageSize = PAGE_SIZE;
     isAdmin = true;
@@ -272,6 +275,20 @@ handleSaveProgress() {
         });
 }
 
+handleExpandAll() {
+    this.openSections = this.paginatedSteps.map(step => step.Id);
+}
+handleCollapseAll() {
+    this.openSections = [];
+}
 
+handleZoomImage(event) {
+    this.zoomedImgSrc = event.detail.src;
+    this.isModalOpen = true;
+}
+closeModal() {
+    this.isModalOpen = false;
+    this.zoomedImgSrc = '';
+}
 
 }

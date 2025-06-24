@@ -61,7 +61,13 @@
 
 </lightning-progress-indicator>
 
-                <lightning-accordion allow-multiple-sections-open class="slds-m-vertical_medium">
+                <!-- Fixed Expand/Collapse All Icon Buttons -->
+                <div class="fixed-accordion-controls slds-grid slds-grid_align-end ">
+                    <lightning-button-icon icon-name="utility:expand_all" alternative-text="Expand All" onclick={handleExpandAll} class="slds-m-right_x-small"></lightning-button-icon>
+                    <lightning-button-icon icon-name="utility:collapse_all" alternative-text="Collapse All" onclick={handleCollapseAll}></lightning-button-icon>
+                </div>
+                <lightning-accordion allow-multiple-sections-open class="slds-m-vertical_medium"
+                    active-section-name={openSections}>
     <template for:each={paginatedSteps} for:item="step">
         <lightning-accordion-section
             key={step.Id}
@@ -71,7 +77,8 @@
             <c-step-detail 
                 step={step} 
                 is-admin={isAdmin} 
-                onstepcomplete={handleStepComplete}>
+                onstepcomplete={handleStepComplete}
+                onzoomimage={handleZoomImage}>
             </c-step-detail>
 
         </lightning-accordion-section>
@@ -103,4 +110,16 @@
 
         </div>
     </div>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__content slds-p-around_medium">
+                    <img src={zoomedImgSrc} alt="Zoomed" style="max-width:90vw;max-height:90vh;" />
+                </div>
+                <button class="slds-button slds-button_neutral slds-modal__close" onclick={closeModal} title="Close">×</button>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
 </template>

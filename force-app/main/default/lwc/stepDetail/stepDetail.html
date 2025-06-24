@@ -2,23 +2,17 @@
     <lightning-card class="slds-m-around_medium">
         <div class="slds-grid slds-wrap">
             <!-- Left: Image & Edit -->
-            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4 slds-var-p-around_medium">
-                <img src={step.Image_URL__c} alt="Step Image"
-                    class="slds-border_bottom slds-border_right slds-border_left slds-border_top  slds-size_full" />
-                <lightning-button-icon
-                    icon-name="utility:edit"
-                    alternative-text="Edit Image"
-                    title="Edit Image"
-                    onclick={handleEditImageClick}
-                    class="slds-m-top_small">
-                </lightning-button-icon>
-            </div>
+            
 
             <!-- Right: Step title, instructions, checkbox -->
             <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-4 slds-p-around_medium">
                 <h2 class="slds-text-heading_medium slds-m-bottom_small">{step.Name}</h2>
 
-                <div class="instructions-container slds-text-longform slds-m-bottom_medium"></div>
+                <div class="instructions-container slds-text-longform slds-m-bottom_medium">
+                    <div onclick={handleRichTextClick}>
+                        <lightning-formatted-rich-text value={step.Instructions__c}></lightning-formatted-rich-text>
+                    </div>
+                </div>
 
                 <lightning-input
                     type="checkbox"
@@ -48,6 +42,18 @@
                         <lightning-button label="Cancel" onclick={handleModalCancel}></lightning-button>
                         <lightning-button variant="brand" label="Save" onclick={handleModalSave}></lightning-button>
                     </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <template if:true={isModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <img src={zoomedImgSrc} alt="Zoomed" style="max-width:90vw;max-height:90vh;" />
+                    </div>
+                    <button class="slds-button slds-button_neutral slds-modal__close" onclick={closeModal} title="Close">×</button>
                 </div>
             </section>
             <div class="slds-backdrop slds-backdrop_open"></div>
