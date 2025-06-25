@@ -39,6 +39,8 @@ The purpose of this app is to simplify hands-on workshop exercises by:
 ![Prompt Templates 1](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-20%20at%202.42.06%E2%80%AFPM.png)
 ![Prompt Templates 2](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-20%20at%202.41.39%E2%80%AFPM.png)
 ![Prompt Templates 3](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-20%20at%202.39.54%E2%80%AFPM.png)
+![Prompt Templates 4](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-24%20at%208.02.20%E2%80%AFPM.png)
+![Prompt Templates 5](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-24%20at%208.06.32%E2%80%AFPM.png)
 
 ## Step: Agentforce for Industries extension
 ![Agentforce for Industries extension 1](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-23%20at%204.25.20%E2%80%AFPM.png)
