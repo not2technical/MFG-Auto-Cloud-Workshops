@@ -46,7 +46,7 @@ The purpose of this app is to simplify hands-on workshop exercises by:
 ## Step: Agentforce for Industries extension
 ![Agentforce for Industries extension 1](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-23%20at%204.22.26%E2%80%AFPM.png)
 ![Agentforce for Industries extension 2](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-23%20at%204.25.20%E2%80%AFPM.png)
-![Agentforce for Industries extension 2](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-20%20at%202.29.25%E2%80%AFPM.png)
+![Agentforce for Industries extension 3](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-20%20at%202.29.25%E2%80%AFPM.png)
 ## Step: Testing the New Configuration
 ![Testing the New Configuration 1](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Testing%20the%20New%20Configuration/Screenshot%202025-06-20%20at%202.29.25%E2%80%AFPM.png)
 
