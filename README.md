@@ -46,36 +46,255 @@ The purpose of this app is to simplify hands-on workshop exercises by:
 </div>
 
 ## Step: Enabling Sales Agreements
+
+Manufacturing Cloud for Sales makes your run-rate business more predictable and enhances transparency and collaboration across sales and operations teams with accurate forecasts.
+
+**To enable Sales Agreements:**
+
+1. From Setup, in the Quick Find box, enter "Manufacturing," and then select Sales Agreements.
+2. Turn on Sales Agreements Foundations by switching on the toggle
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Enabling%20Sales%20Agreements/Screenshot%202025-06-20%20at%202.28.24%E2%80%AFPM.png" alt="Enabling Sales Agreements 1" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 ## Step: Agents Setup
+
+Agentforce allows you to deploy AI agents that work alongside employees, automating routine tasks and assisting with complex ones.
+
+**To enable Agentforce:**
+
+1. Ensure **Einstein Generative AI** is already turned on.
+2. From Setup, in the Quick Find box, enter `Agent`, then select **Agentforce Agents**.
+3. Switch on the **Agentforce** toggle.
+4. On the same page, turn on the desired **Agent**.
+
+**Example command:**
+```
+Turn on Agentforce > Turn on specific Agent
+```
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agents%20Setup/Screenshot%202025-06-20%20at%202.28.58%E2%80%AFPM.png" alt="Agents Setup 1" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 ## Step: Prompt Templates
+
+### Creating a New Prompt Template for Sales Agreement Inventory check
+
+You will create a custom prompt template to check inventory and determine its status. The "**Flex**" prompt template type is suitable for custom business purposes not covered by other template types.
+
+1. **Create a Flex Prompt Template:** From Setup, search for and select **Prompt Builder**.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-24%20at%208.06.32%E2%80%AFPM.png" alt="Prompt Templates 5" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+   - Click **New Prompt Template**. In the "Prompt Template Type" dropdown, select **Flex**. 
+   - Specify a unique "Prompt Template Name" (e.g., "*Sales Agreement Product Inventory Check*"). 
+   - Specify Template description (e.g., This prompt that looks for low inventory on products within a sales agreement).
+   - **Define sources for this prompt**.
+
+**Template Configuration:**
+- Name — *Sales Agreement Product Inventory Check*
+- API Name — *Auto Populates*
+- Description — *This prompt that looks for low inventory on products within a sales agreement*
+- Type — Object
+- Object — Sales Agreement
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-24%20at%208.02.20%E2%80%AFPM.png" alt="Prompt Templates 4" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-20%20at%202.42.06%E2%80%AFPM.png" alt="Prompt Templates 1" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-20%20at%202.41.39%E2%80%AFPM.png" alt="Prompt Templates 2" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+   c. **Click Next**
+
+2. **Write the prompt template** in the "Prompt Template Workspace" to instruct the LLM on how to check inventory and determine its status.
+
+**Copy and Use Example Prompt Text below:**
+
+```
+Goal:
+
+You are an assistant to key account managers. You must understand and analyze inventory data related to sales agreement products. You're provided with remaining inventory quantities for products that are part of the sales agreement.
+You must create an Inventory Summary that shows the current available inventory quantities for each product, highlighting potential restocking needs or surplus situations.
+
+Data Structure:
+The JSON data contains a list of objects, each representing a product's inventory. Each object has the following properties:
+1. InventoryName: Stores the unique inventory record identifier.
+2. Product: Stores the name of the product.
+3. AvailableQuantities: Stores the quantity available for that product.
+
+Inventory Insight Interpretations:
+- Low Quantity (below 1000): Might indicate potential stock shortage or the need for restocking.
+- High Quantity (above 5000): Might indicate potential overstock that could affect cash flow or warehouse capacity.
+- Normal Quantity (1000 - 5000): Indicates stable inventory level.
+
+Output:
+Use the Inventory Summary Template to generate the summary.
+<table>
+<strong>Inventory Summary by Product</strong>
+ <tr>
+  <td>INV-00008</td>
+  <td>Hydraulic Pump H9000</td>
+  <td>3,083</td>
+  <td><em>Stable inventory level</em></td>
+ </tr>
+</table>
+
+Formatting Guidelines:
+- Generate the table in HTML format with the border property set to 1 for all tables.
+- Use <p> for paragraphs.
+- Use <strong> for bolded content.
+- Use <em> for italicized text.
+- Do not use any heading tags.
+- Ensure proper semantic elements for tables.
+- When generating table rows, include all records from the JSON data in the same order they appear.
+- Apply quantity thresholds to generate insights dynamically.
+
+Whitespace Management:
+- Do not use any &nbsp; or unnecessary white spaces between HTML elements.
+- Keep whitespace inside the table cells and rows minimal and only as needed for proper HTML formatting.
+- Ensure the output is clean, with no leading or trailing spaces in the final 
+
+If no JSON data is provided, respond with: "No inventory summary available for this sales agreement."
+
+JSON Data:
+```
+
+**JSON Data:** Place the cursor below the JSON data: label. From the insert resource box, Select **Flows -> Prompt Inventory Check**. The prompt should now end with **Flow:Prompt_Inventory_Check**. (Do not type this. Select from the resources area)
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-20%20at%202.39.54%E2%80%AFPM.png" alt="Prompt Templates 3" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+3. **Save and Preview:** Choose the *QuantumMesh_SA_2025 Sales agreement*. The response should be a formatted table.
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-20%20at%202.41.39%E2%80%AFPM.png" alt="Prompt Templates 2" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+4. Review the Resolved prompt and the Generated Response
+5. **Finally:** Once satisfied, activate the prompt template so it can be used across your org.
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Prompt%20Templates/Screenshot%202025-06-20%20at%202.42.06%E2%80%AFPM.png" alt="Prompt Templates 1" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 
 ## Step: Agentforce for Industries extension
+
+### Adding Prompt Template to Sales Agreement Management Agentforce Topic as an Action
+
+The "Sales Agreement Management" is an out-of-the-box topic available within Manufacturing Agentforce. To integrate your new prompt template, you will extend the default agent action that calls this prompt template and then add it to the existing "Sales Agreement Management" topic.
+
+**Steps: Create an Agent Action**
+
+1. From Setup, search for and select *Agentforce Assets*.
+2. On the Actions tab, click *New Agent Action*.
+3. From the *"Reference Action Type"* dropdown, select **Prompt Template**.
+4. Select your newly created **"Sales Agreement Product Inventory Check"** prompt template.
+5. Review the auto-populated *Agent Action Label* and *API Name*, adjusting as needed.
+6. Click Next
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-23%20at%204.22.26%E2%80%AFPM.png" alt="Agentforce for Industries extension 1" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+7. Review and modify the instructions for the custom action and its inputs/outputs:
+8. **Loading Text:** Checking Inventory
+9. **Inputs:** Id instructions — This is the Sales Agreement Id
+10. **Outputs:** Prompt Response Check, Show in conversation
+11. **Output Rendering:** Richtext
+12. Do nothing with the Citation area.
+13. Click *Finish*.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-23%20at%204.25.20%E2%80%AFPM.png" alt="Agentforce for Industries extension 2" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### Assign the New Action to the Sales Agreement Management Topic:
+
+1. From the Agentforce Agents Setup page, launch your agent in Agentforce Builder.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-20%20at%202.29.25%E2%80%AFPM.png" alt="Agentforce for Industries extension 3" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+2. If your agent is active, deactivate it to make changes.
+3. From the left sidebar, select *Topics*.
+4. On the Topics panel, click the name of the *Sales Agreement Management* topic.
+5. Navigate to the *"This Topic's Actions"* tab and click *add from asset library*.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-24%20at%2010.11.26%E2%80%AFPM.png" alt="Agentforce for Industries extension 4" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+6. Select your newly created custom action, **"Check Sales Agreement Product Inventory"**, and click *Finish*.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-24%20at%2010.33.43%E2%80%AFPM.png" alt="Agentforce for Industries extension 5" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### Add Instructions:
+
+1. Go to the *Topic Configuration* tab for the Sales Agreement Management topic.
+2. In the Instructions field, add guidelines for when the agent should use your new action.
+3. **Example:** Use the Check Sales Agreement Product Inventory action when a user asks about available sales agreement product inventory.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-24%20at%2010.35.16%E2%80%AFPM.png" alt="Agentforce for Industries extension 6" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Best practices for Topic Instructions:**
+- Create boundaries: Narrow down the actions and data that apply to a use case to keep the agent focused.
+- Set context: Help the agent respond appropriately based on the user's role and the conversation flow.
+- Define behavior: Give granular control over how the agent uses actions within the topic.
+- Start minimal, iterate: Begin with few instructions and test iteratively. Avoid contradictory instructions.
+- Use plain language: Avoid jargon. Include examples or sample inputs/outputs.
+
+**Example Instructions for Sales Agreement Management Topic:**
+- "Always offer to check inventory status for products associated with a sales agreement when a user asks about product availability or stock levels."
+- "If the user asks 'What is the stock status for product X in sales agreement Y?', use the 'Check Sales Agreement Product Inventory' action."
+- "Never provide inventory information unless the user explicitly asks for product stock levels."
+- "As a first step, when asked about product availability, identify the product name from the user's request and use it as input for the inventory check."
+
+### Add Example Input:
+
+1. **This will help provide a recommended action**
+   - "Check product availability from inventory"
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Agentforce%20for%20Industries%20extension/Screenshot%202025-06-26%20at%209.03.56%E2%80%AFPM.png" alt="Agentforce for Industries extension 7" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+Save your changes. Reactivate your agent once all changes are made.
 ## Step: Testing the New Configuration
+
+It is crucial to test your agent in a sandbox environment to avoid impacting production data.
+
+### 1. Test in Agentforce Builder:
+
+- Open your agent in Agentforce Builder from the Agentforce Agents Setup page.
+- Use the preview conversation panel to simulate user interactions.
+- Click the eye icon in the top corner to set your test context variables:
+  - **Page Type:** Record Page
+  - **Object:** Sales Agreement
+  - Search for the `QuantumMesh_SA_2025` Sales Agreement.
+  - Select **Apply**.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Testing%20the%20New%20Configuration/Screenshot%202025-06-20%20at%202.29.25%E2%80%AFPM.png" alt="Testing the New Configuration 1" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+- Now you are ready to test. Enter sample utterances you configured to trigger your new **"Check Sales Agreement Product Inventory"** action, such as:
+  - *"What is the inventory status for the products?"*
+  - *"Can you check the availability for products?"*
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Testing%20the%20New%20Configuration/Screenshot%202025-06-27%20at%208.30.28%E2%80%AFAM.png" alt="Testing the New Configuration 2" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+- Observe the agent's response and verify it correctly uses your new action and provides the expected inventory status.
+- If the agent chooses the wrong topic or action, review your topic and action instructions for clarity and specificity.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Testing%20the%20New%20Configuration/Screenshot%202025-06-27%20at%208.30.42%E2%80%AFAM.png" alt="Testing the New Configuration 3" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+- Ensure the agent is **Active** before testing from the Sales Agreement record in Lightning Experience.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Testing%20the%20New%20Configuration/Screenshot%202025-06-27%20at%208.53.58%E2%80%AFAM.png" alt="Testing the New Configuration 4" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 2. Test with Sales Agreement Records:
+
+- Since the Sales Agreement Management topic is designed to work with sales agreement data, test directly on a Sales Agreement record in Lightning Experience.
+- Interact with the agent in the context of a Sales Agreement record (via the Agentforce panel) or by providing the sales agreement context in your query.
+- Verify the agent can successfully retrieve and display inventory information related to the products within that specific Sales Agreement.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Testing%20the%20New%20Configuration/Screenshot%202025-06-27%20at%208.54.48%E2%80%AFAM.png" alt="Testing the New Configuration 5" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
+**🎉 Congratulations on all your hard work!**
+
 ## Step: Einstein Setup
+
+Einstein generative AI capabilities, built on the Salesforce platform, bring generative AI technology to your business at scale, helping supercharge productivity and simplify daily tasks. The Einstein Trust Layer safeguards business data and enhances AI accuracy.
+
+**To set up Einstein Generative AI:**
+
+1. **Turn On Einstein Generative AI:**
+   - From Setup, enter "Einstein Setup" in the Quick Find box and turn it on. This also implies consent to store generative AI activity logs and feedback data in Data Cloud.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Einstein%20Setup/Screenshot%202025-06-20%20at%202.26.39%E2%80%AFPM.png" alt="Einstein Setup 1" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+2. **Enable Manufacturing Generative AI:**
+   - To configure and use prompt templates for manufacturing, turn on Manufacturing Generative AI in Setup.
+
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Einstein%20Setup/Screenshot%202025-06-23%20at%205.03.25%E2%80%AFPM.png" alt="Einstein Setup 2" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 </details>
