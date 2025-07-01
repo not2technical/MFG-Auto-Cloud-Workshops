@@ -2,7 +2,18 @@
 
 This project is a dynamic, user-friendly application and framework for delivering hands-on workshops in Salesforce. It is designed to make technical and business workshops simple, engaging, and easy to follow for all users.
 
-## Purpose
+## 📋 Table of Contents
+
+- [🎯 Purpose](#-purpose)
+- [🚀 Features](#-features)  
+- [👥 Who is this for?](#-who-is-this-for)
+- [📚 Workshops](#-workshops)
+  - [✨ Extend Agentforce Smarter Sales Agreements](#-workshop-extend-agentforce-smarter-sales-agreements)
+  - [⚡️ Supercharge Experiences: Connect Telemetry to CRM360](#-workshop-supercharge-experiences-connect-telemetry-to-crm360)
+
+---
+
+## 🎯 Purpose
 
 The purpose of this app is to simplify hands-on workshop exercises by:
 - Centralizing all workshop content and steps in one place
@@ -10,20 +21,25 @@ The purpose of this app is to simplify hands-on workshop exercises by:
 - Tracking each user's progress through each workshop
 - Providing a clear, interactive, and visually engaging experience
 
-## Features
+## 🚀 Features
 - **Dynamic Workshop Navigation:** Users can browse available workshops and see their progress at a glance.
 - **Step-by-Step Guidance:** Each workshop is broken down into clear, actionable steps, with rich text, images, and instructions.
 - **Progress Tracking:** Users can mark steps as complete and see their progress update in real time.
 - **Modern Salesforce LWC Architecture:** Built with Lightning Web Components for performance and maintainability.
 - **Easy Image and Asset Management:** Workshop images and assets are organized by workshop and step for clarity and reuse.
 
-## Who is this for?
+## 👥 Who is this for?
 - Salesforce admins, developers, and business users who want to deliver or participate in hands-on workshops.
 - Anyone looking for a scalable, maintainable way to manage technical enablement or training content in Salesforce.
 
 ---
 
-# Workshop: Extend Agentforce Smarter Sales Agreements
+## 📚 Workshops
+
+<details>
+<summary><strong>✨ Workshop: Extend Agentforce Smarter Sales Agreements</strong></summary>
+
+### Workshop: Extend Agentforce Smarter Sales Agreements
 
 <div><p><span style="font-size: 20px;">✨ </span><strong style="font-size: 20px;">Reimagine What's Possible for Your Business</strong></p><p><em>Picture this:</em> your sales agreement process runs smarter than ever — inventory checks happen automatically, conversations feel truly personalized, and your teams handle requests at lightning speed. This workshop is designed to spark ideas you can take back to your real company and adapt Agentforce for your unique needs.</p><hr></hr></div><div style="float: right; width: 40%;"><img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Extend%20Agentforce%20Smarter%20Sales%20Agreements%20Workshop%20Main.png" alt="Extend Agentforce Smarter Sales Agreements"></img></div><div><p><strong>In this hands-on session, you'll learn how to:</strong></p><p>• Set up and extend <strong>Agentforce</strong> inside <strong>Manufacturing Cloud</strong></p><p>• Work with <strong>Sales Agreements</strong> &amp; <strong>Einstein Generative AI</strong></p><p><span style="background-color: rgb(255, 255, 255);">• Create and customize </span><strong style="background-color: rgb(255, 255, 255);">Agentforce Actions</strong><span style="background-color: rgb(255, 255, 255);"> with </span><strong style="background-color: rgb(255, 255, 255);">Prompt Builder </strong><span style="background-color: rgb(255, 255, 255);">and</span><strong style="background-color: rgb(255, 255, 255);"> Flow</strong></p><p>• Verify product availability automatically — so your key account managers never miss a beat.</p><hr></hr><p><strong>Audience:</strong> Technical • Level: ⭐⭐⭐☆☆ (3/5)</p>
   <hr></hr>
@@ -62,9 +78,14 @@ The purpose of this app is to simplify hands-on workshop exercises by:
 ![Einstein Setup 1](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Einstein%20Setup/Screenshot%202025-06-20%20at%202.26.39%E2%80%AFPM.png)
 ![Einstein Setup 2](https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Einstein%20Setup/Screenshot%202025-06-23%20at%205.03.25%E2%80%AFPM.png)
 
+</details>
+
 ---
 
-# Workshop: Supercharge Experiences: Connect Telemetry to CRM360
+<details>
+<summary><strong>⚡️ Workshop: Supercharge Experiences: Connect Telemetry to CRM360</strong></summary>
+
+### Workshop: Supercharge Experiences: Connect Telemetry to CRM360
 
 <div>
   <p><span style="font-size: 20px;">⚡️</span>
@@ -87,3 +108,5 @@ The purpose of this app is to simplify hands-on workshop exercises by:
   <hr></hr>
   <p><strong>Audience:</strong> Technical • Level: ⭐⭐⭐⭐☆ (4/5)</p><hr></hr>
 </div>
+
+</details>
