@@ -8,12 +8,28 @@
             <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-4 slds-p-around_medium">
                 <h2 class="slds-text-heading_medium slds-m-bottom_small">{step.Name}</h2>
 
+                <!-- Overview Instructions -->
                 <div class="instructions-container slds-text-longform slds-m-bottom_medium">
                     <div onclick={handleRichTextClick}>
                         <lightning-formatted-rich-text value={step.Instructions__c}></lightning-formatted-rich-text>
                     </div>
-                    
                 </div>
+
+                <!-- Step Details Section -->
+                <template if:true={hasStepDetails}>
+                    <div class="step-details-section slds-m-top_medium slds-p-left_medium slds-m-bottom_medium">
+                        <template for:each={step.stepDetails} for:item="detail">
+                            <div key={detail.Id} class="step-detail-item slds-m-bottom_medium slds-p-around_small slds-border_bottom">
+                                <h3 class="slds-text-heading_small slds-m-bottom_small">{detail.Detail_Title__c}</h3>
+                                <div class="detail-instructions-container slds-text-longform">
+                                    <div onclick={handleRichTextClick}>
+                                        <lightning-formatted-rich-text value={detail.Detail_Instructions__c}></lightning-formatted-rich-text>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
 
                 <lightning-input
                     type="checkbox"

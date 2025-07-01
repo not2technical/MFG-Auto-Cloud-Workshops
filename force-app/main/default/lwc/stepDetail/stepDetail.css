@@ -1,1 +1,30 @@
-/* myButton.css */
+/* stepDetail.css */
+
+.step-details-section {
+    border-left: 3px solid #1B96FF;
+}
+
+.step-detail-item {
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+.step-detail-item h3 {
+    color: #0070d2;
+    font-weight: 600;
+}
+
+.detail-instructions-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.detail-instructions-container img:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: scale(1.02);
+    transition: all 0.2s ease;
+}

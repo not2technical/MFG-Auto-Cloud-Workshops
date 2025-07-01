@@ -299,6 +299,216 @@ It is crucial to test your agent in a sandbox environment to avoid impacting pro
 
 </details>
 
+<details>
+<summary><strong>⚡ Workshop: Supercharge Experiences: Connect Telemetry to CRM360</strong></summary>
+
+### Workshop: Supercharge Experiences: Connect Telemetry to CRM360
+
+<div><p><span style="font-size: 20px;">⚡ </span><strong style="font-size: 20px;">Get hands on with Connected Assets and Vehicles</strong></p><p><em>Picture this:</em> your connected assets stream telemetry data that automatically triggers intelligent actions in Salesforce — alerts are created, work orders are generated, and your service teams respond faster than ever. This comprehensive workshop teaches you to harness the power of Context Service to bring external data, CRM data, and AI together on a single platform.</p><hr></hr></div><div style="float: right; width: 300px;"><img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/connected%20Assets%20workshop.png" alt="Supercharge Experiences Connect Telemetry to CRM360" style="max-width: 300px !important; width: 300px !important; height: auto !important;"></img></div><div><p><strong>In this hands-on session, you'll learn how to:</strong></p><p>• Clone and customize <strong>Context Service Definitions</strong> for connected assets</p><p>• Configure <strong>Actionable Event Management</strong> orchestrations</p><p>• Build <strong>Expression Sets</strong> and execution procedures</p><p>• Create automated responses to telemetry thresholds</p><p>• Test end-to-end workflows with real asset data</p><hr></hr><p><strong>Audience:</strong> Technical • Level: ⭐⭐⭐⭐☆ (4/5)</p>
+  <hr></hr>
+</div>
+
+## Step: Context Service Configuration Guide
+
+Guided steps to create and extend a context service definition for connected vehicles or Assets. This foundational section introduces the workshop objectives and provides overview of the hands-on Connected Assets and Asset Centric Service experience.
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Service%20Configuration%20Guide/image26.png" alt="Context Service Configuration Guide Header" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Workshop Overview:**
+This comprehensive guide will take you through the complete process of setting up connected assets and implementing actionable event management using Salesforce's powerful Context Service capabilities.
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Service%20Configuration%20Guide/image73.png" alt="Connected Assets Overview" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+## Step: Cloning an existing definition
+
+Get off to a fast start by cloning an Out of the Box context definition.
+
+**Steps:**
+
+### 1. Navigate to Context Definitions
+Type "Context service" in setup search and click on "Context Definitions"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Cloning%20an%20existing%20definition/image25.png" alt="Navigate to Context Definitions" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 2. Select VehicleFaultEventDetail
+In the Standard Definitions tab, find VehicleFaultEventDetail and click the dropdown icon
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Cloning%20an%20existing%20definition/image36.png" alt="Select VehicleFaultEventDetail" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 3. Clone the Definition
+Click on "Clone" to create a copy
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Cloning%20an%20existing%20definition/image50.png" alt="Clone Definition" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 4. Name and Save
+Paste "Initials_Asset_Context_Def" into input field and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Cloning%20an%20existing%20definition/image39.png" alt="Name and Save Definition" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+## Step: Context Service Customization
+
+Configure the new context definition for Assets. Edit the cloned Context Definition to align to connected asset event stream.
+
+### 5. Access Custom Definitions
+Click on Custom Definitions, then click the dropdown icon, and select Edit
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Service%20Customization/image24.png" alt="Access Custom Definitions" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 6. Begin Modifications
+Click "Next" to start modifying attributes and adding new nodes
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Service%20Customization/image12.png" alt="Begin Modifications" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 7. Add Child Node
+Click "Add Child Node" to create a new node under signals
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Service%20Customization/image33.png" alt="Add Child Node" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 8. Create Thresholds Node
+In the new child node, type "thresholds" and click Next
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Service%20Customization/image49.png" alt="Create Thresholds Node" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+## Step: Context Definition Attributes
+
+Attributes are fields on a node that can be mapped to sObjects or any input data source. Rename attributes from vehicle-focused to asset-focused.
+
+### 9. Rename Attributes
+In the Attribute section, find "vehicleName" and replace with "assetName". Repeat for "vehicleId" and replace with "assetId"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Definition%20Attributes/image55.png" alt="Rename Attributes" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 10. Add Attributes to Thresholds
+Click on thresholds node and click "Add Attributes"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Definition%20Attributes/image20.png" alt="Add Attributes to Thresholds" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 11. Configure Threshold Attributes
+Create "lower" and "upper" attributes with INPUT OUTPUT type and Number data type, then click Next
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Definition%20Attributes/image44.png" alt="Configure Threshold Attributes" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+## Step: Context Definition Tagging
+
+Tags are used to define the context structure and point to a node or attribute so the consuming application can query data directly from the context definition.
+
+### 12. Add Asset Tags
+Click on Events node and add tags for assetId and assetName
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Definition%20Tagging/image38.png" alt="Add Asset Tags" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 13. Remove Vehicle Tags
+Remove the old vehicleId and vehicleName tags by clicking the delete icons
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Definition%20Tagging/image21.png" alt="Remove Vehicle Tags" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 14. Tag Thresholds Node
+Add tags to the thresholds node and its lower and upper attributes, then click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Definition%20Tagging/image13.png" alt="Tag Thresholds Node" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+## Step: Context Definition Mapping
+
+Context Mapping is the mapping of nodes and attributes to an input data source. Replace Vehicle mappings with Asset object mappings.
+
+### 15-27. Complete Mapping Process
+This comprehensive section includes multiple steps to:
+- Navigate to Custom Definitions and select your context definition
+- Map data sources and edit mappings
+- Replace Vehicle object with Asset object
+- Configure field mappings for assetId and assetName
+- Generate input mappings for all nodes
+- Activate the completed definition
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Definition%20Mapping/image15.png" alt="Context Definition Mapping" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Key Mapping Steps:**
+- Update mappings from Vehicle to Asset
+- Configure node and attribute mappings
+- Generate all mappings for thresholds
+- Activate the definition
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Definition%20Mapping/image43.png" alt="Activate Definition" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+## Step: Actionable Event Management
+
+Define the actions to be performed for actionable events generated by assets by creating actionable event orchestrations.
+
+### 28. Navigate to Actionable Event Management
+Open App Launcher, type "Actionable", and click on Actionable Event Management
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Actionable%20Event%20Management/image61.png" alt="Navigate to Actionable Event Management" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 29. Create New Orchestration
+Type "Initials_MYAEO" as the orchestration name
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Actionable%20Event%20Management/image48.png" alt="Create New Orchestration" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 30. Configure Event Types and Settings
+Set up Event Type "WorkshopEvent", Subtype "WorkshopSubtype", Usage type as Automotive/Manufacturing, and ExpressionSet-Based execution
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Actionable%20Event%20Management/image30.png" alt="Configure Event Types" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+## Step: Execution Procedures and Expression Sets
+
+Pull variables from the event stream and CRM to define rules and actions. Create list group filters with OR conditions for lower/upper thresholds.
+
+### 31-49. Build Expression Logic
+This extensive section covers:
+- Creating list group filters with threshold conditions
+- Setting up local resources (alertSubject, isActive, effDateTime, validUntilDateTime)
+- Configuring Record Actions to create RecordAlert
+- Setting execution rank and activating procedures
+- Refreshing decision tables
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Execution%20Procedures%20and%20Expression%20Sets/image62.png" alt="Expression Sets Configuration" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Key Configuration Steps:**
+- Create OR conditions for lower (< 1400) and upper (> 1800) thresholds
+- Set up local resources as constants
+- Configure RecordAlert creation with field mappings
+- Activate procedures and refresh decision tables
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Execution%20Procedures%20and%20Expression%20Sets/image23.png" alt="Save and Activate" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+## Step: Testing with Developer Console
+
+Time to test and see if all the hard work pays off. Navigate to Manufacturing Service Console to get an AssetId and test the complete workflow.
+
+### 50. Access Manufacturing Service Console
+Navigate to the Manufacturing Service Console from the App Launcher
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Testing%20with%20Developer%20Console/image52.png" alt="Access Service Console" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 51. Select Asset Record
+Navigate to Asset entity and select any asset from the list
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Testing%20with%20Developer%20Console/image35.png" alt="Select Asset Record" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 52. Copy Asset ID
+Copy the AssetId from the browser URL
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Testing%20with%20Developer%20Console/image8.png" alt="Copy Asset ID" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 53-56. Execute Test Payload
+Use Developer Console to execute the test payload:
+
+```apex
+String jsonBody = '{"type": "WorkshopEvent","eventData": "{\"Event\":[{\"assetId\":\"INSERT_ID\",\"id\":\"INSERT_ID\",\"businessObjectType\":\"Asset\",\"signals\":[{\"thresholds\":{\"lower\":\"1500\",\"upper\":\"1880\"}}]}]}"}';
+InboundEventService.sendEvent(jsonBody);
+```
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Testing%20with%20Developer%20Console/image19.png" alt="Execute Test Payload" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### Verify Results
+Check that alerts are created successfully on the Asset record
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Testing%20with%20Developer%20Console/image53.png" alt="Verify Results" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**🎉 Congratulations!** You have successfully completed the hands-on workshop on Salesforce Context Service in Automotive and Manufacturing Cloud! You've now acquired valuable skills in cloning, modifying, and testing context services for connected assets.
+
+</details>
+
 ---
 
 <details>

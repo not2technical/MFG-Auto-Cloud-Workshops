@@ -17,6 +17,10 @@ export default class StepDetail extends LightningElement {
         return value;
     }
 
+    get hasStepDetails() {
+        return this.step?.stepDetails && this.step.stepDetails.length > 0;
+    }
+
     handleCheckboxChange(event) {
         const stepId = this.step.Id;
         const isChecked = event.target.checked;
@@ -73,9 +77,20 @@ export default class StepDetail extends LightningElement {
     }
 
     renderedCallback() {
+        // Handle overview instructions
         const instructionsDiv = this.template.querySelector('.instructions-container');
         if (instructionsDiv && this.step?.Instructions__c) {
             instructionsDiv.innerHTML = this.step.Instructions__c;
+        }
+
+        // Handle step detail instructions
+        const detailDivs = this.template.querySelectorAll('.detail-instructions-container');
+        if (detailDivs && this.step?.stepDetails) {
+            detailDivs.forEach((div, index) => {
+                if (this.step.stepDetails[index]?.Detail_Instructions__c) {
+                    div.innerHTML = this.step.stepDetails[index].Detail_Instructions__c;
+                }
+            });
         }
     }
 }

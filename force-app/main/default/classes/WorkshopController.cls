@@ -17,18 +17,21 @@ public static List<Map<String, Object>> getStepsAndProgress(Id workshopId) {
         progressMap.put(up.Workshop_Step__c, up.IsCompleted__c);
     }
 
-    // ✅ 3) Query only steps that have progress
+    // ✅ 3) Query only steps that have progress, including step details
     List<Workshop_Step__c> steps = new List<Workshop_Step__c>();
     if (!stepIds.isEmpty()) {
         steps = [
-            SELECT Id, Name, Step_Group__c, Step_Order__c, Instructions__c, Image_URL__c
+            SELECT Id, Name, Step_Group__c, Step_Order__c, Instructions__c, Image_URL__c,
+                   (SELECT Id, Name, Detail_Title__c, Detail_Order__c, Detail_Instructions__c 
+                    FROM Workshop_Step_Details__r 
+                    ORDER BY Detail_Order__c)
             FROM Workshop_Step__c
             WHERE Id IN :stepIds
             ORDER BY Step_Group__c, Step_Order__c
         ];
     }
 
-    // ✅ 4) Return same JSON structure
+    // ✅ 4) Return JSON structure with step details
     List<Map<String, Object>> result = new List<Map<String, Object>>();
     for (Workshop_Step__c s : steps) {
         Map<String, Object> row = new Map<String, Object>();
@@ -39,6 +42,20 @@ public static List<Map<String, Object>> getStepsAndProgress(Id workshopId) {
         row.put('Instructions__c', s.Instructions__c);
         row.put('Image_URL__c', s.Image_URL__c);
         row.put('progress', progressMap.get(s.Id) != null ? progressMap.get(s.Id) : false);
+        
+        // Add step details
+        List<Map<String, Object>> stepDetails = new List<Map<String, Object>>();
+        for (Workshop_Step_Detail__c detail : s.Workshop_Step_Details__r) {
+            Map<String, Object> detailMap = new Map<String, Object>();
+            detailMap.put('Id', detail.Id);
+            detailMap.put('Name', detail.Name);
+            detailMap.put('Detail_Title__c', detail.Detail_Title__c);
+            detailMap.put('Detail_Order__c', detail.Detail_Order__c);
+            detailMap.put('Detail_Instructions__c', detail.Detail_Instructions__c);
+            stepDetails.add(detailMap);
+        }
+        row.put('stepDetails', stepDetails);
+        
         result.add(row);
     }
 
