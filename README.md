@@ -56,6 +56,22 @@ Manufacturing Cloud for Sales makes your run-rate business more predictable and 
 
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Enabling%20Sales%20Agreements/Screenshot%202025-06-20%20at%202.28.24%E2%80%AFPM.png" alt="Enabling Sales Agreements 1" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
+## Step: Einstein Setup
+
+Einstein generative AI capabilities, built on the Salesforce platform, bring generative AI technology to your business at scale, helping supercharge productivity and simplify daily tasks. The Einstein Trust Layer safeguards business data and enhances AI accuracy.
+
+**To set up Einstein Generative AI:**
+
+1. **Turn On Einstein Generative AI:**
+   - From Setup, enter "Einstein Setup" in the Quick Find box and turn it on. This also implies consent to store generative AI activity logs and feedback data in Data Cloud.
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Einstein%20Setup/Screenshot%202025-06-20%20at%202.26.39%E2%80%AFPM.png" alt="Einstein Setup 1" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+2. **Enable Manufacturing Generative AI:**
+   - To configure and use prompt templates for manufacturing, turn on Manufacturing Generative AI in Setup.
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Einstein%20Setup/Screenshot%202025-06-23%20at%205.03.25%E2%80%AFPM.png" alt="Einstein Setup 2" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
 ## Step: Agents Setup
 
 Agentforce allows you to deploy AI agents that work alongside employees, automating routine tasks and assisting with complex ones.
@@ -280,22 +296,6 @@ It is crucial to test your agent in a sandbox environment to avoid impacting pro
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Testing%20the%20New%20Configuration/Screenshot%202025-06-27%20at%208.54.48%E2%80%AFAM.png" alt="Testing the New Configuration 5" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 **🎉 Congratulations on all your hard work!**
-
-## Step: Einstein Setup
-
-Einstein generative AI capabilities, built on the Salesforce platform, bring generative AI technology to your business at scale, helping supercharge productivity and simplify daily tasks. The Einstein Trust Layer safeguards business data and enhances AI accuracy.
-
-**To set up Einstein Generative AI:**
-
-1. **Turn On Einstein Generative AI:**
-   - From Setup, enter "Einstein Setup" in the Quick Find box and turn it on. This also implies consent to store generative AI activity logs and feedback data in Data Cloud.
-
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Einstein%20Setup/Screenshot%202025-06-20%20at%202.26.39%E2%80%AFPM.png" alt="Einstein Setup 1" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
-
-2. **Enable Manufacturing Generative AI:**
-   - To configure and use prompt templates for manufacturing, turn on Manufacturing Generative AI in Setup.
-
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Extend%20Agentforce%20Smarter%20Sales%20Agreements/Einstein%20Setup/Screenshot%202025-06-23%20at%205.03.25%E2%80%AFPM.png" alt="Einstein Setup 2" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 </details>
 
