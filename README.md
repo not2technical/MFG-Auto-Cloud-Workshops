@@ -316,7 +316,7 @@ Before we start building our connected asset solutions, let's verify that all re
 
 First, we need to ensure that Context Service is enabled and configured correctly in your org.
 
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Review%20and%20Enable%20Setup%20Requirements/Screenshot%202025-07-02%20at%2012.13.39%20PM.png" alt="Verifying Context Service" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Review%20and%20Enable%20Setup%20Requirements/Screenshot%202025-07-02%20at%2012.13.39%E2%80%AFPM.png" alt="Verifying Context Service" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 ### Step Detail: Verifying Actionable Event orchestration is Enabled
 
