@@ -308,16 +308,23 @@ It is crucial to test your agent in a sandbox environment to avoid impacting pro
   <hr></hr>
 </div>
 
-## Step: Context Service Configuration Guide
+## Step: Review and Enable Setup Requirements
 
-Guided steps to create and extend a context service definition for connected vehicles or Assets. This foundational section introduces the workshop objectives and provides overview of the hands-on Connected Assets and Asset Centric Service experience.
+Before we start building our connected asset solutions, let's verify that all required services are properly configured and enabled in your Salesforce org.
 
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Service%20Configuration%20Guide/image26.png" alt="Context Service Configuration Guide Header" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+### Step Detail: Verifying Context Service
 
-**Workshop Overview:**
-This comprehensive guide will take you through the complete process of setting up connected assets and implementing actionable event management using Salesforce's powerful Context Service capabilities.
+First, we need to ensure that Context Service is enabled and configured correctly in your org.
 
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Context%20Service%20Configuration%20Guide/image73.png" alt="Connected Assets Overview" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Review%20and%20Enable%20Setup%20Requirements/Screenshot%202025-07-02%20at%2012.13.39%20PM.png" alt="Verifying Context Service" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### Step Detail: Verifying Actionable Event orchestration is Enabled
+
+Next, we need to confirm that Actionable Event orchestration is properly enabled and ready for use.
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Review%20and%20Enable%20Setup%20Requirements/Screenshot%202025-07-02%20at%2012.18.52%20PM.png" alt="Verifying Actionable Event orchestration is Enabled" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Important:** These setup requirements must be completed before proceeding with the workshop. This ensures all participants have the necessary foundation to successfully complete the hands-on exercises.
 
 ## Step: Cloning an existing definition
 
