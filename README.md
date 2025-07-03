@@ -322,7 +322,7 @@ First, we need to ensure that Context Service is enabled and configured correctl
 
 Next, we need to confirm that Actionable Event orchestration is properly enabled and ready for use.
 
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Review%20and%20Enable%20Setup%20Requirements/Screenshot%202025-07-02%20at%2012.18.52%20PM.png" alt="Verifying Actionable Event orchestration is Enabled" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+<img src="https://github.com/not2technical/MFG-Auto-Cloud-Workshops/blob/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Review%20and%20Enable%20Setup%20Requirements/Screenshot%202025-07-02%20at%2012.18.52%E2%80%AFPM.png?raw=true" alt="Verifying Actionable Event orchestration is Enabled" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 **Important:** These setup requirements must be completed before proceeding with the workshop. This ensures all participants have the necessary foundation to successfully complete the hands-on exercises.
 
@@ -513,36 +513,5 @@ Check that alerts are created successfully on the Asset record
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Testing%20with%20Developer%20Console/image53.png" alt="Verify Results" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 **🎉 Congratulations!** You have successfully completed the hands-on workshop on Salesforce Context Service in Automotive and Manufacturing Cloud! You've now acquired valuable skills in cloning, modifying, and testing context services for connected assets.
-
-</details>
-
----
-
-<details>
-<summary><strong>⚡️ Workshop: Supercharge Experiences: Connect Telemetry to CRM360</strong></summary>
-
-### Workshop: Supercharge Experiences: Connect Telemetry to CRM360
-
-<div>
-  <p><span style="font-size: 20px;">⚡️</span>
-    <strong style="font-size: 20px;">Connect, Orchestrate &amp; Automate — See It All in Real-Time</strong>
-  </p>
-  <p><em>Imagine this:</em> your IoT devices stream real-time telemetry directly into your CRM — instantly triggering business rules, automating alerts, and orchestrating next steps without missing a beat. This interactive workshop shows you how to bring that vision to life using Salesforce's powerful Actionable Event Orchestration (AEO) framework.</p>
-  <hr></hr>
-</div>
-
-<div style="float: right; width: 300px;">
-  <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/connected%20Assets%20workshop.png" alt="Supercharge Experiences Connect Telemetry to CRM360" style="max-width: 300px !important; width: 300px !important; height: auto !important;"></img>
-</div>
-
-<div>
-  <p><strong>In this hands-on session, you'll get to:</strong></p>
-  <p>• Extend out-of-the-box <strong>context templates</strong> to fit real device signals</p>
-  <p>• Build and test smart <strong>business rules</strong> with the <strong>rules engine</strong> and decision tables</p>
-  <p>• Generate <strong>real-time alerts</strong> and automate actions triggered by IoT events</p>
-  <p>• Simulate live telemetry and watch your orchestration flow in action — instantly!</p>
-  <hr></hr>
-  <p><strong>Audience:</strong> Technical • Level: ⭐⭐⭐⭐☆ (4/5)</p><hr></hr>
-</div>
 
 </details>
