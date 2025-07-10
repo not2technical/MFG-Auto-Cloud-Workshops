@@ -43,3 +43,11 @@ $RECYCLE.BIN/
 **/__pycache__/
 **/.venv/
 **/venv/
+industries_features_list.txt
+.gitignore
+industry common components list
+scripts/apex/cleanup_telemetry_duplicates.apex
+industries_interest_tags.json
+scripts/apex/fix_image_styling_and_content.apex
+scripts/apex/update_step_details_wsd3_wsd4.apex
+scripts/apex/update_telemetry_workshop_alignment.apex

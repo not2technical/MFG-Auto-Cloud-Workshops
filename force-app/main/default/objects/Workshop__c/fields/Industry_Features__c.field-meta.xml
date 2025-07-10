@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Industry_Features__c</fullName>
+    <label>Industry Features</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Accounting Subledger</fullName>
+                <default>false</default>
+                <label>Accounting Subledger</label>
+            </value>
+            <value>
+                <fullName>Actionable List Engagement</fullName>
+                <default>false</default>
+                <label>Actionable List Engagement</label>
+            </value>
+            <value>
+                <fullName>Actionable List Members</fullName>
+                <default>false</default>
+                <label>Actionable List Members</label>
+            </value>
+            <value>
+                <fullName>Actionable Relationship Center (ARC)</fullName>
+                <default>false</default>
+                <label>Actionable Relationship Center (ARC)</label>
+            </value>
+            <value>
+                <fullName>Actionable Segmentation</fullName>
+                <default>false</default>
+                <label>Actionable Segmentation</label>
+            </value>
+            <value>
+                <fullName>Action Launcher</fullName>
+                <default>false</default>
+                <label>Action Launcher</label>
+            </value>
+            <value>
+                <fullName>Action Plans</fullName>
+                <default>false</default>
+                <label>Action Plans</label>
+            </value>
+            <value>
+                <fullName>Advanced Program Management</fullName>
+                <default>false</default>
+                <label>Advanced Program Management</label>
+            </value>
+            <value>
+                <fullName>AI Accelerator</fullName>
+                <default>false</default>
+                <label>AI Accelerator</label>
+            </value>
+            <value>
+                <fullName>Asset Service Lifecycle Management</fullName>
+                <default>false</default>
+                <label>Asset Service Lifecycle Management</label>
+            </value>
+            <value>
+                <fullName>Audit Trail</fullName>
+                <default>false</default>
+                <label>Audit Trail</label>
+            </value>
+            <value>
+                <fullName>Batch Management</fullName>
+                <default>false</default>
+                <label>Batch Management</label>
+            </value>
+            <value>
+                <fullName>Business Rules Engine</fullName>
+                <default>false</default>
+                <label>Business Rules Engine</label>
+            </value>
+            <value>
+                <fullName>Care Plans</fullName>
+                <default>false</default>
+                <label>Care Plans</label>
+            </value>
+            <value>
+                <fullName>Case Referrals</fullName>
+                <default>false</default>
+                <label>Case Referrals</label>
+            </value>
+            <value>
+                <fullName>Collections and Recovery</fullName>
+                <default>false</default>
+                <label>Collections and Recovery</label>
+            </value>
+            <value>
+                <fullName>Complaints Management</fullName>
+                <default>false</default>
+                <label>Complaints Management</label>
+            </value>
+            <value>
+                <fullName>Compliant Data Sharing</fullName>
+                <default>false</default>
+                <label>Compliant Data Sharing</label>
+            </value>
+            <value>
+                <fullName>Connected Assets</fullName>
+                <default>false</default>
+                <label>Connected Assets</label>
+            </value>
+            <value>
+                <fullName>Context Service</fullName>
+                <default>false</default>
+                <label>Context Service</label>
+            </value>
+            <value>
+                <fullName>Contracts</fullName>
+                <default>false</default>
+                <label>Contracts</label>
+            </value>
+            <value>
+                <fullName>Criteria-Based Search and Filter</fullName>
+                <default>false</default>
+                <label>Criteria-Based Search and Filter</label>
+            </value>
+            <value>
+                <fullName>Cross-Object Field History</fullName>
+                <default>false</default>
+                <label>Cross-Object Field History</label>
+            </value>
+            <value>
+                <fullName>CSV Data Management for Industries</fullName>
+                <default>false</default>
+                <label>CSV Data Management for Industries</label>
+            </value>
+            <value>
+                <fullName>Data Consumption Framework</fullName>
+                <default>false</default>
+                <label>Data Consumption Framework</label>
+            </value>
+            <value>
+                <fullName>Data Processing Engine</fullName>
+                <default>false</default>
+                <label>Data Processing Engine</label>
+            </value>
+            <value>
+                <fullName>Decision Explainer</fullName>
+                <default>false</default>
+                <label>Decision Explainer</label>
+            </value>
+            <value>
+                <fullName>Decision Table</fullName>
+                <default>false</default>
+                <label>Decision Table</label>
+            </value>
+            <value>
+                <fullName>Disclosure and Compliance Hub</fullName>
+                <default>false</default>
+                <label>Disclosure and Compliance Hub</label>
+            </value>
+            <value>
+                <fullName>Discovery Framework and Assessments</fullName>
+                <default>false</default>
+                <label>Discovery Framework and Assessments</label>
+            </value>
+            <value>
+                <fullName>Document Checklist Items</fullName>
+                <default>false</default>
+                <label>Document Checklist Items</label>
+            </value>
+            <value>
+                <fullName>Dynamic Assessments</fullName>
+                <default>false</default>
+                <label>Dynamic Assessments</label>
+            </value>
+            <value>
+                <fullName>Einstein Autofill</fullName>
+                <default>false</default>
+                <label>Einstein Autofill</label>
+            </value>
+            <value>
+                <fullName>Einstein Bot Templates</fullName>
+                <default>false</default>
+                <label>Einstein Bot Templates</label>
+            </value>
+            <value>
+                <fullName>Einstein Relationship Insights</fullName>
+                <default>false</default>
+                <label>Einstein Relationship Insights</label>
+            </value>
+            <value>
+                <fullName>Einstein Summary</fullName>
+                <default>false</default>
+                <label>Einstein Summary</label>
+            </value>
+            <value>
+                <fullName>Engagement</fullName>
+                <default>false</default>
+                <label>Engagement</label>
+            </value>
+            <value>
+                <fullName>Events and Milestones</fullName>
+                <default>false</default>
+                <label>Events and Milestones</label>
+            </value>
+            <value>
+                <fullName>Feedback Management</fullName>
+                <default>false</default>
+                <label>Feedback Management</label>
+            </value>
+            <value>
+                <fullName>Fundraising</fullName>
+                <default>false</default>
+                <label>Fundraising</label>
+            </value>
+            <value>
+                <fullName>Grantmaking</fullName>
+                <default>false</default>
+                <label>Grantmaking</label>
+            </value>
+            <value>
+                <fullName>Group Membership and Households</fullName>
+                <default>false</default>
+                <label>Group Membership and Households</label>
+            </value>
+            <value>
+                <fullName>Identity Verification</fullName>
+                <default>false</default>
+                <label>Identity Verification</label>
+            </value>
+            <value>
+                <fullName>Integration Solutions with MuleSoft Direct</fullName>
+                <default>false</default>
+                <label>Integration Solutions with MuleSoft Direct</label>
+            </value>
+            <value>
+                <fullName>Intelligent Document Automation</fullName>
+                <default>false</default>
+                <label>Intelligent Document Automation</label>
+            </value>
+            <value>
+                <fullName>Intelligent Document Reader</fullName>
+                <default>false</default>
+                <label>Intelligent Document Reader</label>
+            </value>
+            <value>
+                <fullName>Intelligent Form Reader</fullName>
+                <default>false</default>
+                <label>Intelligent Form Reader</label>
+            </value>
+            <value>
+                <fullName>Interaction Summaries</fullName>
+                <default>false</default>
+                <label>Interaction Summaries</label>
+            </value>
+            <value>
+                <fullName>Interest Tags</fullName>
+                <default>false</default>
+                <label>Interest Tags</label>
+            </value>
+            <value>
+                <fullName>List Builder for Data Cloud Segment</fullName>
+                <default>false</default>
+                <label>List Builder for Data Cloud Segment</label>
+            </value>
+            <value>
+                <fullName>Loyalty Management</fullName>
+                <default>false</default>
+                <label>Loyalty Management</label>
+            </value>
+            <value>
+                <fullName>Marketing Cloud Engagement for Industries</fullName>
+                <default>false</default>
+                <label>Marketing Cloud Engagement for Industries</label>
+            </value>
+            <value>
+                <fullName>Omnistudio</fullName>
+                <default>false</default>
+                <label>Omnistudio</label>
+            </value>
+            <value>
+                <fullName>Omnistudio Document Generation</fullName>
+                <default>false</default>
+                <label>Omnistudio Document Generation</label>
+            </value>
+            <value>
+                <fullName>Order Management</fullName>
+                <default>false</default>
+                <label>Order Management</label>
+            </value>
+            <value>
+                <fullName>Outcome Management</fullName>
+                <default>false</default>
+                <label>Outcome Management</label>
+            </value>
+            <value>
+                <fullName>Outreach List</fullName>
+                <default>false</default>
+                <label>Outreach List</label>
+            </value>
+            <value>
+                <fullName>Process Compliance Navigator</fullName>
+                <default>false</default>
+                <label>Process Compliance Navigator</label>
+            </value>
+            <value>
+                <fullName>Program and Case Management</fullName>
+                <default>false</default>
+                <label>Program and Case Management</label>
+            </value>
+            <value>
+                <fullName>Rebate Management</fullName>
+                <default>false</default>
+                <label>Rebate Management</label>
+            </value>
+            <value>
+                <fullName>Record Alerts</fullName>
+                <default>false</default>
+                <label>Record Alerts</label>
+            </value>
+            <value>
+                <fullName>Referral Marketing</fullName>
+                <default>false</default>
+                <label>Referral Marketing</label>
+            </value>
+            <value>
+                <fullName>Rollup Definitions for Record Rollups</fullName>
+                <default>false</default>
+                <label>Rollup Definitions for Record Rollups</label>
+            </value>
+            <value>
+                <fullName>Scheduled Reminders</fullName>
+                <default>false</default>
+                <label>Scheduled Reminders</label>
+            </value>
+            <value>
+                <fullName>Scheduler</fullName>
+                <default>false</default>
+                <label>Scheduler</label>
+            </value>
+            <value>
+                <fullName>Scoring Framework</fullName>
+                <default>false</default>
+                <label>Scoring Framework</label>
+            </value>
+            <value>
+                <fullName>Sentiment Insights</fullName>
+                <default>false</default>
+                <label>Sentiment Insights</label>
+            </value>
+            <value>
+                <fullName>Service Process Studio</fullName>
+                <default>false</default>
+                <label>Service Process Studio</label>
+            </value>
+            <value>
+                <fullName>Stage Management</fullName>
+                <default>false</default>
+                <label>Stage Management</label>
+            </value>
+            <value>
+                <fullName>Timeline</fullName>
+                <default>false</default>
+                <label>Timeline</label>
+            </value>
+            <value>
+                <fullName>Virtual Calls</fullName>
+                <default>false</default>
+                <label>Virtual Calls</label>
+            </value>
+            <value>
+                <fullName>Vlocity Contract Lifecycle Management</fullName>
+                <default>false</default>
+                <label>Vlocity Contract Lifecycle Management</label>
+            </value>
+            <value>
+                <fullName>Vlocity Interaction Launcher</fullName>
+                <default>false</default>
+                <label>Vlocity Interaction Launcher</label>
+            </value>
+            <value>
+                <fullName>Actionable Event Orchestration</fullName>
+                <default>false</default>
+                <label>Actionable Event Orchestration</label>
+            </value>
+            <value>
+                <fullName>Agentforce for Manufacturing</fullName>
+                <default>false</default>
+                <label>Agentforce for Manufacturing</label>
+            </value>
+            <value>
+                <fullName>Agentforce for Automotive</fullName>
+                <default>false</default>
+                <label>Agentforce for Automotive</label>
+            </value>
+            <value>
+                <fullName>Connected Vehicle</fullName>
+                <default>false</default>
+                <label>Connected Vehicle</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>
