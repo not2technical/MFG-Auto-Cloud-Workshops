@@ -10,6 +10,7 @@ This project is a dynamic, user-friendly application and framework for deliverin
 - [📚 Workshops](#-workshops)
   - [✨ Extend Agentforce Smarter Sales Agreements](#workshop-extend-agentforce-smarter-sales-agreements)
   - [⚡️ Supercharge Experiences: Connect Telemetry to CRM360](#workshop-supercharge-experiences-connect-telemetry-to-crm360)
+  - [🔄 Recall Ready: Building Product Service Campaigns](#workshop-recall-ready-building-product-service-campaigns)
 
 ---
 
@@ -513,5 +514,358 @@ Check that alerts are created successfully on the Asset record
 <img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Testing%20with%20Developer%20Console/image53.png" alt="Verify Results" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 **🎉 Congratulations!** You have successfully completed the hands-on workshop on Salesforce Context Service in Automotive and Manufacturing Cloud! You've now acquired valuable skills in cloning, modifying, and testing context services for connected assets.
+
+</details>
+
+<details>
+<summary><strong>🔄 Workshop: Recall Ready: Building Product Service Campaigns</strong></summary>
+
+### Workshop: Recall Ready: Building Product Service Campaigns
+
+<div><p><span style="font-size: 20px;">🔄 </span><strong style="font-size: 20px;">Build Powerful Product Service Campaigns</strong></p><p><em>Picture this:</em> your organization can proactively identify at-risk assets, create targeted service campaigns, and automatically generate work orders for field service teams. This comprehensive workshop teaches you to harness the power of Actionable Lists and Data Processing Engine to build effective product recall and upgrade campaigns.</p><hr></hr></div><div style="float: right; width: 300px;"><img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/image73.png" alt="Recall Ready Building Product Service Campaigns" style="max-width: 300px !important; width: 300px !important; height: auto !important;"></img></div><div><p><strong>In this hands-on session, you'll learn how to:</strong></p><p>• Configure <strong>Data Processing Engine</strong> for asset data aggregation</p><p>• Build <strong>Actionable Lists</strong> powered by advanced data processing</p><p>• Create targeted <strong>Product Service Campaigns</strong> for recalls and upgrades</p><p>• Generate <strong>Work Orders</strong> automatically for field service teams</p><p>• Master <strong>Batch Management</strong> and <strong>Actionable Segmentation</strong> workflows</p><hr></hr><p><strong>Audience:</strong> Technical • Level: ⭐⭐⭐⭐☆ (4/5)</p><p><strong>Duration:</strong> 90 minutes</p><p><strong>Industry Features:</strong> Batch Management, Complaints Management, Timeline, Record Alerts, Audit Trail, Actionable Segmentation, Action Plans, Data Processing Engine</p>
+  <hr></hr>
+</div>
+
+## Step: Actionable List Configuration Guide
+
+Guided steps to create Actionable lists powered by data processing engine to create Asset or Vehicle data sets.
+
+### 1. Access Setup
+Click the Gear and click on Setup to access setup from any page in your org
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Configuration%20Guide/Step_01_1_1_Click_the_Gear_2_Click_on_Setup.png" alt="Access Setup" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 2. Navigate to Actionable Segmentation
+In setup quick search, type "Actionable" and click Actionable Segmentation Settings
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Configuration%20Guide/Step_02_2_1_In_setup_quick_search_Type_Actionable_2_C.png" alt="Navigate to Actionable Segmentation" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 3. Create Data Processing Engine Definition
+Click on "New Data Processing Engine Definition"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Configuration%20Guide/Step_03_3_1_Click_on_New_Data_Processing_Engine_Definitio.png" alt="Create Data Processing Engine Definition" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Data processing engine is an industry provided platform data transformation and aggregation component.**
+
+### 4. Configure Engine Definition
+Type "WorkshopAssetServiceEOLUpgradeCampaign", pick Asset from the object list, and click Save & Next
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Configuration%20Guide/Step_04_instruction.png" alt="Configure Engine Definition" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 5. Launch Data Processing Engine
+Click on "Launch Data Processing Engine"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Configuration%20Guide/Step_05_5_Click_on_Launch_Data_Processing_Engine.png" alt="Launch Data Processing Engine" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+## Step: Data Processing Engine Configuration
+
+Configure the new context definition for Assets. This comprehensive section includes multiple steps to configure data sources, joins, and field mappings.
+
+### 6. Configure Asset Data Source
+Click the Asset_DS Data Source and click Configure
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_01_screenshot.png" alt="Configure Asset Data Source" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 7. Select Asset Fields
+Click on Selected Fields (2) button to choose fields for asset data processing
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_02_7_1_Click_on_Selected_Fields_2_button.png" alt="Select Asset Fields" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Here we will choose all the fields for asset that we may want to use for the campaign and other nodes like a join**
+
+### 8. Configure Asset Field Selection
+Select the fields from Asset as shown, update the alias names where shown, and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_03_8_1_Select_the_fields_from_Asset_as_shown_2_Upd.png" alt="Configure Asset Field Selection" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 9. Save Asset Node Configuration
+Click Save for the Asset node
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_05_9_1_Click_on_Save_for_the_Asset_node.png" alt="Save Asset Node Configuration" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 10. Create New Node
+Click on "New Node" to add additional data sources
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_06_10_Click_on_New_Node.png" alt="Create New Node" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 11. Configure Asset Warranty Data Source
+Choose Data Source for Node Type, type "AssetWarranty_DS" in Name field, click API Name field to auto populate, and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_07_instruction.png" alt="Configure Asset Warranty Data Source" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 12. Select Asset Warranty Entity
+Type "Asset Wa" and select Asset Warranty Entity from source object field
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_08_instruction.png" alt="Select Asset Warranty Entity" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 13. Configure Asset Warranty Fields
+Click on Select Fields of Asset warranty
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_09_13_Click_on_Select_Fields_of_Asset_warranty.png" alt="Configure Asset Warranty Fields" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Here we will choose all the fields we may want to use from Asset Warranty entity in the data set.**
+
+### 14. Save Asset Warranty Field Configuration
+Select the fields from asset warranty object as shown, update alias names, and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_14_instruction.png" alt="Save Asset Warranty Field Configuration" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 15. Add Related Object
+Click on "Add Related Object" from the Asset Warranty Configuration page
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_11_15_1_Click_on_Add_Related_Object_from_the_Asset.png" alt="Add Related Object" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 16. Configure Related Object
+Click on "Related Object"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_12_16_1_Click_on_Related_Object.png" alt="Configure Related Object" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 17. Add Asset Related Object
+Click "Add Related Object" button, choose Asset from related object field, and click Select fields button
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_17_instruction.png" alt="Add Asset Related Object" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Here we chose related fields from asset within Asset Warranty**
+
+### 18. Configure Related Object Fields
+Select the field from asset related object as shown, update alias names, and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_18_instruction.png" alt="Configure Related Object Fields" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 19. Save Asset Warranty Node
+Click Save again to save the Asset Warranty Node
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_15_19_Click_on_Save_again_to_save_the_Asset_Warranty.png" alt="Save Asset Warranty Node" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 20. Create Join Node
+Click on "New Node" - In the next few steps we will join the two data source nodes together
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_16_20_1_Click_on_New_Node.png" alt="Create Join Node" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 21. Configure Join Node
+Choose Join for Node Type, type "Join Asset to Asset Warranty" in Name field, click API Name field to auto populate, and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_10_instruction.png" alt="Configure Join Node" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 22. Set Join Sources
+In the first node choose Asset_DS, in the second node choose Asset Warranty_DS
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_26_instruction.png" alt="Set Join Sources" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Here we actual perform the join for the two selected objects**
+
+### 23. Configure Asset_DS Fields
+Click on "Select Fields" button next to the source node Asset_DS
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_21_25_1_Click_on_Select_Fields_button_next_to_the_As.png" alt="Configure Asset_DS Fields" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 24. Select All Asset_DS Fields
+Check "Select All" checkbox and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_20_24_1_Check_Select_All_checkbox_2_Click_Save.png" alt="Select All Asset_DS Fields" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 25. Configure Asset Warranty_DS Fields
+Click on "Select Fields" button next to the Asset Warranty_DS source node
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_19_23_1_Click_on_Select_Fields_button_next_to_the_s.png" alt="Configure Asset Warranty_DS Fields" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 26. Select All Asset Warranty Fields
+Check "Select All" checkbox and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_22_26_1_Check_Select_All_checkbox_2_Click_Save.png" alt="Select All Asset Warranty Fields" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 27. Configure Join Fields
+Click on "First Node Field"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_23_27_Click_on_First_Node_Field.png" alt="Configure Join Fields" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 28. Map Join Fields
+In the mapped fields section select Asset_DS_id from First Node Field, select AssetId_AW_DS from the Second Node Field, and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_28_instruction.png" alt="Map Join Fields" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 29. Create Writeback Node
+Click on "New Node"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_25_29_1_Click_on_New_Node.png" alt="Create Writeback Node" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 30. Configure Writeback Object
+In Node Type select "Writeback Object", in Name type "Asset Warranty EOL Campaign WriteBack", click API Name to auto populate, and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_30_instruction.png" alt="Configure Writeback Object" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 31. Configure Writeback Settings
+In the source node choose "Join Asset to Asset Warranty" join node, select Analytics radio button for Target Type, and type "WorkshopAssetServiceEOLUpgradeCampaign" into Dataset Name field
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_27_instruction.png" alt="Configure Writeback Settings" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 32. Configure Field Mappings
+In the Field Mapping section select all the fields adding rows as needed
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_24_instruction.png" alt="Configure Field Mappings" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**🛑 In this sections simply click each field in the drop down and click the add button until all fields are used**
+
+### 33. Complete Field Mappings
+At the bottom for Field Mappings choose Folder Name "ActionableSegmentation" and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_29_33_1_At_the_bottom_for_Field_Mappings_choose_Fol.png" alt="Complete Field Mappings" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 34. Save and Activate Definition
+Click "Save" on the top right to save the Data processing engine definition, then click "Activate"
+
+### 35. Run Definition
+Click on "Run Definition"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_31_35_1_Click_on_Run_Definition.png" alt="Run Definition" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 36. Complete Wizard
+Click Next through the wizard accepting defaults
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Data%20Processing%20Engine%20Configuration/Step_32_36_1_Click_Next_through_the_wizard_accepting_def.png" alt="Complete Wizard" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**This completes the data processing engine portion to build out the dataset**
+
+## Step: Advanced Data Processing Configuration
+
+Navigate back to the Actionable Segmentation Settings and configure the actionable list columns and statuses.
+
+### 37. Return to Actionable Segmentation
+Click Setup gear, in setup quick search type "Actionable", and click Actionable Segmentation Settings
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_02_38_1_Click_on_Refresh_Dataset_Status.png" alt="Navigate Back to Actionable Segmentation" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 38. Refresh Dataset Status
+Click on "Refresh Dataset Status"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_02_38_1_Click_on_Refresh_Dataset_Status.png" alt="Refresh Dataset Status" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 39. Add Columns
+In the workshop actionable list, click on "+ Add Columns"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_03_39_1_In_the_workshop_actionable_list_Click_on.png" alt="Add Columns" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 40. Configure Columns
+Click the available field names and move them all to the selected field name box, then click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_04_instruction.png" alt="Configure Columns" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 41. Add Statuses
+Click on "+ Add Statuses"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_05_instruction.png" alt="Add Statuses" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 42. Configure Status Items
+Click "New Status" button and add the shown status items, then click save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_06_instruction.png" alt="Configure Status Items" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**After complete the actionable list, these are the status actions that will be available**
+
+### 43. Activate List
+Toggle on to activate
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_07_instruction.png" alt="Activate List" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 44. Confirm Activation
+Click "OK"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_08_instruction.png" alt="Confirm Activation" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 45. Access Actionable Lists
+Click the App Launcher icon, search for "Actionable List", and click Actionable List
+
+## Step: Actionable List Creation
+
+Now we'll create the actual actionable list using our configured data processing engine.
+
+### 46. Create New Actionable List
+Click "New" to create a new actionable list
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Creation/Step_01_screenshot.png" alt="Create New Actionable List" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 47. Configure List Details
+Type "Workshop Upgrade Campaign" in the New Actionable List Name, select the Data processing Engine definition created earlier "WorkshopAssetServiceEOLUpgradeCampaign", and click Next
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Creation/Step_02_instruction.png" alt="Configure List Details" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 48. Apply Filter Criteria
+Click the Filter Criteria, choose InstallDate, choose Previous Fiscal Year, and click Apply
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Creation/Step_03_48_1_Click_the_Filter_Criteria_2_Choose_InstallDa.png" alt="Apply Filter Criteria" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 49. Select All Assets
+Check "Select All" to select all the filtered assets
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Creation/Step_04_instruction.png" alt="Select All Assets" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 50. Review and Save
+Click on "Review & Save (55)"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Creation/Step_05_instruction.png" alt="Review and Save" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 51. Confirm and Save
+Click on "Confirm & Save"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Creation/Step_06_instruction.png" alt="Confirm and Save" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+## Step: Product Service Campaign Configuration
+
+Now we create a new product service campaign and connect the actionable list to foster integration between data sets and campaigns.
+
+### 52. Create Product Service Campaign
+From App Launcher search for "Product Service Campaigns" and click New
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Product%20Service%20Campaign%20Configuration/Step_01_52_1_From_App_Launcher_search_for_Product_Servic.png" alt="Create Product Service Campaign" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 53. Configure Campaign Details
+Type "Workshop Upgrade Campaign" for Campaign Name, select "Upgrade" from type picklist, select work type "replace compressor", choose "Today" for Start date, choose "WorkShop Upgrade Campaign" for actionable list, and click Save
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Product%20Service%20Campaign%20Configuration/Step_02_instruction.png" alt="Configure Campaign Details" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**In this section we are connecting the campaign to the actionable list to foster integration between data sets and campaigns.**
+
+### 54. Navigate to Actionable List
+Click the actionable list link to take you back to the Workshop Upgrade Campaign actionable list
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Product%20Service%20Campaign%20Configuration/Step_03_instruction.png" alt="Navigate to Actionable List" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 55. Add to Service Campaign
+Click the action dropdown and click "Add to Service Campaign"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Product%20Service%20Campaign%20Configuration/Step_04_55_1_Click_the_action_carrot_2_Click_on_Add_to.png" alt="Add to Service Campaign" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**Performing this function will automatically add all the assets to the campaign.**
+
+### 56. Confirm Addition
+Click "Confirm"
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Product%20Service%20Campaign%20Configuration/Step_05_56_Click_on_Confirm.png" alt="Confirm Addition" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 57. Success Confirmation
+Success - Assets are added
+
+**Note you may get an error here on redirect to the previous product campaign but the items are added as this org is not Generally available. This is related to the demo env itself.**
+
+### 58. Verify Assets Added
+Navigate back to the Product Service Campaign from App Launcher, click "Related", and verify the Assets are added
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Product%20Service%20Campaign%20Configuration/Step_06_instruction.png" alt="Verify Assets Added" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+### 59. Create Work Orders
+Click the action dropdown and select "create work order for all items", then click confirm button
+
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Product%20Service%20Campaign%20Configuration/Step_08_59_1_Click_the_action_carrot_and_Select_create.png" alt="Create Work Orders" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+
+**The Final Step is to create work order in mass to support the cross-sell upsell efforts and get techs onsite. The great news is this is done is mass again for all assets added to the campaign**
+
+### 60. Verify Work Orders
+Verify created work orders
+
+**Congrats on completing this exercise**
+
+**🎉 Congratulations!** You have successfully completed the hands-on workshop on Product Service Campaigns in Automotive and Manufacturing Cloud! You've acquired valuable skills in building data sets with Data processing engine, Building Actionable Lists, and connecting Product Service Campaigns - crucial for tackling recalls and upgrades in the automotive and manufacturing industry.
+
+Keep experimenting with what you've learned today, and don't hesitate to leverage the additional resources provided for further exploration and mastery.
 
 </details>

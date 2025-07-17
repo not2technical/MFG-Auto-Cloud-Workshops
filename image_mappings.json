@@ -1,0 +1,541 @@
+[
+  {
+    "embed_id": "rId17",
+    "section": "Actionable List Configuration Guide",
+    "name": "Step_01_1_1_Click_the_Gear_2_Click_on_Setup",
+    "step": 1,
+    "context": "1. 1. Click the Gear 2. Click on Setup\u2026"
+  },
+  {
+    "embed_id": "rId18",
+    "section": "Actionable List Configuration Guide",
+    "name": "Step_02_2_1_In_setup_quick_search_Type_Actionable_2_C",
+    "step": 2,
+    "context": "2. 1. In setup quick search Type \"Actionable\" 2. Click Actionable Segmentation Settings"
+  },
+  {
+    "embed_id": "rId19",
+    "section": "Actionable List Configuration Guide",
+    "name": "Step_03_3_1_Click_on_New_Data_Processing_Engine_Definitio",
+    "step": 3,
+    "context": "3. 1.Click on New Data Processing Engine Definition"
+  },
+  {
+    "embed_id": "rId20",
+    "section": "Actionable List Configuration Guide",
+    "name": "Step_04_instruction",
+    "step": 4,
+    "context": "4. 1. Type \"WorkshopAssetServiceEOLUpgradeCampaign\" 2. Pick Asset from the object list 3. Click on S"
+  },
+  {
+    "embed_id": "rId21",
+    "section": "Actionable List Configuration Guide",
+    "name": "Step_05_5_Click_on_Launch_Data_Processing_Engine",
+    "step": 5,
+    "context": "5. Click on Launch Data Processing Engine"
+  },
+  {
+    "embed_id": "rId22",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_01_screenshot",
+    "step": 1,
+    "context": "Configure the new context definition for Assets"
+  },
+  {
+    "embed_id": "rId23",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_02_7_1_Click_on_Selected_Fields_2_button",
+    "step": 2,
+    "context": "7.1. Click on Selected Fields (2) button"
+  },
+  {
+    "embed_id": "rId24",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_03_8_1_Select_the_fields_from_Asset_as_shown_2_Upd",
+    "step": 3,
+    "context": "8. 1. Select the fields from Asset as shown 2. Update the alias names where shown 3. Click Save"
+  },
+  {
+    "embed_id": "rId25",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_04_9_1_Click_on_Save_for_the_Asset_node",
+    "step": 4,
+    "context": "9. 1. Click on Save for the Asset node"
+  },
+  {
+    "embed_id": "rId26",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_05_9_1_Click_on_Save_for_the_Asset_node",
+    "step": 5,
+    "context": "9. 1. Click on Save for the Asset node"
+  },
+  {
+    "embed_id": "rId27",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_06_10_Click_on_New_Node",
+    "step": 6,
+    "context": "10. Click on New Node"
+  },
+  {
+    "embed_id": "rId28",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_07_instruction",
+    "step": 7,
+    "context": "11. 1. Choose Data Source for Node Type 2. Type AssetWarranty_DS in Name field 3. Click in the API N"
+  },
+  {
+    "embed_id": "rId29",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_08_instruction",
+    "step": 8,
+    "context": "12. 1. Type \"Asset Wa\" and select Asset Warranty Entity form source object field"
+  },
+  {
+    "embed_id": "rId30",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_09_13_Click_on_Select_Fields_of_Asset_warranty",
+    "step": 9,
+    "context": "13. Click on Select Fields of Asset warranty"
+  },
+  {
+    "embed_id": "rId31",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_10_instruction",
+    "step": 10,
+    "context": "14. 1. Select the fields from asset warranty object as shown 2. Update the alias names where shown 3"
+  },
+  {
+    "embed_id": "rId32",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_11_15_1_Click_on_Add_Related_Object_from_the_Asset",
+    "step": 11,
+    "context": "15. 1. Click on Add Related Object from the Asset Warranty Configuration page"
+  },
+  {
+    "embed_id": "rId33",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_12_16_1_Click_on_Related_Object",
+    "step": 12,
+    "context": "16. 1. Click on Related Object"
+  },
+  {
+    "embed_id": "rId34",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_13_instruction",
+    "step": 13,
+    "context": "17. 1. Click on Add Related Object button from the Asset Warranty Configuration page 2. Choose Asset"
+  },
+  {
+    "embed_id": "rId35",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_14_instruction",
+    "step": 14,
+    "context": "18. 1. Select the field from asset related object as shown 2. Update the alias names where shown 3. "
+  },
+  {
+    "embed_id": "rId36",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_15_19_Click_on_Save_again_to_save_the_Asset_Warranty",
+    "step": 15,
+    "context": "19. Click on Save again to save the Asset Warranty Node"
+  },
+  {
+    "embed_id": "rId37",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_16_20_1_Click_on_New_Node",
+    "step": 16,
+    "context": "20. 1. Click on New Node"
+  },
+  {
+    "embed_id": "rId38",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_17_instruction",
+    "step": 17,
+    "context": "21. 1. Choose Join for Node Type 2. Type \"Join Asset to Asset Warranty\" in Name field 3. Click in th"
+  },
+  {
+    "embed_id": "rId39",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_18_instruction",
+    "step": 18,
+    "context": "22. 1. In the first node choose Asset_DS 2. In the second node choose Asset Warranty _DS"
+  },
+  {
+    "embed_id": "rId40",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_19_23_1_Click_on_Select_Fields_button_next_to_the_s",
+    "step": 19,
+    "context": "23. 1. Click on Select Fields button next to the source node Asset_DS"
+  },
+  {
+    "embed_id": "rId41",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_20_24_1_Check_Select_All_checkbox_2_Click_Save",
+    "step": 20,
+    "context": "24. 1, Check Select All checkbox 2. Click Save"
+  },
+  {
+    "embed_id": "rId42",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_21_25_1_Click_on_Select_Fields_button_next_to_the_As",
+    "step": 21,
+    "context": "25. 1.Click on Select Fields button next to the Asset Warranty _DS source node"
+  },
+  {
+    "embed_id": "rId43",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_22_26_1_Check_Select_All_checkbox_2_Click_Save",
+    "step": 22,
+    "context": "26. 1. Check Select All checkbox 2. Click Save"
+  },
+  {
+    "embed_id": "rId44",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_23_27_Click_on_First_Node_Field",
+    "step": 23,
+    "context": "27. Click on First Node Field"
+  },
+  {
+    "embed_id": "rId45",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_24_instruction",
+    "step": 24,
+    "context": "28. 1. In the mapped fields section select Asset_DS_id from First Node Field 2. Select AssetId_AW_DS"
+  },
+  {
+    "embed_id": "rId46",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_25_29_1_Click_on_New_Node",
+    "step": 25,
+    "context": "29. 1.Click on New Node"
+  },
+  {
+    "embed_id": "rId47",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_26_instruction",
+    "step": 26,
+    "context": "30. 1. In Node Type select Writeback Object 2.In Name Type \"Asset Warranty EOL Campaign WriteBack\" 3"
+  },
+  {
+    "embed_id": "rId48",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_27_instruction",
+    "step": 27,
+    "context": "31. 1. In the source node within the writeback configuration, choose Join Asset to Asset Warranty jo"
+  },
+  {
+    "embed_id": "rId49",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_28_instruction",
+    "step": 28,
+    "context": "32. 1. In the Field Mapping section select all the fields adding rows as needed"
+  },
+  {
+    "embed_id": "rId50",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_29_33_1_At_the_bottom_for_Field_Mappings_choose_Fol",
+    "step": 29,
+    "context": "33. 1. At the bottom for Field Mappings choose Folder Name ActionableSegmentation 2. Click Save"
+  },
+  {
+    "embed_id": "rId51",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_30_instruction",
+    "step": 30,
+    "context": "34. 1.Click on Save on the Top right to save the Data processing engine definition 2. Click Activate"
+  },
+  {
+    "embed_id": "rId52",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_31_35_1_Click_on_Run_Definition",
+    "step": 31,
+    "context": "35. 1. Click on Run Definition"
+  },
+  {
+    "embed_id": "rId53",
+    "section": "Data Processing Engine Configuration",
+    "name": "Step_32_36_1_Click_Next_through_the_wizard_accepting_def",
+    "step": 32,
+    "context": "36. 1. Click Next through the wizard accepting defaults"
+  },
+  {
+    "embed_id": "rId18",
+    "section": "Advanced Data Processing Configuration",
+    "name": "Step_01_instruction",
+    "step": 1,
+    "context": "37. 1. Click Setup gear 2. In setup quick search Type \"Actionable\" 3. Click Actionable Segmentation "
+  },
+  {
+    "embed_id": "rId54",
+    "section": "Advanced Data Processing Configuration",
+    "name": "Step_02_38_1_Click_on_Refresh_Dataset_Status",
+    "step": 2,
+    "context": "38. 1. Click on Refresh Dataset Status"
+  },
+  {
+    "embed_id": "rId55",
+    "section": "Advanced Data Processing Configuration",
+    "name": "Step_03_39_1_In_the_workshop_actionable_list_Click_on",
+    "step": 3,
+    "context": "39. 1. In the workshop actionable list Click on + Add Columns"
+  },
+  {
+    "embed_id": "rId56",
+    "section": "Advanced Data Processing Configuration",
+    "name": "Step_04_instruction",
+    "step": 4,
+    "context": "40. 1. Click the available field names and move them all to the selected field name box 2.Click on S"
+  },
+  {
+    "embed_id": "rId57",
+    "section": "Advanced Data Processing Configuration",
+    "name": "Step_05_41_1_Click_on_Add_Statuses",
+    "step": 5,
+    "context": "41. 1. Click on + Add Statuses"
+  },
+  {
+    "embed_id": "rId58",
+    "section": "Advanced Data Processing Configuration",
+    "name": "Step_06_42_1_Click_New_Status_button_and_add_the_shown_s",
+    "step": 6,
+    "context": "42. 1. Click New Status button and add the shown status items 2. Click save"
+  },
+  {
+    "embed_id": "rId59",
+    "section": "Advanced Data Processing Configuration",
+    "name": "Step_07_instruction",
+    "step": 7,
+    "context": "43. 1. Toggle on to activate"
+  },
+  {
+    "embed_id": "rId60",
+    "section": "Advanced Data Processing Configuration",
+    "name": "Step_08_44_1_Click_on_OK",
+    "step": 8,
+    "context": "44. 1.Click on OK"
+  },
+  {
+    "embed_id": "rId61",
+    "section": "Advanced Data Processing Configuration",
+    "name": "Step_09_45_1_Click_the_App_Launcher_icon_2_In_search_Ty",
+    "step": 9,
+    "context": "45. 1. Click the App Launcher icon 2. In search Type \"Actionable List\" 3. Click Actionable List"
+  },
+  {
+    "embed_id": "rId62",
+    "section": "Actionable List Creation",
+    "name": "Step_01_screenshot",
+    "step": 1,
+    "context": "\ud83e\udea7 Actionable List Creation"
+  },
+  {
+    "embed_id": "rId63",
+    "section": "Actionable List Creation",
+    "name": "Step_02_instruction",
+    "step": 2,
+    "context": "47. 1.Type Workshop Upgrade Campaign in the New Actionable List Name 2. Select the Data processing E"
+  },
+  {
+    "embed_id": "rId64",
+    "section": "Actionable List Creation",
+    "name": "Step_03_48_1_Click_the_Filter_Criteria_2_Choose_InstallDa",
+    "step": 3,
+    "context": "48. 1.Click the Filter Criteria 2.Choose InstallDate\u2026 3. Choose Previous Fiscal Year 4. Click Apply"
+  },
+  {
+    "embed_id": "rId65",
+    "section": "Actionable List Creation",
+    "name": "Step_04_instruction",
+    "step": 4,
+    "context": "49. 1.Check Select All to select all the filtered assets"
+  },
+  {
+    "embed_id": "rId66",
+    "section": "Actionable List Creation",
+    "name": "Step_05_50_1_Click_on_Review_Save_55",
+    "step": 5,
+    "context": "50. 1. Click on Review & Save (55)"
+  },
+  {
+    "embed_id": "rId67",
+    "section": "Actionable List Creation",
+    "name": "Step_06_51_1_Click_on_Confirm_Save",
+    "step": 6,
+    "context": "51. 1. Click on Confirm & Save"
+  },
+  {
+    "embed_id": "rId68",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_01_52_1_From_App_Launcher_search_for_Product_Servic",
+    "step": 1,
+    "context": "52. 1. From App Launcher search for Product Service Campaigns 2. Click New"
+  },
+  {
+    "embed_id": "rId69",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_02_instruction",
+    "step": 2,
+    "context": "53. 1. Type \"Workshop Upgrade Campaign for the Campaign Name 2. Select Upgrade from the type pick li"
+  },
+  {
+    "embed_id": "rId70",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_03_instruction",
+    "step": 3,
+    "context": "54. 1. Click the actionable list link to take you back to the Workshop Upgrade Campaign actionable l"
+  },
+  {
+    "embed_id": "rId71",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_04_55_1_Click_the_action_carrot_2_Click_on_Add_to",
+    "step": 4,
+    "context": "55. 1. Click the action carrot 2. Click on Add to Service Campaign"
+  },
+  {
+    "embed_id": "rId72",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_05_56_Click_on_Confirm",
+    "step": 5,
+    "context": "56. Click on Confirm"
+  },
+  {
+    "embed_id": "rId73",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_06_instruction",
+    "step": 6,
+    "context": "57. Success - Assets are added"
+  },
+  {
+    "embed_id": "rId74",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_07_instruction",
+    "step": 7,
+    "context": "58. 1. Navigate back to the Product Service Campaign from App Launcher 2. Click on Related 3. Verify"
+  },
+  {
+    "embed_id": "rId75",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_08_59_1_Click_the_action_carrot_and_Select_create",
+    "step": 8,
+    "context": "59. 1. Click the action carrot and Select \"create work order for all items\" 2. Click confirm button"
+  },
+  {
+    "embed_id": "rId76",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_09_instruction",
+    "step": 9,
+    "context": "60. 1. Verify created work orders"
+  },
+  {
+    "embed_id": "rId77",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_10_screenshot",
+    "step": 10,
+    "context": "Want to learn more?"
+  },
+  {
+    "embed_id": "rId8",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_11_screenshot",
+    "step": 11,
+    "context": "Want to learn more?"
+  },
+  {
+    "embed_id": "rId78",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_12_screenshot",
+    "step": 12,
+    "context": "Want to learn more?"
+  },
+  {
+    "embed_id": "rId79",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_13_screenshot",
+    "step": 13,
+    "context": "Want to learn more?"
+  },
+  {
+    "embed_id": "rId80",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_14_screenshot",
+    "step": 14,
+    "context": "Want to learn more?"
+  },
+  {
+    "embed_id": "rId12",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_15_screenshot",
+    "step": 15,
+    "context": "Want to learn more?"
+  },
+  {
+    "embed_id": "rId81",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_16_screenshot",
+    "step": 16,
+    "context": "Want to learn more?"
+  },
+  {
+    "embed_id": "rId82",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_17_screenshot",
+    "step": 17,
+    "context": "TrailheadManufacturingAutomotiveTrailmixLearning TrialLearning Trial"
+  },
+  {
+    "embed_id": "rId83",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_18_screenshot",
+    "step": 18,
+    "context": "TrailheadManufacturingAutomotiveTrailmixLearning TrialLearning Trial"
+  },
+  {
+    "embed_id": "rId84",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_19_screenshot",
+    "step": 19,
+    "context": "TrailheadManufacturingAutomotiveTrailmixLearning TrialLearning Trial"
+  },
+  {
+    "embed_id": "rId85",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_20_screenshot",
+    "step": 20,
+    "context": "TrailheadManufacturingAutomotiveTrailmixLearning TrialLearning Trial"
+  },
+  {
+    "embed_id": "rId86",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_21_screenshot",
+    "step": 21,
+    "context": "TrailheadManufacturingAutomotiveTrailmixLearning TrialLearning Trial"
+  },
+  {
+    "embed_id": "rId87",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_22_screenshot",
+    "step": 22,
+    "context": "TrailheadManufacturingAutomotiveTrailmixLearning TrialLearning Trial"
+  },
+  {
+    "embed_id": "rId14",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_23_screenshot",
+    "step": 23,
+    "context": ""
+  },
+  {
+    "embed_id": "rId15",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_24_screenshot",
+    "step": 24,
+    "context": ""
+  },
+  {
+    "embed_id": "rId16",
+    "section": "Product Service Campaign Configuration",
+    "name": "Step_25_screenshot",
+    "step": 25,
+    "context": ""
+  }
+]

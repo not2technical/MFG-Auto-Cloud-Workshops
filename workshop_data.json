@@ -1,0 +1,149 @@
+{
+  "name": "Recall Ready Building Product Service Campaigns",
+  "description": "Comprehensive guide for building product service campaigns using actionable lists and data processing engine. Learn to create targeted campaigns for asset recalls, warranty notifications, and proactive service outreach.",
+  "audience": "Technical",
+  "technical_rating": "4",
+  "duration": "90 minutes",
+  "industry_features": "Batch Management;Complaints Management;Timeline;Record Alerts;Audit Trail;Actionable Segmentation;Action Plans;Data Processing Engine",
+  "sections": [
+    {
+      "title": "Actionable List Configuration Guide",
+      "steps": []
+    },
+    {
+      "title": "Data Processing Engine Configuration",
+      "steps": []
+    },
+    {
+      "title": "Advanced Data Processing Configuration",
+      "steps": []
+    },
+    {
+      "title": "Actionable List Creation",
+      "steps": []
+    },
+    {
+      "title": "Product Service Campaign Configuration",
+      "steps": [
+        "Want to learn more?31"
+      ]
+    },
+    {
+      "title": "Actionable List Configuration Guide",
+      "steps": [
+        "Guided steps to create Actionable lists powered by data processing engine to create Asset or Vehicle data sets",
+        "1. 1. Click the Gear 2. Click on Setup\u2026",
+        "Access setup from any page in your org",
+        "2. 1. In setup quick search Type \"Actionable\" 2. Click Actionable Segmentation Settings",
+        "3. 1.Click on New Data Processing Engine Definition",
+        "Data processing engine is an industry provided platform data transformation and aggregation component.",
+        "4. 1. Type \"WorkshopAssetServiceEOLUpgradeCampaign\" 2. Pick Asset from the object list 3. Click on Save & Next",
+        "5. Click on Launch Data Processing Engine"
+      ]
+    },
+    {
+      "title": "Data Processing Engine Configuration",
+      "steps": [
+        "Configure the new context definition for Assets",
+        "6. 1. Click the Asset_DS Data Source 2 .Click on Configure",
+        "7.1. Click on Selected Fields (2) button",
+        "Here we will choose all the fields for asset that we may want to use for the campaign and other nodes like a join",
+        "8. 1. Select the fields from Asset as shown 2. Update the alias names where shown 3. Click Save",
+        "9. 1. Click on Save for the Asset node",
+        "10. Click on New Node",
+        "11. 1. Choose Data Source for Node Type 2. Type AssetWarranty_DS in Name field 3. Click in the API Name field to auto populate the API Name 4.Click on Save",
+        "12. 1. Type \"Asset Wa\" and select Asset Warranty Entity form source object field",
+        "13. Click on Select Fields of Asset warranty",
+        "Here we will choose all the fields we may want to use from Asset Warranty entity in the data set.",
+        "14. 1. Select the fields from asset warranty object as shown 2. Update the alias names where shown 3. Click Save",
+        "15. 1. Click on Add Related Object from the Asset Warranty Configuration page",
+        "16. 1. Click on Related Object",
+        "17. 1. Click on Add Related Object button from the Asset Warranty Configuration page 2. Choose Asset from the related object field 3. Click the Select fields button",
+        "Here we chose related fields from asset within Asset Warranty",
+        "18. 1. Select the field from asset related object as shown 2. Update the alias names where shown 3. Click Save",
+        "19. Click on Save again to save the Asset Warranty Node",
+        "20. 1. Click on New Node",
+        "In the next few steps we will join the two data source nodes together",
+        "21. 1. Choose Join for Node Type 2. Type \"Join Asset to Asset Warranty\" in Name field 3. Click in the API Name field to auto populate the API Name 4. Click on Save",
+        "22. 1. In the first node choose Asset_DS 2. In the second node choose Asset Warranty _DS",
+        "Here we actual perform the join for the two selected objects",
+        "23. 1. Click on Select Fields button next to the source node Asset_DS",
+        "24. 1, Check Select All checkbox 2. Click Save",
+        "25. 1.Click on Select Fields button next to the Asset Warranty _DS source node",
+        "26. 1. Check Select All checkbox 2. Click Save",
+        "27. Click on First Node Field",
+        "28. 1. In the mapped fields section select Asset_DS_id from First Node Field 2. Select AssetId_AW_DS from the Second Node Field 3. Click Save",
+        "29. 1.Click on New Node",
+        "30. 1. In Node Type select Writeback Object 2.In Name Type \"Asset Warranty EOL Campaign WriteBack\" 3. Click the API Name to auto populate the API Name 4. Click Save",
+        "31. 1. In the source node within the writeback configuration, choose Join Asset to Asset Warranty join node 2. Select the radio button for Analytics in Target Type 3. Type \"WorkshopAssetServiceEOLUpgradeCampaign\" into Dataset Name field",
+        "32. 1. In the Field Mapping section select all the fields adding rows as needed",
+        "\ud83d\uded1In this sections simply click each field in the drop down and click the add button until all fields are used",
+        "33. 1. At the bottom for Field Mappings choose Folder Name ActionableSegmentation 2. Click Save",
+        "34. 1.Click on Save on the Top right to save the Data processing engine definition 2. Click Activate",
+        "35. 1. Click on Run Definition",
+        "36. 1. Click Next through the wizard accepting defaults",
+        "This completes the data processing engine portion to build out the dataset"
+      ]
+    },
+    {
+      "title": "Advanced Data Processing Configuration",
+      "steps": [
+        "37. 1. Click Setup gear 2. In setup quick search Type \"Actionable\" 3. Click Actionable Segmentation Settings",
+        "Navigate Back to the Actionable Segmentation Settings",
+        "38. 1. Click on Refresh Dataset Status",
+        "39. 1. In the workshop actionable list Click on + Add Columns",
+        "40. 1. Click the available field names and move them all to the selected field name box 2.Click on Save",
+        "41. 1. Click on + Add Statuses",
+        "42. 1. Click New Status button and add the shown status items 2. Click save",
+        "After complete the actionable list , these are the status actions that will be available",
+        "43. 1. Toggle on to activate",
+        "44. 1.Click on OK",
+        "45. 1. Click the App Launcher icon 2. In search Type \"Actionable List\" 3. Click Actionable List"
+      ]
+    },
+    {
+      "title": "Actionable List Creation",
+      "steps": [
+        "46. Click on New to create a new actionable list",
+        "47. 1.Type Workshop Upgrade Campaign in the New Actionable List Name 2. Select the Data processing Engine definition create earlier WorkshopAssetServiceEOLUpgradeCampaign 3. Click Next",
+        "48. 1.Click the Filter Criteria 2.Choose InstallDate\u2026 3. Choose Previous Fiscal Year 4. Click Apply",
+        "49. 1.Check Select All to select all the filtered assets",
+        "50. 1. Click on Review & Save (55)",
+        "51. 1. Click on Confirm & Save"
+      ]
+    },
+    {
+      "title": "Product Service Campaign Configuration",
+      "steps": [
+        "52. 1. From App Launcher search for Product Service Campaigns 2. Click New",
+        "Now We create a new product service campaign and connect the actionable list",
+        "53. 1. Type \"Workshop Upgrade Campaign for the Campaign Name 2. Select Upgrade from the type pick list 3. Select a work type \"replace compressor\" 4. In Start date choose \"Today\" 5. In the actionable list choose WorkShop Upgrade Campaign 6. Click Save",
+        "In this section we are connecting the campaign to the actionable list to foster integration between data sets and campaigns.",
+        "54. 1. Click the actionable list link to take you back to the Workshop Upgrade Campaign actionable list",
+        "55. 1. Click the action carrot 2. Click on Add to Service Campaign",
+        "Performing this function will automatically add all the assets to the campaign.",
+        "56. Click on Confirm",
+        "57. Success - Assets are added",
+        "Note you may get an error here on redirect to the previous product campaign but the items are added as this org is not Generally available. This is related to the demo env itself.",
+        "58. 1. Navigate back to the Product Service Campaign from App Launcher 2. Click on Related 3. Verify the Assets are added",
+        "59. 1. Click the action carrot and Select \"create work order for all items\" 2. Click confirm button",
+        "The Final Step is to create work order in mass to support the cross-sell upsell efforts and get techs onsite. The great news is this is done is mass again for all assets added to the campaign",
+        "60. 1. Verify created work orders",
+        "Congrats on completing this exercise",
+        "Congratulations on successfully completing the hands-on workshop on Product Service Campaigns in Automotive and Manufacturing Cloud!",
+        "Your enthusiasm, participation, and commitment to learning made this workshop a success. You have now acquired valuable skills in building data sets with Data processing engine, Building Actionable Lists, and connecting Product Service Campaigns, crucial for your work in the automotive and manufacturing industry where tackling recalls and upgrades is critical .",
+        "Keep experimenting with what you've learned today, and don't hesitate to leverage the additional resources provided for further exploration and mastery.",
+        "We look forward to seeing how you apply these new skills in your roles and contribute to your projects' success.",
+        "Thank you for your participation, and best wishes on your continued journey with Salesforce!",
+        "Warm regards,",
+        "August Krys & Team",
+        "Director, Industry Solutions Architect",
+        "Automotive & Manufacturing Cloud",
+        "Salesforce",
+        "Want to learn more?",
+        "As the capabilities of Salesforce Connected assets and vehicles continue to expand, Salesforce is providing a growing set of enablement offerings to help customers maximize the value of the industries. A wide range of resources are now available to learn more about getting started with connected and utilizing its advanced features such as context service to bring the power of external data , CRM data and AI in a single Platform.",
+        "TrailheadManufacturingAutomotiveTrailmixLearning TrialLearning Trial"
+      ]
+    }
+  ]
+}
