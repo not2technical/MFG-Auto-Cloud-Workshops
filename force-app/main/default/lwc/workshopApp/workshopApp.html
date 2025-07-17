@@ -70,6 +70,28 @@
                     </div>
                 </div>
 
+                <!-- Key Features Section -->
+                <template if:true={selectedWorkshopIndustryFeatures.length}>
+                    <div class="slds-m-bottom_medium">
+                        <div class="slds-text-heading_small slds-m-bottom_small">
+                            <lightning-icon icon-name="utility:knowledge_base" size="small" class="slds-m-right_x-small"></lightning-icon>
+                            Key Features
+                        </div>
+                        <div class="slds-grid slds-wrap slds-gutters_x-small slds-m-top_x-small">
+                            <template for:each={selectedWorkshopIndustryFeatures} for:item="feature">
+                                <span key={feature} 
+                                      class="slds-show_inline-block slds-p-horizontal_small slds-p-vertical_xx-small key-feature-tag"
+                                      onclick={handleTagClick}
+                                      role="button"
+                                      tabindex="0"
+                                      title="Click to view Interest Tag details">
+                                    {feature}
+                                </span>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
                 <lightning-button label="Start Workshop" onclick={handleStartWorkshop}></lightning-button>
             </template>
 

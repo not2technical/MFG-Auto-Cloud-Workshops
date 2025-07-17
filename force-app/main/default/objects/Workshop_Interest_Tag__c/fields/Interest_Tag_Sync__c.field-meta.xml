@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Interest_Tag_Sync__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Interest_Tag_Sync</label>
+    <referenceTo>Interest_Tag_Sync__c</referenceTo>
+    <relationshipLabel>Workshop Interest Tags</relationshipLabel>
+    <relationshipName>Workshop_Interest_Tags</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

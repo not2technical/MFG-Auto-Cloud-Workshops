@@ -5,12 +5,16 @@ import getFreshStepsAndProgress from '@salesforce/apex/WorkshopController.getFre
 import startWorkshop from '@salesforce/apex/WorkshopController.startWorkshop';
 import resetWorkshop from '@salesforce/apex/WorkshopController.resetWorkshop';
 import markStepComplete from '@salesforce/apex/WorkshopController.markStepComplete';
+import getAssignedInterestTags from '@salesforce/apex/WorkshopController.getAssignedInterestTags';
+import getAssignedInterestTagsWithNamedCredential from '@salesforce/apex/WorkshopController.getAssignedInterestTagsWithNamedCredential';
+import getAssignedInterestTagsWithDynamicOrg from '@salesforce/apex/WorkshopController.getAssignedInterestTagsWithDynamicOrg';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { NavigationMixin } from 'lightning/navigation';
 
 
 const PAGE_SIZE = 10;
 
-export default class WorkshopApp extends LightningElement {
+export default class WorkshopApp extends NavigationMixin(LightningElement) {
     @track workshops = [];
     @track workshopOptions = [];
     @track selectedWorkshopId = '';
@@ -24,6 +28,7 @@ export default class WorkshopApp extends LightningElement {
     @track openSections = [];
     @track isModalOpen = false;
     @track zoomedImgSrc = '';
+    @track assignedInterestTags = [];
 
     pageSize = PAGE_SIZE;
     isAdmin = true;
@@ -62,7 +67,38 @@ export default class WorkshopApp extends LightningElement {
         return selected ? selected.ImageUrl : '';
     }
 
-    connectedCallback() {
+    get selectedWorkshopIndustryFeatures() {
+        console.log('🔍 Getting assigned Interest Tags for selected workshop');
+        console.log('🔍 Selected Workshop ID:', this.selectedWorkshopId);
+        console.log('🔍 Assigned tags:', this.assignedInterestTags);
+        console.log('🔍 Assigned tags length:', this.assignedInterestTags.length);
+        
+        // If we have assigned Interest Tags, return them
+        if (this.assignedInterestTags && this.assignedInterestTags.length > 0) {
+            console.log('✅ Returning assigned Interest Tags');
+            
+            // Debug: log each tag to see its structure
+            this.assignedInterestTags.forEach((tag, index) => {
+                console.log(`🏷️ Tag ${index + 1}:`, JSON.stringify(tag, null, 2));
+            });
+            
+            const tagNames = this.assignedInterestTags.map(tag => tag.name).filter(name => name);
+            console.log('🔍 Tag names being returned:', tagNames);
+            console.log('🔍 Tag names array length:', tagNames.length);
+            
+            // Force reactivity by breaking proxy chain
+            const reactiveTagNames = [...tagNames];
+            console.log('🔄 Reactive tag names:', reactiveTagNames);
+            
+            return reactiveTagNames;
+        }
+        
+        // Fallback: return empty array (don't show raw field values)
+        console.log('⚠️ No assigned Interest Tags found, returning empty array');
+        return [];
+    }
+
+    async connectedCallback() {
         getAllWorkshops().then(data => {
             console.log('🔍 Raw workshop data from server:', JSON.stringify(data, null, 2));
             
@@ -88,6 +124,7 @@ export default class WorkshopApp extends LightningElement {
                 TechnicalRating: ws.TechnicalRating,
                 Duration: ws.Duration,
                 ImageUrl: ws.ImageUrl,
+                IndustryFeatures: ws.IndustryFeatures,
                 displayLabel: `${ws.Name} (${ws.StepCount} Steps)`,
                 UserProgressCount: 0
             }));
@@ -101,6 +138,7 @@ export default class WorkshopApp extends LightningElement {
             if (first && first.Id) {
                 this.selectedWorkshopId = first.Id;
                 this.loadSteps();
+                this.loadAssignedInterestTags();
             } else {
                 console.warn('⚠️ First workshop is missing Id — skipping loadSteps.');
                 this.selectedWorkshopId = '';
@@ -130,6 +168,7 @@ export default class WorkshopApp extends LightningElement {
          const selected = this.workshops.find(ws => ws.Id === workshopId);
         this.currentPage = 1;
         this.loadSteps();
+        this.loadAssignedInterestTags();
     }
 
     loadSteps() {
@@ -184,7 +223,83 @@ export default class WorkshopApp extends LightningElement {
             });
     }
 
+    async loadAssignedInterestTags() {
+        if (!this.selectedWorkshopId) {
+            console.warn('⚠️ No workshop selected, skipping assigned tags loading');
+            this.assignedInterestTags = [];
+            return;
+        }
 
+        try {
+            console.log('📊 Loading assigned Interest Tags for workshop:', this.selectedWorkshopId);
+            console.log('🔧 Making Apex call to getAssignedInterestTags...');
+            
+            // Try the original method first
+            const assignedTags = await getAssignedInterestTags({ workshopId: this.selectedWorkshopId });
+            console.log('🔍 Raw response from getAssignedInterestTags:', assignedTags);
+            console.log('🔍 Response type:', typeof assignedTags);
+            console.log('🔍 Response is array:', Array.isArray(assignedTags));
+            
+            if (assignedTags && assignedTags.length > 0) {
+                console.log('✅ Got tags from original method, processing...');
+                assignedTags.forEach((tag, index) => {
+                    console.log(`📋 Tag ${index + 1} from original method:`, JSON.stringify(tag, null, 2));
+                });
+                // Force reactivity by creating a new array
+                this.assignedInterestTags = [...assignedTags];
+                console.log('✅ Loaded assigned Interest Tags via original method:', this.assignedInterestTags.length);
+                return;
+            }
+            
+            // If original method returns empty, try Dynamic method (works in any cloned org)
+            console.log('⚠️ Original method returned empty, trying Dynamic method...');
+            console.log('🔧 Making Apex call to getAssignedInterestTagsWithDynamicOrg...');
+            
+            const dynamicTags = await getAssignedInterestTagsWithDynamicOrg({ workshopId: this.selectedWorkshopId });
+            console.log('🔍 Raw response from getAssignedInterestTagsWithDynamicOrg:', dynamicTags);
+            console.log('🔍 Response type:', typeof dynamicTags);
+            console.log('🔍 Response is array:', Array.isArray(dynamicTags));
+            
+            if (dynamicTags && dynamicTags.length > 0) {
+                console.log('✅ Got tags from Dynamic method, processing...');
+                dynamicTags.forEach((tag, index) => {
+                    console.log(`📋 Tag ${index + 1} from Dynamic method:`, JSON.stringify(tag, null, 2));
+                });
+                // Force reactivity by creating a new array
+                this.assignedInterestTags = [...dynamicTags];
+                console.log('✅ Loaded assigned Interest Tags via Dynamic method:', this.assignedInterestTags.length);
+                return;
+            }
+            
+            // If Dynamic method also fails, try Named Credential method as last resort
+            console.log('⚠️ Dynamic method returned empty, trying Named Credential method as fallback...');
+            console.log('🔧 Making Apex call to getAssignedInterestTagsWithNamedCredential...');
+            
+            const namedCredTags = await getAssignedInterestTagsWithNamedCredential({ workshopId: this.selectedWorkshopId });
+            console.log('🔍 Raw response from getAssignedInterestTagsWithNamedCredential:', namedCredTags);
+            console.log('🔍 Response type:', typeof namedCredTags);
+            console.log('🔍 Response is array:', Array.isArray(namedCredTags));
+            
+            if (namedCredTags && namedCredTags.length > 0) {
+                console.log('✅ Got tags from Named Credential method, processing...');
+                namedCredTags.forEach((tag, index) => {
+                    console.log(`📋 Tag ${index + 1} from Named Credential:`, JSON.stringify(tag, null, 2));
+                });
+                // Force reactivity by creating a new array
+                this.assignedInterestTags = [...namedCredTags];
+                console.log('✅ Loaded assigned Interest Tags via Named Credential:', this.assignedInterestTags.length);
+            } else {
+                console.log('⚠️ All methods returned empty - no tags found');
+                this.assignedInterestTags = [];
+            }
+            
+        } catch (error) {
+            console.error('❌ Error loading assigned Interest Tags:', error);
+            console.error('❌ Error details:', error.message);
+            console.error('❌ Error stack:', error.stack);
+            this.assignedInterestTags = [];
+        }
+    }
 
     handleStartWorkshop() {
         if (this.steps && this.steps.some(s => s.isComplete !== undefined)) {
@@ -321,6 +436,61 @@ get allStepsComplete() {
     closeModal() {
         this.isModalOpen = false;
         this.zoomedImgSrc = '';
+    }
+
+
+
+    handleTagClick(event) {
+        const tagName = event.target.textContent;
+        
+        console.log('🔗 Tag clicked:', tagName);
+        console.log('🔗 Looking for tagId in assigned tags...');
+        console.log('🔗 Available assigned tags:', this.assignedInterestTags);
+        
+        // Find the tag in assignedInterestTags by name
+        const foundTag = this.assignedInterestTags.find(tag => tag.name === tagName);
+        const tagId = foundTag ? foundTag.tagId : null;
+        
+        console.log('🔗 Found tag:', foundTag);
+        console.log('🔗 Tag ID:', tagId);
+        
+        if (tagId) {
+            console.log('✅ Found matching Interest Tag ID:', tagId);
+            
+            // Navigate to the Interest Tag record view
+            this[NavigationMixin.Navigate]({
+                type: 'standard__recordPage',
+                attributes: {
+                    recordId: tagId,
+                    objectApiName: 'InterestTag',
+                    actionName: 'view'
+                }
+            }).then(() => {
+                console.log('✅ Successfully navigated to InterestTag:', tagId);
+            }).catch(error => {
+                console.error('❌ Navigation error:', error);
+                // Fallback: try direct URL navigation
+                const baseUrl = window.location.origin;
+                const interestTagUrl = `${baseUrl}/lightning/r/InterestTag/${tagId}/view`;
+                console.log('🔗 Trying fallback URL:', interestTagUrl);
+                window.open(interestTagUrl, '_blank');
+            });
+            
+            // Show success toast
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Opening Interest Tag',
+                message: `"${tagName}" - ID: ${tagId}`,
+                variant: 'success'
+            }));
+        } else {
+            console.warn('❌ No matching Interest Tag ID found for:', tagName);
+            // Show info toast if no ID found
+            this.dispatchEvent(new ShowToastEvent({
+                title: 'Interest Tag Not Found',
+                message: `"${tagName}" - No matching Interest Tag ID found in assigned tags`,
+                variant: 'warning'
+            }));
+        }
     }
 
 }

@@ -75,3 +75,22 @@
     fill: #FFD600 !important;
     color: #FFD600 !important;
 }
+
+/* Key Features Styling */
+.key-feature-tag {
+    background-color: #691b88;
+    color: white;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.key-feature-tag:hover {
+    background-color: #390c4b;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}

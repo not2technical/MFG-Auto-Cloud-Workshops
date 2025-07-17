@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Workshops__c</fullName>
+    <externalId>false</externalId>
+    <label>Workshops</label>
+    <referenceTo>Workshop__c</referenceTo>
+    <relationshipLabel>Interest Tag Syncs</relationshipLabel>
+    <relationshipName>Interest_Tag_Syncs</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField> 
