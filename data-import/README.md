@@ -1,6 +1,26 @@
-# Workshop Data Import CSV Files
+# Workshop Data Import - Recall Ready: Building Product Service Campaigns
 
-This directory contains structured CSV files for importing workshop data into your Salesforce org. These files replace the need for Apex scripts and provide a clean, standardized way to import workshop content.
+This directory contains CSV files for importing the **"Recall Ready: Building Product Service Campaigns"** workshop data into your Salesforce org. This workshop focuses on building targeted product service campaigns using actionable lists and data processing engines.
+
+## Workshop Overview
+
+**Recall Ready: Building Product Service Campaigns** is a comprehensive 90-minute technical workshop that teaches you how to:
+- Configure and deploy data processing engines for asset analysis
+- Create dynamic actionable lists with advanced filtering criteria  
+- Build automated product service campaigns with targeted messaging
+- Implement end-to-end recall management workflows
+- Monitor campaign performance and adjust targeting strategies
+
+## CSV Files Overview
+
+### Import Summary
+
+This data import creates:
+- **1 Workshop**: Recall Ready: Building Product Service Campaigns (90 minutes, Technical Level 4)
+- **8 Interest Tags**: Core industry features including Batch Management, Data Processing Engine, Actionable Segmentation, etc.
+- **5 Workshop Steps**: Main sections covering configuration, implementation, and execution
+- **60 Workshop Step Details**: Detailed instructions with 60 specific steps
+- **8 Interest Tag Associations**: Linking the workshop to relevant industry features
 
 ## 📋 Import Order
 
