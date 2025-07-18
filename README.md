@@ -753,12 +753,12 @@ Click the available field names and move them all to the selected field name box
 ### 41. Add Statuses
 Click on "+ Add Statuses"
 
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_05_instruction.png" alt="Add Statuses" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_05_41_1_Click_on_Add_Statuses.png" alt="Add Statuses" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 ### 42. Configure Status Items
 Click "New Status" button and add the shown status items, then click save
 
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_06_instruction.png" alt="Configure Status Items" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Advanced%20Data%20Processing%20Configuration/Step_06_42_1_Click_New_Status_button_and_add_the_shown_s.png" alt="Configure Status Items" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 **After complete the actionable list, these are the status actions that will be available**
 
@@ -802,12 +802,12 @@ Check "Select All" to select all the filtered assets
 ### 50. Review and Save
 Click on "Review & Save (55)"
 
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Creation/Step_05_instruction.png" alt="Review and Save" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Creation/Step_05_50_1_Click_on_Review_Save_55.png" alt="Review and Save" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 ### 51. Confirm and Save
 Click on "Confirm & Save"
 
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Creation/Step_06_instruction.png" alt="Confirm and Save" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Recall%20Ready%20Building%20Product%20Service%20Campaigns/Actionable%20List%20Creation/Step_06_51_1_Click_on_Confirm_Save.png" alt="Confirm and Save" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 ## Step: Product Service Campaign Configuration
 

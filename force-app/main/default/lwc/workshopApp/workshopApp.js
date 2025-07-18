@@ -5,6 +5,7 @@ import getFreshStepsAndProgress from '@salesforce/apex/WorkshopController.getFre
 import startWorkshop from '@salesforce/apex/WorkshopController.startWorkshop';
 import resetWorkshop from '@salesforce/apex/WorkshopController.resetWorkshop';
 import markStepComplete from '@salesforce/apex/WorkshopController.markStepComplete';
+import deleteWorkshopProgress from '@salesforce/apex/WorkshopController.deleteWorkshopProgress';
 import getAssignedInterestTags from '@salesforce/apex/WorkshopController.getAssignedInterestTags';
 import getAssignedInterestTagsWithNamedCredential from '@salesforce/apex/WorkshopController.getAssignedInterestTagsWithNamedCredential';
 import getAssignedInterestTagsWithDynamicOrg from '@salesforce/apex/WorkshopController.getAssignedInterestTagsWithDynamicOrg';
@@ -419,6 +420,48 @@ get allStepsComplete() {
             })
             .catch(error => {
                 console.error('Error saving progress:', error);
+            });
+    }
+
+    handleDeleteProgress() {
+        if (!this.selectedWorkshopId) {
+            console.warn('⚠️ No workshop selected, skipping delete progress.');
+            return;
+        }
+
+        deleteWorkshopProgress({ workshopId: this.selectedWorkshopId })
+            .then(() => {
+                console.log('✅ Progress deleted successfully for workshop:', this.selectedWorkshopId);
+                
+                // Reset all step-related data
+                this.steps = [];
+                this.savedSteps = [];
+                this.paginatedSteps = [];
+                this.progress = 0;
+                this.currentPage = 1;
+                this.openSections = [];
+                this.showStartButton = true;
+                
+                // Update the workshop badge count to 0
+                this.workshops = this.workshops.map(ws =>
+                    ws.Id === this.selectedWorkshopId
+                        ? { ...ws, UserProgressCount: 0 }
+                        : ws
+                );
+
+                this.dispatchEvent(new ShowToastEvent({
+                    title: 'Progress Deleted',
+                    message: 'Your workshop progress has been deleted. You can now start fresh.',
+                    variant: 'success'
+                }));
+            })
+            .catch(error => {
+                console.error('❌ Error deleting progress:', error);
+                this.dispatchEvent(new ShowToastEvent({
+                    title: 'Error Deleting Progress',
+                    message: 'Failed to delete workshop progress. Please try again.',
+                    variant: 'error'
+                }));
             });
     }
 

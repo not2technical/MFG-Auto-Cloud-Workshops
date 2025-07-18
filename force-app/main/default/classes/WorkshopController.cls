@@ -85,6 +85,20 @@ public static void markStepComplete(Id stepId, Boolean isComplete) {
     upsert progress;
 }
 
+    @AuraEnabled
+    public static void deleteWorkshopProgress(Id workshopId) {
+        List<User_Progress__c> progressToDelete = [
+            SELECT Id 
+            FROM User_Progress__c 
+            WHERE User__c = :UserInfo.getUserId() 
+              AND Workshop_Step__r.Workshop__c = :workshopId
+        ];
+        
+        if (!progressToDelete.isEmpty()) {
+            delete progressToDelete;
+        }
+    }
+
 
     @AuraEnabled(cacheable=true)
     public static Map<Id, Boolean> getUserProgress(Id workshopId) {
