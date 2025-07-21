@@ -148,6 +148,77 @@ public static List<Map<String, Object>> getAllWorkshops() {
     return results;
 }
 
+    /**
+     * Get all workshops with accurate progress counts for the current user
+     * This method efficiently retrieves progress information for all workshops in a single query
+     */
+    @AuraEnabled
+    public static List<Map<String, Object>> getAllWorkshopsWithProgress() {
+        // Get all workshops with their steps
+        List<Workshop__c> workshops = [
+            SELECT Id, Name, Description__c, Audience__c, Star_Rating__c, Technical_Rating__c, Duration__c, Workshop_Image__c, Industry_Features__c,
+                (SELECT Id FROM Workshop_Steps__r)
+            FROM Workshop__c
+            ORDER BY CreatedDate DESC
+        ];
+        
+        // Get all workshop IDs
+        Set<Id> workshopIds = new Set<Id>();
+        for (Workshop__c w : workshops) {
+            workshopIds.add(w.Id);
+        }
+        
+        // Get all progress for current user across all workshops in a single query
+        Map<Id, Integer> workshopProgressCounts = new Map<Id, Integer>();
+        
+        // Initialize all workshops with 0 progress
+        for (Id workshopId : workshopIds) {
+            workshopProgressCounts.put(workshopId, 0);
+        }
+        
+        // Query progress counts by workshop
+        List<AggregateResult> progressResults = [
+            SELECT Workshop_Step__r.Workshop__c workshopId, COUNT(Id) progressCount
+            FROM User_Progress__c 
+            WHERE User__c = :UserInfo.getUserId() 
+            AND Workshop_Step__r.Workshop__c IN :workshopIds
+            AND IsCompleted__c = true
+            GROUP BY Workshop_Step__r.Workshop__c
+        ];
+        
+        // Update progress counts
+        for (AggregateResult ar : progressResults) {
+            Id workshopId = (Id) ar.get('workshopId');
+            Integer progressCount = (Integer) ar.get('progressCount');
+            workshopProgressCounts.put(workshopId, progressCount);
+        }
+        
+        // Build result with accurate progress counts
+        List<Map<String, Object>> results = new List<Map<String, Object>>();
+        for (Workshop__c w : workshops) {
+            Map<String, Object> wsMap = new Map<String, Object>();
+            wsMap.put('Id', w.Id);
+            wsMap.put('Name', w.Name);
+            wsMap.put('Description', w.Description__c);
+            wsMap.put('Audience', w.Audience__c);
+            wsMap.put('StarRating', w.Star_Rating__c);
+            wsMap.put('TechnicalRating', w.Technical_Rating__c);
+            wsMap.put('Duration', w.Duration__c);
+            wsMap.put('ImageUrl', w.Workshop_Image__c);
+            wsMap.put('IndustryFeatures', w.Industry_Features__c);
+            
+            Integer stepCount = w.Workshop_Steps__r != null ? w.Workshop_Steps__r.size() : 0;
+            Integer progressCount = workshopProgressCounts.get(w.Id);
+            
+            wsMap.put('StepCount', stepCount);
+            wsMap.put('UserProgressCount', progressCount);
+            
+            results.add(wsMap);
+        }
+        
+        return results;
+    }
+
     @AuraEnabled
 public static void startWorkshop(Id workshopId) {
     List<Workshop_Step__c> steps = [SELECT Id FROM Workshop_Step__c WHERE Workshop__c = :workshopId];

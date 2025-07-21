@@ -1,5 +1,6 @@
 import { LightningElement, track } from 'lwc';
 import getAllWorkshops from '@salesforce/apex/WorkshopController.getAllWorkshops';
+import getAllWorkshopsWithProgress from '@salesforce/apex/WorkshopController.getAllWorkshopsWithProgress';
 import getStepsAndProgress from '@salesforce/apex/WorkshopController.getStepsAndProgress';
 import getFreshStepsAndProgress from '@salesforce/apex/WorkshopController.getFreshStepsAndProgress';
 import startWorkshop from '@salesforce/apex/WorkshopController.startWorkshop';
@@ -11,7 +12,7 @@ import getAssignedInterestTagsWithNamedCredential from '@salesforce/apex/Worksho
 import getAssignedInterestTagsWithDynamicOrg from '@salesforce/apex/WorkshopController.getAssignedInterestTagsWithDynamicOrg';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
-
+import { refreshApex } from '@salesforce/apex';
 
 const PAGE_SIZE = 10;
 
@@ -30,9 +31,15 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
     @track isModalOpen = false;
     @track zoomedImgSrc = '';
     @track assignedInterestTags = [];
+    @track isLoading = false;
 
     pageSize = PAGE_SIZE;
     isAdmin = true;
+
+    // Cache references for refreshApex
+    _workshopsResult;
+    _stepsResult;
+    _interestTagsResult;
 
     get totalPages() { return Math.ceil(this.steps.length / this.pageSize); }
     get isFirstPage() { return this.currentPage === 1; }
@@ -100,21 +107,65 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
     }
 
     async connectedCallback() {
-        getAllWorkshops().then(data => {
-            console.log('🔍 Raw workshop data from server:', JSON.stringify(data, null, 2));
+        await this.forceRefreshAllData();
+    }
+
+    /**
+     * Force complete refresh of all data from server (clears all caches)
+     */
+    async forceRefreshAllData() {
+        console.log('🔄 Force refreshing all workshop data from server...');
+        this.isLoading = true;
+        
+        try {
+            // Clear existing cache references
+            this._workshopsResult = null;
+            this._stepsResult = null;
+            this._interestTagsResult = null;
+            
+            // Reset all local state
+            this.workshops = [];
+            this.workshopOptions = [];
+            this.steps = [];
+            this.savedSteps = [];
+            this.paginatedSteps = [];
+            this.assignedInterestTags = [];
+            this.progress = 0;
+            this.currentPage = 1;
+            this.openSections = [];
+            
+            // Force fresh workshop data from server with accurate badge counts
+            await this.loadWorkshopsWithProgressFromServer();
+            
+        } catch (error) {
+            console.error('❌ Error during force refresh:', error);
+            this.showErrorToast('Failed to refresh workshop data. Please reload the page.');
+        } finally {
+            this.isLoading = false;
+        }
+    }
+
+    /**
+     * Load workshops with progress counts from server (most efficient method)
+     */
+    async loadWorkshopsWithProgressFromServer() {
+        try {
+            console.log('🔄 Loading workshops with progress from server...');
+            
+            // Get fresh workshop data with accurate progress counts
+            const data = await getAllWorkshopsWithProgress();
+            console.log('🔍 Raw workshop data with progress from server:', JSON.stringify(data, null, 2));
             
             if (!data || !Array.isArray(data) || data.length === 0) {
-                // No workshops found — clear everything safely
+                console.warn('⚠️ No workshops found');
                 this.workshops = [];
                 this.workshopOptions = [];
-                this.steps = [];
-                this.paginatedSteps = [];
                 this.selectedWorkshopId = '';
                 this.showStartButton = true;
                 return;
             }
 
-            // ✅ Map workshops safely
+            // Map workshops with accurate progress counts
             this.workshops = data.map(ws => ({
                 Id: ws.Id,
                 Name: ws.Name,
@@ -127,104 +178,132 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
                 ImageUrl: ws.ImageUrl,
                 IndustryFeatures: ws.IndustryFeatures,
                 displayLabel: `${ws.Name} (${ws.StepCount} Steps)`,
-                UserProgressCount: 0
+                UserProgressCount: ws.UserProgressCount || 0 // This now comes from server!
             }));
 
-            console.log('✅ Mapped workshops:', JSON.stringify(this.workshops));
+            console.log('✅ Mapped workshops with progress:', JSON.stringify(this.workshops, null, 2));
 
-            this.workshopOptions = this.workshops.map(ws => ({ label: ws.Name, value: ws.Id }));
+            this.workshopOptions = this.workshops.map(ws => ({ 
+                label: ws.Name, 
+                value: ws.Id 
+            }));
 
-            // ✅ Pick first workshop ONLY IF valid
+            // Select first workshop if available
             const first = this.workshops[0];
             if (first && first.Id) {
                 this.selectedWorkshopId = first.Id;
-                this.loadSteps();
-                this.loadAssignedInterestTags();
+                await this.loadStepsFromServer();
+                await this.loadAssignedInterestTagsFromServer();
             } else {
-                console.warn('⚠️ First workshop is missing Id — skipping loadSteps.');
+                console.warn('⚠️ First workshop is missing Id');
                 this.selectedWorkshopId = '';
                 this.showStartButton = true;
             }
 
-        }).catch(error => {
-            console.error('❌ Error loading workshops:', error);
+        } catch (error) {
+            console.error('❌ Error loading workshops with progress from server:', error);
             this.workshops = [];
             this.workshopOptions = [];
-            this.steps = [];
-            this.paginatedSteps = [];
             this.selectedWorkshopId = '';
             this.showStartButton = true;
-        });
-    }
-
-
-
-    sortSteps() {
-        this.steps = [...this.steps].sort((a, b) => (a.Step_Order__c || 0) - (b.Step_Order__c || 0));
-    }
-
-    handleWorkshopSelect(event) {
-        const workshopId = event.detail.name;
-        this.selectedWorkshopId = workshopId;
-         const selected = this.workshops.find(ws => ws.Id === workshopId);
-        this.currentPage = 1;
-        this.loadSteps();
-        this.loadAssignedInterestTags();
-    }
-
-    loadSteps() {
-        console.log('🔄 Calling loadSteps for workshop:', this.selectedWorkshopId);
-      if (!this.selectedWorkshopId) {
-            console.warn('⏭️ Skipping loadSteps because selectedWorkshopId is empty.');
-            return; // 🚫 Prevent Apex call with bad Id
+            throw error;
         }
-        getStepsAndProgress({ workshopId: this.selectedWorkshopId })
-            .then(result => {
-                const steps = Array.isArray(result) ? result : [];
-                console.log('✅ Steps loaded:', steps);
+    }
 
-                // Total steps is static
-                const selectedWs = this.workshops.find(ws => ws.Id === this.selectedWorkshopId);
-                const totalSteps = selectedWs ? selectedWs.StepCount : 0;
+    /**
+     * Refresh badge counts for all workshops (called after progress changes)
+     */
+    async refreshAllWorkshopBadges() {
+        try {
+            console.log('🔄 Refreshing badge counts for all workshops...');
+            
+            // Get fresh progress data for all workshops
+            const freshWorkshopData = await getAllWorkshopsWithProgress();
+            
+            // Update only the UserProgressCount for each workshop
+            this.workshops = this.workshops.map(existingWs => {
+                const freshWs = freshWorkshopData.find(fw => fw.Id === existingWs.Id);
+                return {
+                    ...existingWs,
+                    UserProgressCount: freshWs ? (freshWs.UserProgressCount || 0) : 0
+                };
+            });
+            
+            console.log('✅ Badge counts refreshed for all workshops');
+            
+        } catch (error) {
+            console.error('❌ Error refreshing workshop badges:', error);
+        }
+    }
 
-                // User progress steps (progress rows)
-                const userProgressSteps = steps.filter(s => s.progress).length;
+    /**
+     * Load workshops with forced server refresh (legacy method - now uses new method)
+     */
+    async loadWorkshopsFromServer() {
+        return this.loadWorkshopsWithProgressFromServer();
+    }
 
-                console.log(`🧮 Total steps: ${totalSteps}, UserProgressCount: ${userProgressSteps}`);
+    /**
+     * Load steps with forced server refresh  
+     */
+    async loadStepsFromServer() {
+        if (!this.selectedWorkshopId) {
+            console.warn('⏭️ Skipping loadStepsFromServer because selectedWorkshopId is empty.');
+            return;
+        }
 
-                // Store fresh steps
-                this.steps = steps;
-                this.sortSteps();
-                this.savedSteps = JSON.parse(JSON.stringify(this.steps));
+        try {
+            console.log('🔄 Loading steps from server (bypassing cache) for workshop:', this.selectedWorkshopId);
+            
+            // Use non-cached method to get fresh data
+            const result = await getFreshStepsAndProgress({ workshopId: this.selectedWorkshopId });
+            const steps = Array.isArray(result) ? result : [];
+            console.log('✅ Fresh steps loaded from server:', steps);
 
-                // ✅ Update workshop nav bar counts for this workshop
-                this.workshops = this.workshops.map(ws =>
-                    ws.Id === this.selectedWorkshopId
-                        ? { ...ws, UserProgressCount: userProgressSteps }
-                        : ws
-                );
+            // Calculate progress counts
+            const selectedWs = this.workshops.find(ws => ws.Id === this.selectedWorkshopId);
+            const totalSteps = selectedWs ? selectedWs.StepCount : 0;
+            const userProgressSteps = steps.filter(s => s.progress).length;
 
-                // ✅ Set Start button based on actual user progress count
-                 const hasProgress = steps.some(s => s.progress !== undefined);
+            console.log(`🧮 Total steps: ${totalSteps}, UserProgressCount: ${userProgressSteps}`);
+
+            // Update step data
+            this.steps = steps;
+            this.sortSteps();
+            this.savedSteps = JSON.parse(JSON.stringify(this.steps));
+
+            // Update badge count for selected workshop only
+            this.workshops = this.workshops.map(ws =>
+                ws.Id === this.selectedWorkshopId
+                    ? { ...ws, UserProgressCount: userProgressSteps }
+                    : ws
+            );
+
+            // Set start button visibility based on progress
+            const hasProgress = steps.some(s => s.progress !== undefined);
             this.showStartButton = !hasProgress;
 
-                if (!this.showStartButton) {
-                    this.paginate();
-                    this.refreshProgress();
-                } else {
-                    this.paginatedSteps = [];
-                }
-            })
-            .catch(error => {
-                console.error('❌ Error loading steps:', error);
-                this.steps = [];
-                this.savedSteps = [];
+            if (!this.showStartButton) {
+                this.paginate();
+                this.refreshProgress();
+            } else {
                 this.paginatedSteps = [];
-                this.showStartButton = true;
-            });
+            }
+
+        } catch (error) {
+            console.error('❌ Error loading steps from server:', error);
+            this.steps = [];
+            this.savedSteps = [];
+            this.paginatedSteps = [];
+            this.showStartButton = true;
+            throw error;
+        }
     }
 
-    async loadAssignedInterestTags() {
+    /**
+     * Load assigned interest tags with forced server refresh
+     */
+    async loadAssignedInterestTagsFromServer() {
         if (!this.selectedWorkshopId) {
             console.warn('⚠️ No workshop selected, skipping assigned tags loading');
             this.assignedInterestTags = [];
@@ -232,134 +311,176 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
         }
 
         try {
-            console.log('📊 Loading assigned Interest Tags for workshop:', this.selectedWorkshopId);
-            console.log('🔧 Making Apex call to getAssignedInterestTags...');
+            console.log('📊 Loading assigned Interest Tags from server for workshop:', this.selectedWorkshopId);
             
-            // Try the original method first
-            const assignedTags = await getAssignedInterestTags({ workshopId: this.selectedWorkshopId });
-            console.log('🔍 Raw response from getAssignedInterestTags:', assignedTags);
-            console.log('🔍 Response type:', typeof assignedTags);
-            console.log('🔍 Response is array:', Array.isArray(assignedTags));
+            // Try multiple methods to get fresh data
+            let assignedTags = null;
             
-            if (assignedTags && assignedTags.length > 0) {
-                console.log('✅ Got tags from original method, processing...');
-                assignedTags.forEach((tag, index) => {
-                    console.log(`📋 Tag ${index + 1} from original method:`, JSON.stringify(tag, null, 2));
-                });
-                // Force reactivity by creating a new array
-                this.assignedInterestTags = [...assignedTags];
-                console.log('✅ Loaded assigned Interest Tags via original method:', this.assignedInterestTags.length);
-                return;
+            // Method 1: Original method
+            try {
+                assignedTags = await getAssignedInterestTags({ workshopId: this.selectedWorkshopId });
+                if (assignedTags && assignedTags.length > 0) {
+                    console.log('✅ Got tags from original method');
+                    this.assignedInterestTags = [...assignedTags];
+                    return;
+                }
+            } catch (error) {
+                console.log('⚠️ Original method failed, trying alternatives...');
             }
             
-            // If original method returns empty, try Dynamic method (works in any cloned org)
-            console.log('⚠️ Original method returned empty, trying Dynamic method...');
-            console.log('🔧 Making Apex call to getAssignedInterestTagsWithDynamicOrg...');
-            
-            const dynamicTags = await getAssignedInterestTagsWithDynamicOrg({ workshopId: this.selectedWorkshopId });
-            console.log('🔍 Raw response from getAssignedInterestTagsWithDynamicOrg:', dynamicTags);
-            console.log('🔍 Response type:', typeof dynamicTags);
-            console.log('🔍 Response is array:', Array.isArray(dynamicTags));
-            
-            if (dynamicTags && dynamicTags.length > 0) {
-                console.log('✅ Got tags from Dynamic method, processing...');
-                dynamicTags.forEach((tag, index) => {
-                    console.log(`📋 Tag ${index + 1} from Dynamic method:`, JSON.stringify(tag, null, 2));
-                });
-                // Force reactivity by creating a new array
-                this.assignedInterestTags = [...dynamicTags];
-                console.log('✅ Loaded assigned Interest Tags via Dynamic method:', this.assignedInterestTags.length);
-                return;
+            // Method 2: Dynamic method
+            try {
+                assignedTags = await getAssignedInterestTagsWithDynamicOrg({ workshopId: this.selectedWorkshopId });
+                if (assignedTags && assignedTags.length > 0) {
+                    console.log('✅ Got tags from Dynamic method');
+                    this.assignedInterestTags = [...assignedTags];
+                    return;
+                }
+            } catch (error) {
+                console.log('⚠️ Dynamic method failed, trying final alternative...');
             }
             
-            // If Dynamic method also fails, try Named Credential method as last resort
-            console.log('⚠️ Dynamic method returned empty, trying Named Credential method as fallback...');
-            console.log('🔧 Making Apex call to getAssignedInterestTagsWithNamedCredential...');
-            
-            const namedCredTags = await getAssignedInterestTagsWithNamedCredential({ workshopId: this.selectedWorkshopId });
-            console.log('🔍 Raw response from getAssignedInterestTagsWithNamedCredential:', namedCredTags);
-            console.log('🔍 Response type:', typeof namedCredTags);
-            console.log('🔍 Response is array:', Array.isArray(namedCredTags));
-            
-            if (namedCredTags && namedCredTags.length > 0) {
-                console.log('✅ Got tags from Named Credential method, processing...');
-                namedCredTags.forEach((tag, index) => {
-                    console.log(`📋 Tag ${index + 1} from Named Credential:`, JSON.stringify(tag, null, 2));
-                });
-                // Force reactivity by creating a new array
-                this.assignedInterestTags = [...namedCredTags];
-                console.log('✅ Loaded assigned Interest Tags via Named Credential:', this.assignedInterestTags.length);
-            } else {
-                console.log('⚠️ All methods returned empty - no tags found');
-                this.assignedInterestTags = [];
+            // Method 3: Named Credential method
+            try {
+                assignedTags = await getAssignedInterestTagsWithNamedCredential({ workshopId: this.selectedWorkshopId });
+                if (assignedTags && assignedTags.length > 0) {
+                    console.log('✅ Got tags from Named Credential method');
+                    this.assignedInterestTags = [...assignedTags];
+                    return;
+                }
+            } catch (error) {
+                console.log('⚠️ All methods failed');
             }
+            
+            // All methods failed
+            console.log('⚠️ All methods returned empty - no tags found');
+            this.assignedInterestTags = [];
             
         } catch (error) {
-            console.error('❌ Error loading assigned Interest Tags:', error);
-            console.error('❌ Error details:', error.message);
-            console.error('❌ Error stack:', error.stack);
+            console.error('❌ Error loading assigned Interest Tags from server:', error);
             this.assignedInterestTags = [];
         }
     }
 
-    handleStartWorkshop() {
+    sortSteps() {
+        this.steps = [...this.steps].sort((a, b) => (a.Step_Order__c || 0) - (b.Step_Order__c || 0));
+    }
+
+    async handleWorkshopSelect(event) {
+        const workshopId = event.detail.name;
+        this.selectedWorkshopId = workshopId;
+        this.currentPage = 1;
+        
+        // Force refresh for selected workshop
+        await this.loadStepsFromServer();
+        await this.loadAssignedInterestTagsFromServer();
+    }
+
+    // Legacy method - now calls server version
+    loadSteps() {
+        return this.loadStepsFromServer();
+    }
+
+    // Legacy method - now calls server version  
+    loadAssignedInterestTags() {
+        return this.loadAssignedInterestTagsFromServer();
+    }
+
+    async handleStartWorkshop() {
         if (this.steps && this.steps.some(s => s.isComplete !== undefined)) {
             this.showRestartModal = true;
             return;
         }
 
-        startWorkshop({ workshopId: this.selectedWorkshopId }).then(() => {
-            console.log('✅ Workshop started, now force re-load from server');
+        try {
+            this.isLoading = true;
+            console.log('🚀 Starting workshop...');
+            
+            await startWorkshop({ workshopId: this.selectedWorkshopId });
+            console.log('✅ Workshop started, forcing complete data refresh...');
 
-            // Use NON-CACHE version
-            getFreshStepsAndProgress({ workshopId: this.selectedWorkshopId }).then(result => {
-                this.steps = result;
-                this.sortSteps();
-                this.savedSteps = JSON.parse(JSON.stringify(this.steps));
-                this.showStartButton = false;
-
-                // Refresh nav counts too
-                this.workshops = this.workshops.map(ws =>
-                    ws.Id === this.selectedWorkshopId
-                        ? { ...ws, UserProgressCount: 0 }
-                        : ws
-                );
-
-                this.paginate();
-                this.refreshProgress();
-            });
-
-        }).catch(error => {
-            console.error('Error starting workshop:', error);
-        });
+            // Force complete refresh from server after starting
+            await this.forceRefreshWorkshopData();
+            
+            // Also refresh all badges to keep them in sync
+            await this.refreshAllWorkshopBadges();
+            
+            this.showSuccessToast('Workshop Started', 'Your workshop has been started successfully!');
+            
+        } catch (error) {
+            console.error('❌ Error starting workshop:', error);
+            this.showErrorToast('Failed to start workshop. Please try again.');
+        } finally {
+            this.isLoading = false;
+        }
     }
 
-
-    handleRestartConfirm() {
-        resetWorkshop({ workshopId: this.selectedWorkshopId }).then(() => {
-            this.steps = this.steps.map(s => ({ ...s, isComplete: false }));
+    async handleRestartConfirm() {
+        try {
+            this.isLoading = true;
+            console.log('🔄 Restarting workshop...');
+            
+            await resetWorkshop({ workshopId: this.selectedWorkshopId });
+            console.log('✅ Workshop reset, forcing complete data refresh...');
+            
+            // Force complete refresh from server after reset
+            await this.forceRefreshWorkshopData();
+            
+            // Also refresh all badges to keep them in sync
+            await this.refreshAllWorkshopBadges();
+            
             this.showRestartModal = false;
-            this.showStartButton = false;
-            this.paginate();
-            this.refreshProgress();
-        });
+            this.showSuccessToast('Workshop Restarted', 'Your workshop has been restarted successfully!');
+            
+        } catch (error) {
+            console.error('❌ Error restarting workshop:', error);
+            this.showErrorToast('Failed to restart workshop. Please try again.');
+        } finally {
+            this.isLoading = false;
+        }
     }
 
     handleRestartCancel() {
         this.showRestartModal = false;
     }
-// compute first incomplete step index + 1 (path steps are 1-based)
-get currentPathStep() {
-    if (this.savedSteps.length > 0 && this.savedSteps.every(s => s.progress === true || s.isComplete === true)) {
-        return this.steps.length - 1; // last step index
-    }
-    const completed = this.savedSteps.filter(s => s.progress === true || s.isComplete === true).length;
-    return completed;
-}
 
-get allStepsComplete() {
-    return this.savedSteps.length > 0 && this.savedSteps.every(s => s.progress === true || s.isComplete === true);
-}
+    /**
+     * Force refresh workshop-specific data (steps and tags)
+     */
+    async forceRefreshWorkshopData() {
+        console.log('🔄 Force refreshing workshop-specific data...');
+        
+        // Clear workshop-specific cache references
+        this._stepsResult = null;
+        this._interestTagsResult = null;
+        
+        // Reset workshop-specific state
+        this.steps = [];
+        this.savedSteps = [];
+        this.paginatedSteps = [];
+        this.assignedInterestTags = [];
+        this.progress = 0;
+        this.currentPage = 1;
+        this.openSections = [];
+        this.showStartButton = true;
+        
+        // Load fresh data from server
+        await this.loadStepsFromServer();
+        await this.loadAssignedInterestTagsFromServer();
+    }
+
+    // compute first incomplete step index + 1 (path steps are 1-based)
+    get currentPathStep() {
+        if (this.savedSteps.length > 0 && this.savedSteps.every(s => s.progress === true || s.isComplete === true)) {
+            return this.steps.length - 1; // last step index
+        }
+        const completed = this.savedSteps.filter(s => s.progress === true || s.isComplete === true).length;
+        return completed;
+    }
+
+    get allStepsComplete() {
+        return this.savedSteps.length > 0 && this.savedSteps.every(s => s.progress === true || s.isComplete === true);
+    }
 
     refreshProgress() {
         const completed = this.steps.filter(s => s.progress).length;
@@ -372,8 +493,19 @@ get allStepsComplete() {
         this.paginatedSteps = this.steps.slice(start, end);
     }
 
-    handlePrev() { if (this.currentPage > 1) { this.currentPage--; this.paginate(); } }
-    handleNext() { if (this.currentPage < this.totalPages) { this.currentPage++; this.paginate(); } }
+    handlePrev() { 
+        if (this.currentPage > 1) { 
+            this.currentPage--; 
+            this.paginate(); 
+        } 
+    }
+    
+    handleNext() { 
+        if (this.currentPage < this.totalPages) { 
+            this.currentPage++; 
+            this.paginate(); 
+        } 
+    }
 
     handleStepComplete(event) {
         const { stepId, isChecked } = event.detail;
@@ -383,91 +515,68 @@ get allStepsComplete() {
             s.Id === stepId ? { ...s, progress: isChecked } : s
         );
     }
-    handleSaveProgress() {
-        const promises = [];
 
-        this.steps.forEach(s => {
-            promises.push(markStepComplete({ stepId: s.Id, isComplete: s.progress === true }));
-        });
+    async handleSaveProgress() {
+        try {
+            this.isLoading = true;
+            console.log('💾 Saving progress...');
+            
+            const promises = this.steps.map(s => 
+                markStepComplete({ stepId: s.Id, isComplete: s.progress === true })
+            );
 
-        Promise.all(promises)
-            .then(() => {
-                // Fetch fresh steps from server (non-cached)
-                return getFreshStepsAndProgress({ workshopId: this.selectedWorkshopId });
-            })
-            .then(freshSteps => {
-                this.steps = freshSteps;
-                this.sortSteps();
-                this.savedSteps = JSON.parse(JSON.stringify(this.steps));
-                console.log('Fresh steps after save:', this.steps);
+            await Promise.all(promises);
+            console.log('✅ Progress saved, forcing data refresh...');
 
-                // Update badge count (UserProgressCount) for the selected workshop
-                const userProgressSteps = this.steps.filter(s => s.progress === true || s.isComplete === true).length;
-                this.workshops = this.workshops.map(ws =>
-                    ws.Id === this.selectedWorkshopId
-                        ? { ...ws, UserProgressCount: userProgressSteps }
-                        : ws
-                );
+            // Force refresh from server after save
+            await this.forceRefreshWorkshopData();
+            
+            // CRITICAL: Refresh ALL workshop badges to prevent reset on tab navigation
+            await this.refreshAllWorkshopBadges();
 
-                this.refreshProgress();
-                this.paginate();
-
-                this.dispatchEvent(new ShowToastEvent({
-                    title: 'Success',
-                    message: 'Your progress has been saved.',
-                    variant: 'success'
-                }));
-            })
-            .catch(error => {
-                console.error('Error saving progress:', error);
-            });
+            this.showSuccessToast('Progress Saved', 'Your progress has been saved successfully!');
+            
+        } catch (error) {
+            console.error('❌ Error saving progress:', error);
+            this.showErrorToast('Failed to save progress. Please try again.');
+        } finally {
+            this.isLoading = false;
+        }
     }
 
-    handleDeleteProgress() {
+    async handleDeleteProgress() {
         if (!this.selectedWorkshopId) {
             console.warn('⚠️ No workshop selected, skipping delete progress.');
             return;
         }
 
-        deleteWorkshopProgress({ workshopId: this.selectedWorkshopId })
-            .then(() => {
-                console.log('✅ Progress deleted successfully for workshop:', this.selectedWorkshopId);
-                
-                // Reset all step-related data
-                this.steps = [];
-                this.savedSteps = [];
-                this.paginatedSteps = [];
-                this.progress = 0;
-                this.currentPage = 1;
-                this.openSections = [];
-                this.showStartButton = true;
-                
-                // Update the workshop badge count to 0
-                this.workshops = this.workshops.map(ws =>
-                    ws.Id === this.selectedWorkshopId
-                        ? { ...ws, UserProgressCount: 0 }
-                        : ws
-                );
-
-                this.dispatchEvent(new ShowToastEvent({
-                    title: 'Progress Deleted',
-                    message: 'Your workshop progress has been deleted. You can now start fresh.',
-                    variant: 'success'
-                }));
-            })
-            .catch(error => {
-                console.error('❌ Error deleting progress:', error);
-                this.dispatchEvent(new ShowToastEvent({
-                    title: 'Error Deleting Progress',
-                    message: 'Failed to delete workshop progress. Please try again.',
-                    variant: 'error'
-                }));
-            });
+        try {
+            this.isLoading = true;
+            console.log('🗑️ Deleting workshop progress...');
+            
+            await deleteWorkshopProgress({ workshopId: this.selectedWorkshopId });
+            console.log('✅ Progress deleted, forcing complete data refresh...');
+            
+            // Force complete refresh from server after delete
+            await this.forceRefreshWorkshopData();
+            
+            // CRITICAL: Refresh ALL workshop badges to prevent reset on tab navigation
+            await this.refreshAllWorkshopBadges();
+            
+            this.showSuccessToast('Progress Deleted', 'Your workshop progress has been deleted. You can now start fresh.');
+            
+        } catch (error) {
+            console.error('❌ Error deleting progress:', error);
+            this.showErrorToast('Failed to delete workshop progress. Please try again.');
+        } finally {
+            this.isLoading = false;
+        }
     }
 
     handleExpandAll() {
         this.openSections = this.paginatedSteps.map(step => step.Id);
     }
+    
     handleCollapseAll() {
         this.openSections = [];
     }
@@ -476,12 +585,11 @@ get allStepsComplete() {
         this.zoomedImgSrc = event.detail.src;
         this.isModalOpen = true;
     }
+    
     closeModal() {
         this.isModalOpen = false;
         this.zoomedImgSrc = '';
     }
-
-
 
     handleTagClick(event) {
         const tagName = event.target.textContent;
@@ -520,20 +628,35 @@ get allStepsComplete() {
             });
             
             // Show success toast
-            this.dispatchEvent(new ShowToastEvent({
-                title: 'Opening Interest Tag',
-                message: `"${tagName}" - ID: ${tagId}`,
-                variant: 'success'
-            }));
+            this.showSuccessToast('Opening Interest Tag', `"${tagName}" - ID: ${tagId}`);
         } else {
             console.warn('❌ No matching Interest Tag ID found for:', tagName);
-            // Show info toast if no ID found
-            this.dispatchEvent(new ShowToastEvent({
-                title: 'Interest Tag Not Found',
-                message: `"${tagName}" - No matching Interest Tag ID found in assigned tags`,
-                variant: 'warning'
-            }));
+            this.showWarningToast('Interest Tag Not Found', `"${tagName}" - No matching Interest Tag ID found in assigned tags`);
         }
     }
 
+    // Utility methods for toast notifications following SLDS2 standards
+    showSuccessToast(title, message) {
+        this.dispatchEvent(new ShowToastEvent({
+            title: title,
+            message: message,
+            variant: 'success'
+        }));
+    }
+
+    showErrorToast(message, title = 'Error') {
+        this.dispatchEvent(new ShowToastEvent({
+            title: title,
+            message: message,
+            variant: 'error'
+        }));
+    }
+
+    showWarningToast(title, message) {
+        this.dispatchEvent(new ShowToastEvent({
+            title: title,
+            message: message,
+            variant: 'warning'
+        }));
+    }
 }

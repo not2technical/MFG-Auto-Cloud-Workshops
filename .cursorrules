@@ -1,0 +1,110 @@
+# Salesforce Lightning Design System 2 (SLDS2) & LWC Development Rules
+
+## Core SLDS2 Principles
+- ALWAYS use SLDS utility classes instead of custom CSS
+- ALWAYS follow SLDS component patterns and markup structure  
+- ALWAYS use semantic HTML with proper SLDS classes
+- NEVER create custom CSS that conflicts with SLDS design tokens
+- ALWAYS use SLDS spacing, typography, and color utilities
+
+## Lightning Web Component (LWC) Standards
+
+### HTML Structure
+- Use `<div class="slds-*">` containers for all components
+- Apply `slds-grid` and `slds-col` for responsive layouts
+- Use `slds-form-element` for all form inputs
+- Always include proper SLDS button variants: `slds-button slds-button_brand`
+- Use `slds-card` structure: `slds-card__header`, `slds-card__body`, `slds-card__footer`
+
+### Required SLDS Classes by Component Type
+- **Buttons**: `slds-button slds-button_[variant]` (brand, neutral, destructive, etc.)
+- **Forms**: `slds-form-element`, `slds-form-element__label`, `slds-form-element__control`
+- **Cards**: `slds-card`, `slds-card__header`, `slds-card__body`
+- **Modals**: `slds-modal`, `slds-modal__container`, `slds-modal__content`
+- **Tables**: `slds-table slds-table_bordered slds-table_col-bordered`
+- **Lists**: `slds-list_dotted`, `slds-list_ordered`, `slds-item`
+
+### Spacing & Layout
+- Use SLDS spacing utilities: `slds-m-*`, `slds-p-*` (none, xxx-small, xx-small, x-small, small, medium, large, x-large, xx-large)
+- Use SLDS grid system: `slds-grid`, `slds-col`, `slds-size_*`
+- Use SLDS flexbox utilities: `slds-grid slds-gutters`, `slds-col`
+
+### Typography
+- Use SLDS text utilities: `slds-text-heading_*`, `slds-text-body_*`
+- Use SLDS font weights: `slds-text-font_monospace`, `slds-text-font_*`
+- Use SLDS text colors: `slds-text-color_*` (default, weak, error, success, etc.)
+
+### Icons & Images
+- Always use SLDS icons with proper sizing: `slds-icon slds-icon_*`
+- Use SLDS image utilities for responsive images: `slds-image`
+- Follow SLDS icon guidelines for accessibility
+
+## JavaScript Standards
+
+### LWC Best Practices
+- Always import LWC base classes: `import { LightningElement } from 'lwc';`
+- Use proper lifecycle methods: `connectedCallback()`, `renderedCallback()`
+- Always use `@track`, `@api`, `@wire` decorators appropriately
+- Use proper event handling with `this.dispatchEvent()`
+
+### Error Handling
+- Always include try-catch blocks for Apex calls
+- Use proper SLDS error messaging with `slds-notify slds-notify_alert`
+- Display errors in SLDS format: `slds-form-element__help slds-text-color_error`
+
+### Accessibility
+- Always include proper ARIA labels and roles
+- Use SLDS accessibility classes: `slds-assistive-text`
+- Ensure proper focus management and keyboard navigation
+- Use semantic HTML elements with SLDS classes
+
+## Apex Integration
+- Always use `@AuraEnabled(cacheable=true)` for read operations
+- Use proper error handling with `AuraHandledException`
+- Follow SOQL best practices with selective field queries
+- Always include security checks: `WITH SECURITY_ENFORCED`
+
+## File Structure Standards
+- Place all LWC files in proper structure: `component.html`, `component.js`, `component.js-meta.xml`
+- Use descriptive component names in camelCase
+- Include proper component metadata with target configs
+
+## CSS Guidelines (When Custom CSS is Needed)
+- Only use CSS custom properties (CSS variables) aligned with SLDS design tokens
+- Always scope custom CSS to component level
+- Use SLDS custom property names: `--slds-c-*` for component properties
+- Never override core SLDS classes directly
+
+## Data Import & CSV Standards
+- Always use proper field API names in CSV headers
+- Include proper HTML formatting in rich text fields using SLDS classes
+- Use proper image URL references for GitHub raw content
+- Follow proper lookup field formatting for relationships
+
+## Documentation Standards
+- Always include comprehensive inline comments
+- Use proper JSDoc format for all public methods
+- Include component usage examples in comments
+- Document all @api properties with descriptions
+
+## Testing Requirements
+- Include proper test coverage for all LWC components
+- Test all SLDS responsive breakpoints
+- Validate accessibility compliance
+- Test with different Salesforce user profiles and permissions
+
+## Never Do
+- Never use inline styles instead of SLDS classes
+- Never create custom CSS that duplicates SLDS functionality
+- Never use non-semantic HTML elements
+- Never ignore SLDS accessibility guidelines
+- Never use hardcoded colors, fonts, or spacing values
+- Never create components without proper SLDS structure
+
+## Always Do
+- Always validate SLDS markup structure
+- Always use SLDS design tokens for consistency
+- Always test components in different Salesforce editions
+- Always follow SLDS responsive design patterns
+- Always include proper error states and loading indicators using SLDS
+- Always use SLDS animation and transition utilities 

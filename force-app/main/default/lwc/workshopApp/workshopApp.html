@@ -1,191 +1,345 @@
 <template>
+    <!-- ✅ LOADING OVERLAY -->
+    <template if:true={isLoading}>
+        <div class="slds-backdrop slds-backdrop_open slds-is-absolute">
+            <div class="slds-align_absolute-center">
+                <lightning-spinner 
+                    alternative-text="Loading workshop data..." 
+                    size="large"
+                    variant="brand">
+                </lightning-spinner>
+                <div class="slds-text-heading_small slds-text-align_center slds-m-top_medium slds-text-color_weak">
+                    Loading workshop data...
+                </div>
+            </div>
+        </div>
+    </template>
+
     <!-- ✅ NEW: TWO-COLUMN LAYOUT USING SLDS GRID -->
-    <div class="slds-grid slds-wrap">
+    <div class="slds-grid slds-wrap" aria-busy={isLoading}>
 
         <!-- ✅ LEFT NAVIGATION PANEL -->
         <div class="slds-size_1-of-4 slds-p-around_medium slds-box slds-theme_default">
-            <h2 class="slds-text-heading_small">Workshops</h2>
-   <lightning-vertical-navigation selected-item={selectedWorkshopId} onselect={handleWorkshopSelect}>
-  <lightning-vertical-navigation-section>
-    <template for:each={workshops} for:item="ws">
-      <div key={ws.Id} class="slds-grid slds-grid_align-spread slds-m-vertical_x-small">
-        <lightning-vertical-navigation-item 
-          label={ws.Name} 
-          name={ws.Id}>
-        </lightning-vertical-navigation-item>
-        <span class="slds-badge "> {ws.UserProgressCount} of {ws.StepCount} Steps</span>
-      </div>
-    </template>
-  </lightning-vertical-navigation-section>
-</lightning-vertical-navigation>
-
-
+            <h2 class="slds-text-heading_small slds-m-bottom_medium">
+                <lightning-icon icon-name="utility:knowledge_base" size="small" class="slds-m-right_x-small"></lightning-icon>
+                Workshops
+            </h2>
+            
+            <!-- ✅ WORKSHOP NAVIGATION WITH LOADING STATE -->
+            <template if:false={isLoading}>
+                <lightning-vertical-navigation selected-item={selectedWorkshopId} onselect={handleWorkshopSelect}>
+                    <lightning-vertical-navigation-section>
+                        <template for:each={workshops} for:item="ws">
+                            <div key={ws.Id} class="slds-grid slds-grid_align-spread slds-m-vertical_x-small">
+                                <lightning-vertical-navigation-item 
+                                    label={ws.Name} 
+                                    name={ws.Id}>
+                                </lightning-vertical-navigation-item>
+                                <span class="slds-badge slds-badge_lightest">
+                                    {ws.UserProgressCount} of {ws.StepCount} Steps
+                                </span>
+                            </div>
+                        </template>
+                    </lightning-vertical-navigation-section>
+                </lightning-vertical-navigation>
+            </template>
+            
+            <!-- ✅ LOADING STATE FOR NAVIGATION -->
+            <template if:true={isLoading}>
+                <div class="slds-text-align_center slds-p-vertical_large">
+                    <lightning-spinner size="small" alternative-text="Loading workshops..."></lightning-spinner>
+                    <div class="slds-text-body_small slds-text-color_weak slds-m-top_small">
+                        Loading workshops...
+                    </div>
+                </div>
+            </template>
         </div>
 
         <!-- ✅ RIGHT CONTENT PANEL -->
         <div class="slds-size_3-of-4 slds-p-around_medium slds-box slds-theme_default">
-            <!-- ⚙️ UNCHANGED: START BUTTON -->
+            
+            <!-- ✅ START WORKSHOP VIEW -->
             <template if:true={showStartButton}>
-                <!-- ✅ Show description if available -->
-                <!-- Description and Image Section: 2 columns -->
-                <div class="slds-grid slds-wrap slds-m-bottom_medium">
-                    <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
-                        <lightning-formatted-rich-text 
-                            value={selectedWorkshopDescription}
-                            class="slds-m-bottom_medium">
-                        </lightning-formatted-rich-text>
-                    </div>
-                    <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small slds-text-align_center">
-                        <template if:true={selectedWorkshopImageUrl}>
-                            <img src={selectedWorkshopImageUrl} alt="Workshop Image" style="max-width: 100%; max-height: 400px; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" />
-                        </template>
-                    </div>
-                </div>
-
-                <!-- Workshop Details Section: 3 columns, improved labels -->
-                <div class="slds-grid slds-wrap slds-m-bottom_medium slds-p-around_medium camo-background">
-                    <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
-                        <div class="slds-text-title_bold slds-text-color_default slds-m-bottom_xx-small slds-text-align_center">
-                            <lightning-icon icon-name="action:new_group" size="small" class="slds-m-right_x-small"></lightning-icon>
-                            Recommended Audience
+                <template if:false={isLoading}>
+                    <!-- ✅ Show description if available -->
+                    <!-- Description and Image Section: 2 columns -->
+                    <div class="slds-grid slds-wrap slds-m-bottom_medium">
+                        <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
+                            <lightning-formatted-rich-text 
+                                value={selectedWorkshopDescription}
+                                class="slds-m-bottom_medium">
+                            </lightning-formatted-rich-text>
                         </div>
-                        <div class="slds-text-body_regular slds-text-align_center">{selectedWorkshopAudience}</div>
-                    </div>
-                    <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
-                        <div class="slds-text-title_bold slds-text-color_default slds-m-bottom_xx-small slds-text-align_center">
-                            <lightning-icon icon-name="action:new_custom95" size="small" class="slds-m-right_x-small"></lightning-icon>
-                            Workshop Duration
-                        </div>
-                        <div class="slds-text-body_regular slds-text-align_center">{selectedWorkshopDuration}</div>
-                    </div>
-                    <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small center-flex-col">
-                        <div class="slds-text-title_bold slds-text-color_default slds-m-bottom_xx-small slds-text-align_center">
-                            <lightning-icon icon-name="action:new_custom3" size="small" class="slds-m-right_x-small"></lightning-icon>
-                            Challenge Rating
-                        </div>
-                        <lightning-formatted-rich-text 
-                            value={selectedWorkshopStarRating}
-                            class="slds-text-body_regular slds-text-align_center center-rich-text">
-                        </lightning-formatted-rich-text>
-                    </div>
-                </div>
-
-                <!-- Key Features Section -->
-                <template if:true={selectedWorkshopIndustryFeatures.length}>
-                    <div class="slds-m-bottom_medium">
-                        <div class="slds-text-heading_small slds-m-bottom_small">
-                            <lightning-icon icon-name="utility:knowledge_base" size="small" class="slds-m-right_x-small"></lightning-icon>
-                            Key Features
-                        </div>
-                        <div class="slds-grid slds-wrap slds-gutters_x-small slds-m-top_x-small">
-                            <template for:each={selectedWorkshopIndustryFeatures} for:item="feature">
-                                <span key={feature} 
-                                      class="slds-show_inline-block slds-p-horizontal_small slds-p-vertical_xx-small key-feature-tag"
-                                      onclick={handleTagClick}
-                                      role="button"
-                                      tabindex="0"
-                                      title="Click to view Interest Tag details">
-                                    {feature}
-                                </span>
+                        <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small slds-text-align_center">
+                            <template if:true={selectedWorkshopImageUrl}>
+                                <img src={selectedWorkshopImageUrl} 
+                                     alt="Workshop Image" 
+                                     style="max-width: 100%; max-height: 400px; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" />
                             </template>
                         </div>
                     </div>
-                </template>
 
-                <lightning-button label="Start Workshop" onclick={handleStartWorkshop}></lightning-button>
-            </template>
+                    <!-- Workshop Details Section: 3 columns, improved labels -->
+                    <div class="slds-grid slds-wrap slds-m-bottom_medium slds-p-around_medium camo-background">
+                        <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
+                            <div class="slds-text-title_bold slds-text-color_default slds-m-bottom_xx-small slds-text-align_center">
+                                <lightning-icon icon-name="action:new_group" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                Recommended Audience
+                            </div>
+                            <div class="slds-text-body_regular slds-text-align_center">{selectedWorkshopAudience}</div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
+                            <div class="slds-text-title_bold slds-text-color_default slds-m-bottom_xx-small slds-text-align_center">
+                                <lightning-icon icon-name="action:new_custom95" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                Workshop Duration
+                            </div>
+                            <div class="slds-text-body_regular slds-text-align_center">{selectedWorkshopDuration}</div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small center-flex-col">
+                            <div class="slds-text-title_bold slds-text-color_default slds-m-bottom_xx-small slds-text-align_center">
+                                <lightning-icon icon-name="action:new_custom3" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                Challenge Rating
+                            </div>
+                            <lightning-formatted-rich-text 
+                                value={selectedWorkshopStarRating}
+                                class="slds-text-body_regular slds-text-align_center center-rich-text">
+                            </lightning-formatted-rich-text>
+                        </div>
+                    </div>
 
-            <!-- ⚙️ UNCHANGED: STEPS, PROGRESS, PAGINATION -->
-            <template if:false={showStartButton}>
-                <!-- ✅ Show completion message if all steps are complete -->
-                <template if:true={allStepsComplete}>
-                    <div class="slds-text-color_success slds-text-heading_small slds-m-bottom_small">
-                        🎉 Workshop Complete!
+                    <!-- Key Features Section -->
+                    <template if:true={selectedWorkshopIndustryFeatures.length}>
+                        <div class="slds-m-bottom_medium">
+                            <div class="slds-text-heading_small slds-m-bottom_small">
+                                <lightning-icon icon-name="utility:knowledge_base" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                Key Features
+                            </div>
+                            <div class="slds-grid slds-wrap slds-gutters_x-small slds-m-top_x-small">
+                                <template for:each={selectedWorkshopIndustryFeatures} for:item="feature">
+                                    <span key={feature} 
+                                          class="slds-show_inline-block slds-p-horizontal_small slds-p-vertical_xx-small key-feature-tag slds-theme_shade"
+                                          onclick={handleTagClick}
+                                          role="button"
+                                          tabindex="0"
+                                          title="Click to view Interest Tag details">
+                                        <lightning-icon icon-name="utility:tag" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                        {feature}
+                                    </span>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- ✅ START BUTTON WITH LOADING STATE -->
+                    <div class="slds-m-top_large">
+                        <lightning-button 
+                            label="Start Workshop" 
+                            onclick={handleStartWorkshop}
+                            variant="brand-outline"
+                            class="slds-size_full"
+                            disabled={isLoading}
+                            icon-name="utility:play"
+                            icon-position="left">
+                        </lightning-button>
                     </div>
                 </template>
-                <!-- ✅ NEW PATH INDICATOR -->
-<lightning-progress-indicator 
-    type="path" 
-    variant="base" 
-    current-step={currentPathStep}>
-
-    <template for:each={steps} for:item="step" for:index="index">
-        <lightning-progress-step 
-            key={step.Id}
-            label={step.Name}
-            value={index}>
-        </lightning-progress-step>
-    </template>
-
-</lightning-progress-indicator>
-
-                <!-- Fixed Expand/Collapse All Icon Buttons -->
-                <div class="fixed-accordion-controls slds-grid slds-grid_align-end ">
-                    <lightning-button-icon icon-name="utility:expand_all" alternative-text="Expand All" onclick={handleExpandAll} class="slds-m-right_x-small"></lightning-button-icon>
-                    <lightning-button-icon icon-name="utility:collapse_all" alternative-text="Collapse All" onclick={handleCollapseAll}></lightning-button-icon>
-                </div>
-                <lightning-accordion allow-multiple-sections-open class="slds-m-vertical_medium"
-                    active-section-name={openSections}>
-    <template for:each={paginatedSteps} for:item="step">
-        <lightning-accordion-section
-            key={step.Id}
-            name={step.Id}
-            label={step.Name}>
-
-            <c-step-detail 
-                step={step} 
-                is-admin={isAdmin} 
-                onstepcomplete={handleStepComplete}
-                onzoomimage={handleZoomImage}>
-            </c-step-detail>
-
-        </lightning-accordion-section>
-    </template>
-</lightning-accordion>
-
-
-                <div class="slds-m-top_medium">
-                    <lightning-button 
-                        label="Previous" 
-                        onclick={handlePrev} 
-                        disabled={isFirstPage}>
-                    </lightning-button>
-
-                    <lightning-button 
-                        label="Next" 
-                        onclick={handleNext} 
-                        disabled={isLastPage} 
-                        class="slds-m-left_small">
-                    </lightning-button>
-
-                    <lightning-button 
-                        label="Save Progress" 
-                        onclick={handleSaveProgress} 
-                        class="slds-m-left_small">
-                    </lightning-button>
-
-                    <lightning-button 
-                        label="Delete Progress" 
-                        onclick={handleDeleteProgress} 
-                        variant="destructive"
-                        icon-name="utility:delete"
-                        icon-position="left"
-                        title="Delete all progress for this workshop"
-                        class="slds-m-left_small">
-                    </lightning-button>
-                </div>
+                
+                <!-- ✅ LOADING STATE FOR START VIEW -->
+                <template if:true={isLoading}>
+                    <div class="slds-text-align_center slds-p-vertical_xx-large">
+                        <lightning-spinner size="medium" alternative-text="Loading workshop details..."></lightning-spinner>
+                        <div class="slds-text-heading_small slds-text-color_weak slds-m-top_medium">
+                            Loading workshop details...
+                        </div>
+                    </div>
+                </template>
             </template>
 
+            <!-- ✅ WORKSHOP STEPS VIEW -->
+            <template if:false={showStartButton}>
+                <template if:false={isLoading}>
+                    <!-- ✅ Show completion message if all steps are complete -->
+                    <template if:true={allStepsComplete}>
+                        <div class="slds-notify slds-notify_alert slds-theme_success slds-m-bottom_medium">
+                            <lightning-icon icon-name="utility:success" size="small" class="slds-m-right_x-small"></lightning-icon>
+                            <div class="slds-text-heading_small">🎉 Workshop Complete!</div>
+                            <div class="slds-text-body_small slds-m-top_x-small">
+                                Congratulations! You've successfully completed all workshop steps.
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <!-- ✅ NEW PATH INDICATOR -->
+                    <lightning-progress-indicator 
+                        type="path" 
+                        variant="base" 
+                        current-step={currentPathStep}
+                        class="slds-m-bottom_medium">
+
+                        <template for:each={steps} for:item="step" for:index="index">
+                            <lightning-progress-step 
+                                key={step.Id}
+                                label={step.Name}
+                                value={index}>
+                            </lightning-progress-step>
+                        </template>
+                    </lightning-progress-indicator>
+
+                    <!-- Fixed Expand/Collapse All Icon Buttons -->
+                    <div class="fixed-accordion-controls slds-grid slds-grid_align-end slds-m-bottom_medium">
+                        <lightning-button-icon 
+                            icon-name="utility:expand_all" 
+                            alternative-text="Expand All" 
+                            onclick={handleExpandAll} 
+                            class="slds-m-right_x-small"
+                            disabled={isLoading}>
+                        </lightning-button-icon>
+                        <lightning-button-icon 
+                            icon-name="utility:collapse_all" 
+                            alternative-text="Collapse All" 
+                            onclick={handleCollapseAll}
+                            disabled={isLoading}>
+                        </lightning-button-icon>
+                    </div>
+                    
+                    <!-- ✅ STEPS ACCORDION -->
+                    <lightning-accordion 
+                        allow-multiple-sections-open 
+                        class="slds-m-vertical_medium"
+                        active-section-name={openSections}>
+                        
+                        <template for:each={paginatedSteps} for:item="step">
+                            <lightning-accordion-section
+                                key={step.Id}
+                                name={step.Id}
+                                label={step.Name}>
+
+                                <c-step-detail 
+                                    step={step} 
+                                    is-admin={isAdmin} 
+                                    onstepcomplete={handleStepComplete}
+                                    onzoomimage={handleZoomImage}>
+                                </c-step-detail>
+
+                            </lightning-accordion-section>
+                        </template>
+                    </lightning-accordion>
+
+                    <!-- ✅ ACTION BUTTONS WITH LOADING STATES -->
+                    <div class="slds-grid slds-wrap slds-gutters_small slds-m-top_medium">
+                        <!-- Navigation Buttons -->
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-button-group" role="group">
+                                <lightning-button 
+                                    label="Previous" 
+                                    onclick={handlePrev} 
+                                    disabled={isFirstPage}
+                                    icon-name="utility:chevronleft"
+                                    icon-position="left">
+                                </lightning-button>
+
+                                <lightning-button 
+                                    label="Next" 
+                                    onclick={handleNext} 
+                                    disabled={isLastPage}
+                                    icon-name="utility:chevronright"
+                                    icon-position="right">
+                                </lightning-button>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-button-group slds-float_right" role="group">
+                                <lightning-button 
+                                    label="Save Progress" 
+                                    onclick={handleSaveProgress} 
+                                    variant="success"
+                                    disabled={isLoading}
+                                    icon-name="utility:save"
+                                    icon-position="left">
+                                </lightning-button>
+
+                                <lightning-button 
+                                    label="Delete Progress" 
+                                    onclick={handleDeleteProgress} 
+                                    variant="destructive"
+                                    disabled={isLoading}
+                                    icon-name="utility:delete"
+                                    icon-position="left"
+                                    title="Delete all progress for this workshop">
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                
+                <!-- ✅ LOADING STATE FOR STEPS VIEW -->
+                <template if:true={isLoading}>
+                    <div class="slds-text-align_center slds-p-vertical_xx-large">
+                        <lightning-spinner size="medium" alternative-text="Loading workshop steps..."></lightning-spinner>
+                        <div class="slds-text-heading_small slds-text-color_weak slds-m-top_medium">
+                            Loading workshop steps...
+                        </div>
+                    </div>
+                </template>
+            </template>
         </div>
     </div>
 
+    <!-- ✅ RESTART MODAL -->
+    <template if:true={showRestartModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium slds-hyphenate">
+                        <lightning-icon icon-name="utility:warning" size="small" class="slds-m-right_x-small"></lightning-icon>
+                        Restart Workshop?
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p class="slds-text-body_regular">
+                        This workshop has existing progress. Do you want to restart and lose all current progress?
+                    </p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button 
+                        label="Cancel" 
+                        onclick={handleRestartCancel}
+                        class="slds-m-right_x-small">
+                    </lightning-button>
+                    <lightning-button 
+                        label="Restart Workshop" 
+                        onclick={handleRestartConfirm}
+                        variant="destructive"
+                        disabled={isLoading}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- ✅ IMAGE ZOOM MODAL -->
     <template if:true={isModalOpen}>
         <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container">
-                <div class="slds-modal__content slds-p-around_medium">
-                    <img src={zoomedImgSrc} alt="Zoomed" style="max-width:90vw;max-height:90vh;" />
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">
+                        <lightning-icon icon-name="utility:zoomin" size="small" class="slds-m-right_x-small"></lightning-icon>
+                        Workshop Image
+                    </h2>
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" 
+                            onclick={closeModal} 
+                            title="Close">
+                        <lightning-icon icon-name="utility:close" size="small" alternative-text="Close"></lightning-icon>
+                    </button>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium slds-text-align_center">
+                    <img src={zoomedImgSrc} 
+                         alt="Zoomed Workshop Image" 
+                         style="max-width:90vw;max-height:90vh;" />
                 </div>
-                <button class="slds-button slds-button_neutral slds-modal__close" onclick={closeModal} title="Close">×</button>
             </div>
         </section>
         <div class="slds-backdrop slds-backdrop_open"></div>
