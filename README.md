@@ -317,13 +317,13 @@ Before we start building our connected asset solutions, let's verify that all re
 
 First, we need to ensure that Context Service is enabled and configured correctly in your org.
 
-<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Review%20and%20Enable%20Setup%20Requirements/Screenshot%202025-07-02%20at%2012.13.39%E2%80%AFPM.png" alt="Verifying Context Service" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Review%20and%20Enable%20Setup%20Requirements/contextservicetoggle.png" alt="Verifying Context Service" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 ### Step Detail: Verifying Actionable Event orchestration is Enabled
 
 Next, we need to confirm that Actionable Event orchestration is properly enabled and ready for use.
 
-<img src="https://github.com/not2technical/MFG-Auto-Cloud-Workshops/blob/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Review%20and%20Enable%20Setup%20Requirements/Screenshot%202025-07-02%20at%2012.18.52%E2%80%AFPM.png?raw=true" alt="Verifying Actionable Event orchestration is Enabled" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
+<img src="https://raw.githubusercontent.com/not2technical/MFG-Auto-Cloud-Workshops/refs/heads/main/images/Workshop/Supercharge%20Experiences%20Connect%20Telemetry%20to%20CRM360/Review%20and%20Enable%20Setup%20Requirements/aeotoggles.png" alt="Verifying Actionable Event orchestration is Enabled" style="max-width: 300px !important; width: 300px !important; height: auto !important;" />
 
 **Important:** These setup requirements must be completed before proceeding with the workshop. This ensures all participants have the necessary foundation to successfully complete the hands-on exercises.
 
