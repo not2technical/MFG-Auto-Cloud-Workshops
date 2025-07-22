@@ -32,6 +32,7 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
     @track zoomedImgSrc = '';
     @track assignedInterestTags = [];
     @track isLoading = false;
+    @track isDescriptionExpanded = false;
 
     pageSize = PAGE_SIZE;
     isAdmin = true;
@@ -106,6 +107,27 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
         return [];
     }
 
+    /**
+     * Dynamic CSS class for description container
+     */
+    get workshopDescriptionContainerClass() {
+        return `workshop-description-container ${this.isDescriptionExpanded ? 'expanded' : 'collapsed'}`;
+    }
+
+    /**
+     * Dynamic label for read more/less button
+     */
+    get readMoreButtonLabel() {
+        return this.isDescriptionExpanded ? 'Read Less' : 'Read More';
+    }
+
+    /**
+     * Dynamic icon for read more/less button
+     */
+    get readMoreIconName() {
+        return this.isDescriptionExpanded ? 'utility:chevronup' : 'utility:chevrondown';
+    }
+
     async connectedCallback() {
         await this.forceRefreshAllData();
     }
@@ -133,6 +155,7 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
             this.progress = 0;
             this.currentPage = 1;
             this.openSections = [];
+            this.isDescriptionExpanded = false; // Reset description expansion state
             
             // Force fresh workshop data from server with accurate badge counts
             await this.loadWorkshopsWithProgressFromServer();
@@ -371,6 +394,9 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
         this.selectedWorkshopId = workshopId;
         this.currentPage = 1;
         
+        // Reset description expansion state when switching workshops
+        this.isDescriptionExpanded = false;
+        
         // Force refresh for selected workshop
         await this.loadStepsFromServer();
         await this.loadAssignedInterestTagsFromServer();
@@ -384,6 +410,13 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
     // Legacy method - now calls server version  
     loadAssignedInterestTags() {
         return this.loadAssignedInterestTagsFromServer();
+    }
+
+    /**
+     * Toggle workshop description expansion state
+     */
+    handleToggleDescription() {
+        this.isDescriptionExpanded = !this.isDescriptionExpanded;
     }
 
     async handleStartWorkshop() {

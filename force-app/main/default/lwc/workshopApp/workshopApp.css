@@ -94,3 +94,77 @@
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
+
+/* ✅ Workshop Description Container with Fade Effect */
+.workshop-description-container {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.workshop-description-container.collapsed {
+    max-height: 300px;
+}
+
+.workshop-description-container.expanded {
+    max-height: none;
+}
+
+/* Fade gradient overlay for truncated content */
+.workshop-description-container.collapsed::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 1) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Read More button positioning */
+.read-more-container {
+    text-align: center;
+    padding-top: 0.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.read-more-button {
+    background-color: transparent;
+    border: none;
+    color: var(--sds-c-button-brand-color-background);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.read-more-button:hover {
+    background-color: var(--sds-c-button-brand-color-background-hover, #1565c0);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.read-more-button:focus {
+    outline: 2px solid var(--sds-c-button-brand-color-border-focus, #0176d3);
+    outline-offset: 2px;
+}
+
+/* Icon rotation animation for expand/collapse */
+.expand-icon {
+    transition: transform 0.3s ease;
+}
+
+.expand-icon.rotated {
+    transform: rotate(180deg);
+}

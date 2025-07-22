@@ -65,10 +65,27 @@
                     <!-- Description and Image Section: 2 columns -->
                     <div class="slds-grid slds-wrap slds-m-bottom_medium">
                         <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
-                            <lightning-formatted-rich-text 
-                                value={selectedWorkshopDescription}
-                                class="slds-m-bottom_medium">
-                            </lightning-formatted-rich-text>
+                            <!-- ✅ Truncated Description Container with Fade Effect -->
+                            <div class={workshopDescriptionContainerClass}>
+                                <lightning-formatted-rich-text 
+                                    value={selectedWorkshopDescription}
+                                    class="slds-rich-text-editor__output">
+                                </lightning-formatted-rich-text>
+                            </div>
+                            
+                            <!-- ✅ Read More/Less Button -->
+                            <template if:true={selectedWorkshopDescription}>
+                                <div class="read-more-container">
+                                    <lightning-button 
+                                        variant="base"
+                                        label={readMoreButtonLabel}
+                                        icon-name={readMoreIconName}
+                                        icon-position="right"
+                                        onclick={handleToggleDescription}
+                                        class="slds-m-top_x-small">
+                                    </lightning-button>
+                                </div>
+                            </template>
                         </div>
                         <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small slds-text-align_center">
                             <template if:true={selectedWorkshopImageUrl}>
