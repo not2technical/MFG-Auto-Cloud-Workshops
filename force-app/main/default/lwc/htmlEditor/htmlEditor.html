@@ -1,0 +1,203 @@
+<template>
+    <!-- ✅ LOADING OVERLAY -->
+    <template if:true={isLoading}>
+        <div class="slds-backdrop slds-backdrop_open slds-is-absolute">
+            <div class="slds-align_absolute-center">
+                <lightning-spinner 
+                    alternative-text="Loading HTML editor..." 
+                    size="large"
+                    variant="brand">
+                </lightning-spinner>
+                <div class="slds-text-heading_small slds-text-align_center slds-m-top_medium slds-text-color_weak">
+                    Loading HTML editor...
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ✅ MAIN EDITOR CONTAINER -->
+    <div class="slds-card">
+        <!-- ✅ HEADER WITH TITLE AND ACTIONS -->
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="utility:code" size="small"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">HTML Editor</span>
+                    </h2>
+                    <p class="slds-text-body_small slds-text-color_weak">
+                        Edit HTML content for {fieldApiName} field
+                    </p>
+                </div>
+            </header>
+            <div class="slds-no-flex">
+                <!-- ✅ PREVIEW TOGGLE -->
+                <template if:true={showPreview}>
+                    <lightning-button-icon 
+                        icon-name="utility:preview" 
+                        variant="border-filled"
+                        alternative-text="Toggle Preview"
+                        title="Toggle Preview"
+                        onclick={handlePreviewToggle}
+                        class="slds-m-left_xx-small">
+                    </lightning-button-icon>
+                </template>
+            </div>
+        </div>
+
+        <!-- ✅ TOOLBAR -->
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-grid slds-wrap slds-gutters_small slds-m-bottom_medium">
+                <!-- ✅ EDITOR ACTIONS -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <div class="slds-button-group" role="group">
+                        <lightning-button 
+                            label="Format Code" 
+                            icon-name="utility:automate"
+                            onclick={handleFormatCode}
+                            variant="neutral"
+                            disabled={isLoading}>
+                        </lightning-button>
+                        <lightning-button 
+                            label="Insert Image" 
+                            icon-name="utility:image"
+                            onclick={handleInsertImage}
+                            variant="neutral"
+                            disabled={isLoading}>
+                        </lightning-button>
+                        <lightning-button 
+                            label="Insert Link" 
+                            icon-name="utility:link"
+                            onclick={handleInsertLink}
+                            variant="neutral"
+                            disabled={isLoading}>
+                        </lightning-button>
+                    </div>
+                </div>
+
+                <!-- ✅ SAVE ACTIONS -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <div class="slds-button-group slds-float_right" role="group">
+                        <lightning-button 
+                            label="Clear" 
+                            icon-name="utility:clear"
+                            onclick={handleClear}
+                            variant="destructive-text"
+                            disabled={isLoading}>
+                        </lightning-button>
+                        <lightning-button 
+                            label="Reset" 
+                            icon-name="utility:refresh"
+                            onclick={handleReset}
+                            variant="neutral"
+                            disabled={isLoading}>
+                        </lightning-button>
+                        <lightning-button 
+                            label="Save" 
+                            icon-name="utility:save"
+                            onclick={handleSave}
+                            variant="brand"
+                            disabled={isSaveDisabled}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ✅ CHARACTER COUNT AND PROGRESS -->
+            <template if:true={showCharacterCount}>
+                <div class="slds-grid slds-grid_align-spread slds-m-bottom_medium">
+                    <div class="slds-col">
+                        <div class={characterCountClass}>
+                            <lightning-icon 
+                                icon-name="utility:text" 
+                                size="x-small" 
+                                class="slds-m-right_xx-small">
+                            </lightning-icon>
+                            <span class="slds-text-body_small">
+                                {characterCount} / {MAX_CHARACTERS} characters
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                        <lightning-progress-bar 
+                            value={progressPercentage}
+                            variant={progressBarVariant}
+                            size="medium">
+                        </lightning-progress-bar>
+                    </div>
+                </div>
+            </template>
+
+            <!-- ✅ ERROR DISPLAY -->
+            <template if:true={editorError}>
+                <div class="slds-notify slds-notify_alert slds-theme_error slds-m-bottom_medium">
+                    <lightning-icon 
+                        icon-name="utility:error" 
+                        size="small" 
+                        class="slds-m-right_x-small">
+                    </lightning-icon>
+                    <div class="slds-text-body_regular">
+                        {editorError}
+                    </div>
+                </div>
+            </template>
+
+            <!-- ✅ EDITOR AND PREVIEW LAYOUT -->
+            <div class="slds-grid slds-wrap editor-layout">
+                <!-- ✅ MONACO EDITOR PANE -->
+                <div class={editorPaneClass}>
+                    <div class="slds-text-heading_small slds-m-bottom_x-small">
+                        <lightning-icon 
+                            icon-name="utility:code" 
+                            size="x-small" 
+                            class="slds-m-right_xx-small">
+                        </lightning-icon>
+                        HTML Source
+                    </div>
+                    <div class="editor-container">
+                        <div 
+                            class="monaco-editor-container slds-size_full" 
+                            data-height={editorHeight}>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✅ PREVIEW PANE -->
+                <template if:true={showPreviewPane}>
+                    <div class={previewPaneClass}>
+                        <div class="slds-text-heading_small slds-m-bottom_x-small">
+                            <lightning-icon 
+                                icon-name="utility:preview" 
+                                size="x-small" 
+                                class="slds-m-right_xx-small">
+                            </lightning-icon>
+                            Live Preview
+                        </div>
+                        <div class="preview-container slds-scrollable_none">
+                            <div class="preview-content slds-rich-text-editor__output slds-p-around_medium">
+                                <lightning-formatted-rich-text 
+                                    value={htmlContent}
+                                    class="slds-rich-text-editor__output">
+                                </lightning-formatted-rich-text>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- ✅ HELP TEXT -->
+            <div class="slds-text-body_small slds-text-color_weak slds-m-top_medium">
+                <lightning-icon 
+                    icon-name="utility:info" 
+                    size="x-small" 
+                    class="slds-m-right_xx-small">
+                </lightning-icon>
+                <strong>Tips:</strong> 
+                Use external image URLs to save storage. The editor supports full HTML with inline CSS. 
+                Content is limited to 32K characters including HTML formatting.
+            </div>
+        </div>
+    </div>
+</template> 

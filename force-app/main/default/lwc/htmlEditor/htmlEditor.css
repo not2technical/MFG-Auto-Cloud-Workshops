@@ -1,0 +1,154 @@
+/* ✅ HTML Editor Component Styles */
+
+/* Editor Layout */
+.editor-layout {
+    min-height: 400px;
+}
+
+.editor-container {
+    border: 1px solid var(--sds-c-input-color-border, #d8dde6);
+    border-radius: 0.25rem;
+    background-color: white;
+}
+
+.monaco-editor-container {
+    height: 400px;
+    min-height: 300px;
+}
+
+/* Preview Container */
+.preview-container {
+    border: 1px solid var(--sds-c-input-color-border, #d8dde6);
+    border-radius: 0.25rem;
+    background-color: white;
+    height: 400px;
+    min-height: 300px;
+    overflow-y: auto;
+}
+
+.preview-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* Progress Bar Customization */
+lightning-progress-bar {
+    --sds-c-progress-bar-color-background-fill: var(--sds-c-color-brand-base-20);
+}
+
+/* Character Count Styling */
+.character-count-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Button Group Responsive Behavior */
+@media (max-width: 768px) {
+    .slds-button-group {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+    
+    .monaco-editor-container {
+        height: 300px;
+        min-height: 250px;
+    }
+    
+    .preview-container {
+        height: 300px;
+        min-height: 250px;
+    }
+}
+
+/* Editor Theme Customization */
+.monaco-editor-container .monaco-editor {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Consolas', monospace;
+}
+
+/* Toolbar Styling */
+.toolbar-section {
+    border-bottom: 1px solid var(--sds-c-color-border, #d8dde6);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Loading State */
+.slds-backdrop {
+    z-index: 9999;
+}
+
+/* Error State */
+.editor-error {
+    border: 1px solid var(--sds-c-color-text-error, #c23934);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    background-color: var(--sds-c-color-background-error, #fef7f7);
+}
+
+/* Success State */
+.editor-success {
+    border: 1px solid var(--sds-c-color-text-success, #027e46);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    background-color: var(--sds-c-color-background-success, #f3fdf4);
+}
+
+/* Responsive Layout Adjustments */
+@media (min-width: 1024px) {
+    .monaco-editor-container {
+        height: 500px;
+    }
+    
+    .preview-container {
+        height: 500px;
+    }
+}
+
+/* Focus States */
+.editor-container:focus-within {
+    border-color: var(--sds-c-input-color-border-focus, #1589ee);
+    box-shadow: 0 0 0 1px var(--sds-c-input-color-border-focus, #1589ee);
+}
+
+/* Rich Text Output Styling in Preview */
+.preview-content .slds-rich-text-editor__output {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.preview-content .slds-rich-text-editor__output img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+    margin: 0.5rem 0;
+}
+
+.preview-content .slds-rich-text-editor__output p {
+    margin-bottom: 1rem;
+}
+
+.preview-content .slds-rich-text-editor__output h1,
+.preview-content .slds-rich-text-editor__output h2,
+.preview-content .slds-rich-text-editor__output h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Scrollbar Styling for Preview */
+.preview-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.preview-container::-webkit-scrollbar-track {
+    background: var(--sds-c-color-background, #f3f3f3);
+}
+
+.preview-container::-webkit-scrollbar-thumb {
+    background: var(--sds-c-color-border, #d8dde6);
+    border-radius: 3px;
+}
+
+.preview-container::-webkit-scrollbar-thumb:hover {
+    background: var(--sds-c-color-text-weak, #8e8e93);
+} 

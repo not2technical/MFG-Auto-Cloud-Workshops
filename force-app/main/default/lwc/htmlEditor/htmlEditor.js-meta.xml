@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <isExposed>true</isExposed>
+    <description>HTML Editor for Rich Text Fields - Edit HTML content with live preview and external image support</description>
+    <masterLabel>HTML Editor</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="fieldApiName" type="String" default="Description__c" label="Field API Name" description="The API name of the rich text field to edit (e.g., Description__c)"/>
+            <property name="editorHeight" type="String" default="400px" label="Editor Height" description="Height of the editor pane (e.g., 400px, 500px)"/>
+            <property name="showPreview" type="Boolean" default="false" label="Show Preview" description="Show live preview pane alongside editor"/>
+            <property name="showCharacterCount" type="Boolean" default="false" label="Show Character Count" description="Display character count and progress bar"/>
+        </targetConfig>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage">
+            <property name="fieldApiName" type="String" default="Description__c" label="Field API Name" description="The API name of the rich text field to edit"/>
+            <property name="editorHeight" type="String" default="400px" label="Editor Height" description="Height of the editor pane"/>
+            <property name="showPreview" type="Boolean" default="false" label="Show Preview" description="Show live preview pane"/>
+            <property name="showCharacterCount" type="Boolean" default="false" label="Show Character Count" description="Display character count"/>
+        </targetConfig>
+
+    </targetConfigs>
+</LightningComponentBundle> 
