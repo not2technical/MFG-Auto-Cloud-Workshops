@@ -31,10 +31,18 @@
 .fixed-accordion-controls {
   position: sticky;
   top: 15%;
-  right: 0;
   z-index: 10;
   padding: 0.5rem 0.5rem 0.5rem 0;
-  
+  /* Constrain width to prevent accordion overlap */
+  width: fit-content;
+  max-width: 120px;
+  /* Force to right side - override SLDS grid alignment */
+  justify-self: flex-end;
+}
+
+/* Re-enable pointer events for the buttons inside */
+.fixed-accordion-controls lightning-button-icon {
+  pointer-events: auto;
 }
 
 .zoomable {
