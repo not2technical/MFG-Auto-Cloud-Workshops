@@ -1,0 +1,171 @@
+Industries and Revenue Cloud Common Feature Documentation
+Make the most of your org with features available for use in multiple Industries and Revenue Cloud products.
+
+What's an Industries common feature? It's any feature that's included in more than one Industries product. These shared features serve familiar database functions such as automation, data import, custom user interfaces, and more. As this common layer grows, you get access to even more enhancements and innovation from other industries. That's the power of Salesforce Industries.
+
+Your Industries product includes the common features most relevant to your business needs. Not all of the common features are available in each product. To understand which features are available in your product, refer to your cloud's documentation and the feature documentation. For your convenience, we've included some add-ons that are relevant to Industries in this feature list.
+
+A |B |C |D |E |F |G |H |I |J |K |L |M |N |O |P |Q |R |S |T |U |V |W |X |Y |Z
+
+A
+Accounting Subledger
+Consolidate data between Salesforce CRM and your accounting system to help manage your accounting department.
+Action Launcher
+Let users search for and launch actions from a page.
+Action Plans
+Capture repeatable tasks and other items needed to complete business processes by using templates.
+Actionable List Engagement
+Enable users to engage with the prospects and existing customers who are interested in a product or service without having to leave the sales console.
+Actionable List Members
+Set up actionable lists to help sales agents or service agents engage with prospects and customers.
+Actionable Relationship Center (ARC)
+View and understand relationships among people and businesses by presenting them in an interactive graph.
+Actionable Segmentation
+Segment similar client profiles, curate them, and design timely and personalized client outreach programs
+AI Accelerator
+Create and configure machine learning use cases quickly and easily.
+Advanced Program Management
+Modernize and simplify the everyday tasks that organizations, service and support agencies, institutions, and departments do to maintain safe, healthy, and thriving communities.
+Asset Service Lifecycle Management
+Manage the entire lifecycle of asset service operations, streamline field service operations, and boost the productivity and satisfaction of your field service teams.
+Audit Trail
+Detect potential cases of compliance fraud and identity breach by monitoring and analyzing the primary and secondary identity verification audit records of customers.
+B
+Batch Management
+Automate the processing of records in scheduled flows or other processes that generate a high volume of standard and custom object records.
+Business Rules Engine
+Create business rules that perform complex lookups and calculations to automate your business.
+C
+Care Plans
+Support members of your community to overcome challenges and accomplish life goals. Care plans contain goals to help individuals meet a milestone or outcome, and benefits and tasks that help them get there.
+Case Referrals
+Help deliver support services and social and educational programs to individuals by fielding requests for referrals. Collect important information from the person who needs help so you can quickly connect individuals with programs and services.
+Cross-Object Field History
+Empower users to track record changes across related objects in a single view, eliminating the hassle of checking each record individually.
+Collections and Recovery
+Help financial institutions and corporations streamline their collection processes, reduce delinquencies, and maintain positive customer relationships.
+Complaints Management
+Foster and maintain thriving communities by documenting incidents or concerns reported by individuals about someone’s personal health, safety, behavior, or well-being.
+Compliant Data Sharing
+Control and monitor what data gets shared with whom, without writing complex code. Advanced data sharing rules improve your compliance with regulations and company policies.
+Connected Assets
+Orchestrate real-time actions on assets and transform your asset operations. Detect relevant events from assets and perform rules-driven actions in Salesforce.
+Context Service
+Simplify the sharing and consumption of business application data.
+Contracts
+Manage the end-to-end lifecycle of contracts in Salesforce. Control the sales process integration, contract management process, and contract lifecycle that starts from contract authoring to activation.
+Criteria-Based Search and Filter
+Design a custom search experience for your users based on a single object that unifies complex sets of data that are otherwise spread across multiple objects and fields.
+CSV Data Management for Industries
+Import large amounts of data into Salesforce objects using CSV files.
+D
+Data Consumption Framework
+Let agents access complete and current data from external systems without leaving Salesforce.
+Data Processing Engine
+Transform data that's available in your Salesforce org and write back the transformation results as new or updated records.
+Decision Explainer
+Get insights into why a business rule generated a specific result.
+Decision Table
+Define business rules and let decision tables decide the outcome.
+Disclosure and Compliance Hub
+Extract data, answer questions, improve answers, collaborate with users, and generate disclosures.
+Discovery Framework and Assessments
+Collect and validate customer information in compliance with your policies.
+Document Checklist Items
+Track and approve documents submitted by customers. Document Checklist Items can be used with Action Plans.
+Dynamic Assessments
+Provide a responsive and streamlined way to capture information and provide your users with flexibility over onsite or virtual inspections, investigations, and evaluations.
+E
+Einstein Autofill
+Use Einstein Autofill to get AI-driven recommendations that transform real-time call and chat conversations into instant suggestions.
+Einstein Bot Templates
+Set up a bot that lets customers report an issue or view their recent cases using a preconfigured bot template.
+Einstein Relationship Insights
+Discover critical relationships between people and companies by exploring disparate data sources from unstructured web pages and structured information like Salesforce records.
+Einstein Summary
+Generate a summary of records to derive insights and gain better comprehension of sales and service information.
+Engagement
+Store details about interactions between customer service representatives and customers. Engagement provides objects, invocable actions, and Engagement copilot flows.
+Events and Milestones
+Get an at-a-glance view of your customers’ life events or milestones.
+F
+Feedback Management
+Understand customer feedback as it evolves over time by engaging customers and users with relevant, personalized surveys. Incorporate survey data into your feedback management process and gain actionable insights at every stage of the customer lifecycle.
+Fundraising
+Engage donors, raise funds, and drive outcomes with tools for strategic planning and data-driven insights.
+G
+Grantmaking
+Streamline the grant management process for both funders and applicants.
+Group Membership and Households
+Organize relationships between people and organizations in meaningful ways. .
+I
+Identity Verification
+Verify the identity of a customer before you share sensitive information with them.
+Integration Solutions with MuleSoft Direct
+Integrate Industries Cloud apps with external systems by using Integration Solutions with MuleSoft Direct.
+Intelligent Document Automation
+Extract data from PDFs and image files provided by customers into preconfigured document records in Salesforce.
+Intelligent Document Reader
+Extract data from documents using optical character recognition with Amazon Textract. Support your data processing operations and manage large volumes of data.
+Intelligent Form Reader
+Extract data from forms using Amazon Textract. Then map a document's fields to fields in a Salesforce record. Use the extracted information to create or update record fields, or to verify data that's already in the org.
+Interaction Summaries
+Take detailed notes, specify the confidentiality level of the notes, and add action items or next steps. You can share notes that contain confidential information only with relevant stakeholders to maintain compliance.
+Interest Tags
+Capture customer, client, or constituent needs, interests, and prospecting opportunities on Salesforce records. Having interests in mind during interactions helps deepen relationships.
+L
+List Builder for Data Cloud Segment
+Target prospects and customers by creating actionable lists from Data Cloud segments.
+Loyalty Management
+Deliver innovative programs for customer recognition, reward, and retention. You can also track members’ activities, reward members, and manage promotions.
+M
+Marketing Cloud Engagement for Industries
+Communicate with and engage your supporters, customers, and contacts. Send personalized emails to target audiences and create automated email campaigns.
+O
+Omnistudio
+Provides a suite of services, components, and data model objects that combine to create Industry Cloud applications. Create guided interactions using data from your Salesforce org and external sources.
+Omnistudio Document Generation
+Generate documents from Microsoft Word (.docx) and Microsoft PowerPoint (.pptx) templates. These templates can include values from any JSON-based data in the text, including data from any Salesforce object. Optionally, convert the resulting documents to PDF format.
+Order Management
+Deliver best-in-class, next-generation order management capabilities using a single Master Data Model (MDM) paradigm.
+Outcome Management
+Define, measure, and evaluate the impact of your programs and initiatives in one place.
+Outreach List
+Help your sales or service agents get the most out of their prospect engagements. Agents can cross-sell products, collect outstanding dues, and provide advisory services to prospects and customers.
+P
+Process Compliance Navigator
+Make sure that your company follows internal policies and meets regulatory requirements and industry standards.
+Program and Case Management
+Deliver programs that benefit the health and well-being of the individuals, families, and students that you serve.
+R
+Rebate Management
+Create rebate programs and define an incentive structure with benefits and corresponding qualification thresholds.
+Record Alerts
+Help users prioritize their work. Users can scan records for notifications that show information from your system or from alerts that are stored in Salesforce.
+Referral Marketing
+Run referral programs with evergreen and time-bound promotions for your customers. Design and launch referral promotions within minutes, then use inbuilt automations to take care of the rest.
+Rollup Definitions for Record Rollups
+Streamline the aggregation of records from various objects or groups.
+S
+Scheduled Reminders
+Keep users updated about important occasions by using automated reminders. Send recurring or one-time reminders to keep recipients informed and ready for upcoming or completed actions.
+Scheduler
+Simplify appointment scheduling in Salesforce. Create a personalized experience by scheduling customer appointments—in person, or by phone or video—with the right person at the right place and time.
+Scoring Framework
+Predict key aspects for the future of your business and make informed decisions by using propensity models.
+Sentiment Insights
+Analyze the sentiment of your customers and get actionable insights to improve it.
+Service Process Studio
+Design seamless customer service processes quickly and efficiently.
+Stage Management
+Automate and manage business process stages and gain control over the record stage progress.
+T
+Timeline
+Show key events relating to a person or resource in one place so your users can see information from a single source of truth.
+V
+Virtual Calls
+Enable communication and customer service from anywhere. Provide customers with self-service scheduling, automated appointment notifications, and easy access links to the video platform.
+Vlocity Contract Lifecycle Management
+Create and maintain accurate contracts associated with opportunities, orders, and quotes.
+Vlocity Interaction Launcher
+Let contact center agents display a full view of the customer and perform authorized actions from the Vlocity Interaction Console app.

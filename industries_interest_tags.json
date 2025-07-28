@@ -1,0 +1,369 @@
+{
+   "interestTagList":[
+      {
+         "tagDescription":"Consolidate data between Salesforce CRM and your accounting system to help manage your accounting department.",
+         "tagName":"Accounting Subledger",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Let users search for and launch actions from a page.",
+         "tagName":"Action Launcher",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Capture repeatable tasks and other items needed to complete business processes by using templates.",
+         "tagName":"Action Plans",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Enable users to engage with the prospects and existing customers who are interested in a product or service without having to leave the sales console.",
+         "tagName":"Actionable List Engagement",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Set up actionable lists to help sales agents or service agents engage with prospects and customers.",
+         "tagName":"Actionable List Members",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"View and understand relationships among people and businesses by presenting them in an interactive graph.",
+         "tagName":"Actionable Relationship Center (ARC)",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Segment similar client profiles, curate them, and design timely and personalized client outreach programs",
+         "tagName":"Actionable Segmentation",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Create and configure machine learning use cases quickly and easily.",
+         "tagName":"AI Accelerator",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Modernize and simplify the everyday tasks that organizations, service and support agencies, institutions, and departments do to maintain safe, healthy, and thriving communities.",
+         "tagName":"Advanced Program Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Manage the entire lifecycle of asset service operations, streamline field service operations, and boost the productivity and satisfaction of your field service teams.",
+         "tagName":"Asset Service Lifecycle Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Detect potential cases of compliance fraud and identity breach by monitoring and analyzing the primary and secondary identity verification audit records of customers.",
+         "tagName":"Audit Trail",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Automate the processing of records in scheduled flows or other processes that generate a high volume of standard and custom object records.",
+         "tagName":"Batch Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Create business rules that perform complex lookups and calculations to automate your business.",
+         "tagName":"Business Rules Engine",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Support members of your community to overcome challenges and accomplish life goals. Care plans contain goals to help individuals meet a milestone or outcome, and benefits and tasks that help them get there.",
+         "tagName":"Care Plans",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Help deliver support services and social and educational programs to individuals by fielding requests for referrals. Collect important information from the person who needs help so you can quickly connect individuals with programs and services.",
+         "tagName":"Case Referrals",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Empower users to track record changes across related objects in a single view, eliminating the hassle of checking each record individually.",
+         "tagName":"Cross-Object Field History",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Help financial institutions and corporations streamline their collection processes, reduce delinquencies, and maintain positive customer relationships.",
+         "tagName":"Collections and Recovery",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Foster and maintain thriving communities by documenting incidents or concerns reported by individuals about someone's personal health, safety, behavior, or well-being.",
+         "tagName":"Complaints Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Control and monitor what data gets shared with whom, without writing complex code. Advanced data sharing rules improve your compliance with regulations and company policies.",
+         "tagName":"Compliant Data Sharing",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Orchestrate real-time actions on assets and transform your asset operations. Detect relevant events from assets and perform rules-driven actions in Salesforce.",
+         "tagName":"Connected Assets",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Simplify the sharing and consumption of business application data.",
+         "tagName":"Context Service",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Manage the end-to-end lifecycle of contracts in Salesforce. Control the sales process integration, contract management process, and contract lifecycle that starts from contract authoring to activation.",
+         "tagName":"Contracts",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Design a custom search experience for your users based on a single object that unifies complex sets of data that are otherwise spread across multiple objects and fields.",
+         "tagName":"Criteria-Based Search and Filter",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Import large amounts of data into Salesforce objects using CSV files.",
+         "tagName":"CSV Data Management for Industries",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Let agents access complete and current data from external systems without leaving Salesforce.",
+         "tagName":"Data Consumption Framework",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Transform data that's available in your Salesforce org and write back the transformation results as new or updated records.",
+         "tagName":"Data Processing Engine",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Get insights into why a business rule generated a specific result.",
+         "tagName":"Decision Explainer",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Define business rules and let decision tables decide the outcome.",
+         "tagName":"Decision Table",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Extract data, answer questions, improve answers, collaborate with users, and generate disclosures.",
+         "tagName":"Disclosure and Compliance Hub",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Collect and validate customer information in compliance with your policies.",
+         "tagName":"Discovery Framework and Assessments",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Track and approve documents submitted by customers. Document Checklist Items can be used with Action Plans.",
+         "tagName":"Document Checklist Items",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Provide a responsive and streamlined way to capture information and provide your users with flexibility over onsite or virtual inspections, investigations, and evaluations.",
+         "tagName":"Dynamic Assessments",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Use Einstein Autofill to get AI-driven recommendations that transform real-time call and chat conversations into instant suggestions.",
+         "tagName":"Einstein Autofill",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Set up a bot that lets customers report an issue or view their recent cases using a preconfigured bot template.",
+         "tagName":"Einstein Bot Templates",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Discover critical relationships between people and companies by exploring disparate data sources from unstructured web pages and structured information like Salesforce records.",
+         "tagName":"Einstein Relationship Insights",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Generate a summary of records to derive insights and gain better comprehension of sales and service information.",
+         "tagName":"Einstein Summary",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Store details about interactions between customer service representatives and customers. Engagement provides objects, invocable actions, and Engagement copilot flows.",
+         "tagName":"Engagement",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Get an at-a-glance view of your customers' life events or milestones.",
+         "tagName":"Events and Milestones",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Understand customer feedback as it evolves over time by engaging customers and users with relevant, personalized surveys. Incorporate survey data into your feedback management process and gain actionable insights at every stage of the customer lifecycle.",
+         "tagName":"Feedback Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Engage donors, raise funds, and drive outcomes with tools for strategic planning and data-driven insights.",
+         "tagName":"Fundraising",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Streamline the grant management process for both funders and applicants.",
+         "tagName":"Grantmaking",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Organize relationships between people and organizations in meaningful ways.",
+         "tagName":"Group Membership and Households",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Verify the identity of a customer before you share sensitive information with them.",
+         "tagName":"Identity Verification",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Integrate Industries Cloud apps with external systems by using Integration Solutions with MuleSoft Direct.",
+         "tagName":"Integration Solutions with MuleSoft Direct",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Extract data from PDFs and image files provided by customers into preconfigured document records in Salesforce.",
+         "tagName":"Intelligent Document Automation",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Extract data from documents using optical character recognition with Amazon Textract. Support your data processing operations and manage large volumes of data.",
+         "tagName":"Intelligent Document Reader",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Extract data from forms using Amazon Textract. Then map a document's fields to fields in a Salesforce record. Use the extracted information to create or update record fields, or to verify data that's already in the org.",
+         "tagName":"Intelligent Form Reader",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Take detailed notes, specify the confidentiality level of the notes, and add action items or next steps. You can share notes that contain confidential information only with relevant stakeholders to maintain compliance.",
+         "tagName":"Interaction Summaries",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Capture customer, client, or constituent needs, interests, and prospecting opportunities on Salesforce records. Having interests in mind during interactions helps deepen relationships.",
+         "tagName":"Interest Tags",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Target prospects and customers by creating actionable lists from Data Cloud segments.",
+         "tagName":"List Builder for Data Cloud Segment",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Deliver innovative programs for customer recognition, reward, and retention. You can also track members' activities, reward members, and manage promotions.",
+         "tagName":"Loyalty Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Communicate with and engage your supporters, customers, and contacts. Send personalized emails to target audiences and create automated email campaigns.",
+         "tagName":"Marketing Cloud Engagement for Industries",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Provides a suite of services, components, and data model objects that combine to create Industry Cloud applications. Create guided interactions using data from your Salesforce org and external sources.",
+         "tagName":"Omnistudio",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Generate documents from Microsoft Word (.docx) and Microsoft PowerPoint (.pptx) templates. These templates can include values from any JSON-based data in the text, including data from any Salesforce object. Optionally, convert the resulting documents to PDF format.",
+         "tagName":"Omnistudio Document Generation",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Deliver best-in-class, next-generation order management capabilities using a single Master Data Model (MDM) paradigm.",
+         "tagName":"Order Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Define, measure, and evaluate the impact of your programs and initiatives in one place.",
+         "tagName":"Outcome Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Help your sales or service agents get the most out of their prospect engagements. Agents can cross-sell products, collect outstanding dues, and provide advisory services to prospects and customers.",
+         "tagName":"Outreach List",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Make sure that your company follows internal policies and meets regulatory requirements and industry standards.",
+         "tagName":"Process Compliance Navigator",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Deliver programs that benefit the health and well-being of the individuals, families, and students that you serve.",
+         "tagName":"Program and Case Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Create rebate programs and define an incentive structure with benefits and corresponding qualification thresholds.",
+         "tagName":"Rebate Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Help users prioritize their work. Users can scan records for notifications that show information from your system or from alerts that are stored in Salesforce.",
+         "tagName":"Record Alerts",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Run referral programs with evergreen and time-bound promotions for your customers. Design and launch referral promotions within minutes, then use inbuilt automations to take care of the rest.",
+         "tagName":"Referral Marketing",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Streamline the aggregation of records from various objects or groups.",
+         "tagName":"Rollup Definitions for Record Rollups",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Keep users updated about important occasions by using automated reminders. Send recurring or one-time reminders to keep recipients informed and ready for upcoming or completed actions.",
+         "tagName":"Scheduled Reminders",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Simplify appointment scheduling in Salesforce. Create a personalized experience by scheduling customer appointments—in person, or by phone or video—with the right person at the right place and time.",
+         "tagName":"Scheduler",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Predict key aspects for the future of your business and make informed decisions by using propensity models.",
+         "tagName":"Scoring Framework",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Analyze the sentiment of your customers and get actionable insights to improve it.",
+         "tagName":"Sentiment Insights",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Design seamless customer service processes quickly and efficiently.",
+         "tagName":"Service Process Studio",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Automate and manage business process stages and gain control over the record stage progress.",
+         "tagName":"Stage Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Show key events relating to a person or resource in one place so your users can see information from a single source of truth.",
+         "tagName":"Timeline",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Enable communication and customer service from anywhere. Provide customers with self-service scheduling, automated appointment notifications, and easy access links to the video platform.",
+         "tagName":"Virtual Calls",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Create and maintain accurate contracts associated with opportunities, orders, and quotes.",
+         "tagName":"Vlocity Contract Lifecycle Management",
+         "categoryId":"0qRKa000000wvxlMAA"
+      },
+      {
+         "tagDescription":"Let contact center agents display a full view of the customer and perform authorized actions from the Vlocity Interaction Console app.",
+         "tagName":"Vlocity Interaction Launcher",
+         "categoryId":"0qRKa000000wvxlMAA"
+      }
+   ]
+} 
