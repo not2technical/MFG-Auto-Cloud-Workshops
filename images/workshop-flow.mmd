@@ -1,0 +1,23 @@
+graph TD
+    A[Workshop] --> B[Workshop Steps]
+    B --> C[Step Details]
+    
+    F[User] --> G[User Progress]
+    G --> B
+    
+    subgraph "Core Workshop Structure"
+        A
+        B
+        C
+    end
+    
+    subgraph "User Tracking"
+        F
+        G
+    end
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style F fill:#e8f5e8
+    style G fill:#e8f5e8 

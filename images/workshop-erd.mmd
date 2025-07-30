@@ -1,0 +1,47 @@
+erDiagram
+    Workshop {
+        Id Id PK
+        Name Name
+        Description__c RichText
+        Duration__c Number
+        Workshop_Image__c URL
+        Audience__c Picklist
+        Learning_Objectives__c LongTextArea
+    }
+    
+    Workshop_Step {
+        Id Id PK
+        Workshop__c Lookup FK
+        Name Name
+        Instructions__c RichText
+        Step_Order__c Number
+        Image_URL__c URL
+        isCompleted__c Formula
+    }
+    
+    Workshop_Step_Detail {
+        Id Id PK
+        Workshop_Step__c Lookup FK
+        Detail_Title__c Text
+        Detail_Instructions__c RichText
+        Detail_Order__c Number
+        Image_URL__c URL
+    }
+    
+    User_Progress {
+        Id Id PK
+        User__c Lookup FK
+        Workshop_Step__c Lookup FK
+        IsCompleted__c Checkbox
+    }
+    
+    User {
+        Id Id PK
+        Name Name
+        Email Email
+    }
+
+    Workshop ||--o{ Workshop_Step : "contains"
+    Workshop_Step ||--o{ Workshop_Step_Detail : "has details"
+    Workshop_Step ||--o{ User_Progress : "tracks progress"
+    User ||--o{ User_Progress : "has progress" 

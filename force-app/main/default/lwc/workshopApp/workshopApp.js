@@ -77,33 +77,33 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
     }
 
     get selectedWorkshopIndustryFeatures() {
-        console.log('🔍 Getting assigned Interest Tags for selected workshop');
-        console.log('🔍 Selected Workshop ID:', this.selectedWorkshopId);
-        console.log('🔍 Assigned tags:', this.assignedInterestTags);
-        console.log('🔍 Assigned tags length:', this.assignedInterestTags.length);
+        // console.log('🔍 Getting assigned Interest Tags for selected workshop');
+        // console.log('🔍 Selected Workshop ID:', this.selectedWorkshopId);
+        // console.log('🔍 Assigned tags:', this.assignedInterestTags);
+        // console.log('🔍 Assigned tags length:', this.assignedInterestTags.length);
         
         // If we have assigned Interest Tags, return them
         if (this.assignedInterestTags && this.assignedInterestTags.length > 0) {
-            console.log('✅ Returning assigned Interest Tags');
+            // console.log('✅ Returning assigned Interest Tags');
             
             // Debug: log each tag to see its structure
-            this.assignedInterestTags.forEach((tag, index) => {
-                console.log(`🏷️ Tag ${index + 1}:`, JSON.stringify(tag, null, 2));
-            });
+            // this.assignedInterestTags.forEach((tag, index) => {
+            //     console.log(`🏷️ Tag ${index + 1}:`, JSON.stringify(tag, null, 2));
+            // });
             
             const tagNames = this.assignedInterestTags.map(tag => tag.name).filter(name => name);
-            console.log('🔍 Tag names being returned:', tagNames);
-            console.log('🔍 Tag names array length:', tagNames.length);
+            // console.log('🔍 Tag names being returned:', tagNames);
+            // console.log('🔍 Tag names array length:', tagNames.length);
             
             // Force reactivity by breaking proxy chain
             const reactiveTagNames = [...tagNames];
-            console.log('🔄 Reactive tag names:', reactiveTagNames);
+            // console.log('🔄 Reactive tag names:', reactiveTagNames);
             
             return reactiveTagNames;
         }
         
         // Fallback: return empty array (don't show raw field values)
-        console.log('⚠️ No assigned Interest Tags found, returning empty array');
+        // console.log('⚠️ No assigned Interest Tags found, returning empty array');
         return [];
     }
 
@@ -129,6 +129,73 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
     }
 
     async connectedCallback() {
+        // Display developer signature
+        console.log(`
+╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                     BUILT BY AUGUST KRYS WITH CURSOR                                         ║
+║                                                                                                               ║
+║                                      ░░░▒▒▒▒▒▒░░░▒▒▒▓▓▓▓▒▒░░░                                               ║
+║                                   ░░▒▒▓▓▓▓▓▓▒▒▒▒▓█████████▓▓▒░░                                             ║
+║                                 ░▒▓█████████▓▓▒▒▓███████▓▓▓▒▒▒▒▒░░░                                         ║
+║                               ░▒▓███████████▓▓▓▓▓████████████▓▒▒▒▒▒░░                                        ║
+║                             ░▒▓██████████████▓▓▓██████████████▓▓▒▒▒▒▒▒░                                      ║
+║                           ░░▓███████████████████▓▓▓█████████████▓▒▒▒▒▓▓▒░                                    ║
+║                         ░░▒████████████████▓▓▓▒▒▒▒▒▒▒░▒▒▒▒█████▓▓█▓▓▒▒▓▓▓░░                                  ║
+║                      ░░░░▒▓█████████▓███▓▒▒▒▒░░░░░░░░░  ░░░▒▒▓█▓▓███▓▓▓▓▓▓▒░░                                ║
+║                    ░░░░░▒▓█████████████▓▒▒▒░░░░░░░░░       ░░░▒▓▒████▓▓▓█▓▓▒░░                               ║
+║                  ░░░░░▒▒▓█████████████▓▒▒▒▒░░░░░░░░░          ░░▒▓█████████▓▒▒░                              ║
+║                 ░░░▒▒▒█████████████▓▓▓▒▒▒▒░░░░░░░░░░           ░░▓█████████▓▒░░                             ║
+║                ░░▒▒▓█████████████▓▓▒▒▒▒▒░░░░░░░░░░░░░          ░░▒▓████████▒▒░░                             ║
+║                ▒▒▒████████████▓▒▒▒▒▒▒▒░░░░░░░░  ░░░░             ░░▒██████▓▒▒░░                             ║
+║                ▒▒█████████████▓▒▒▒▒▒▒▒▒░░░░░░   ░░░░░              ░▒██████▒▒▒░                             ║
+║                ▒▒████████████▓▒▒▒▒▒▒░░░░░░░░░░  ░░░░░        ░░░░░░░░██████▓▒▒▒                             ║
+║                ▒▒█████████████▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░▓██████▓▒▒                            ║
+║                ▒▒████████████▓▒▒▓▓▓▓▓▓▒▒▒▒▓▓▓▒▒▒░░░░░ ░░░░░░░░░░░░░░░░▒███████▓▒▒                            ║
+║                ▒▒████████████▓▒▓▓▓▓▓▒▒▒░░░░▒▒▒▓▒▒▒░░    ░░░▒▒▒▒░░░░░░░░████████▓▒                            ║
+║                ▒████████████▓▒▒▒▓▓▓▓▓▓▓▒▒▒▒▒▒▓▓█▓▒▒░░   ░▒▓▓▓▓▓█▓▒▒▒░░░░▒████████▒                           ║
+║                ▒████████████▓▒▒▒▒▒▓▓███████▓░▒▓█▓▓▒▒░░   ░░░▒▒▒▒▒▒▒▒▒▒▒░░░▓███████▓                          ║
+║                █████████████▓▒▒▒▒▓▓▓▓▓▓▒▒▒▒▒▒▒▓▓▓▒▒▒░░░   ░░░▒▒▒░░░░░░░░░░▒▓██████▓                          ║
+║                ██████████████▒▒▒▒▒▒▒▓▓▒▒▒▒▒▒▓▓▓▓▓▒▒▒░░░ ░░  ░░░░░   ░░    ░▒▓████▓█                          ║
+║                ███████████████▒▒▒▒▒▒▒▒░▒░▒▒▒▒▒▒▒▒▒▒▒░░░  ░░    ░░         ░▒▓▓▓▓▓█▓                          ║
+║                ██████████████▓▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▓▓▒▒░░░░    ░              ░▒█████▓▒                          ║
+║                ▓▓▓███████████▓▓▒▒▒▒▒▒▒░░░░░░▒▒▓▓▒▒▒░░░░    ░░░           ░░▒▓████▓▒                          ║
+║                ▓▓▓████████████▓▒▒▒▒▒▒▒▒░░░░▒▒▒▓▒▓▓▒▒░░░░░░░░░░░░         ░░▓██████▒                          ║
+║                ▓▓████████████▓▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▓▓▓▓▓▓▓▒▒▒▒▓▒░  ░░        ░░▓█▓██▓▓░                          ║
+║                ▒▓███████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓█▓▓▒░░░▒░░░    ░░░   ░   ▒▓██▓▒▓▒░                          ║
+║                ░░▒▓▒██▒█████▓▒▒▒▒▒▒▒▒▒▒▒▒▓▓███▓▓▓▒▒▒▒▒▒▒▒░░░░░░░░░ ░  ░▒▓▓▓▓▒▓░░░                          ║
+║                     ░▓█▒▓████▓▒▒▒▒▒▒▒▒▓▓██████▓▓▓▓▓▓▓▓▓▒▓▓▒▒▒▒▒▒░░░░ ░ ░▒▓▓▓██▓                               ║
+║                     ░▒█▓██████▓▒▒▒▒▒▒█████████▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░ ░░▒▓█████▒▒░                            ║
+║                   ░▒▒▓████████▓▒▒▓▓▓██████████▓▓▓▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▒░░░░░░▒▓▓█▓▓▓█▓▓▓                          ║
+║                 ░▒▒▒▓▓▓████████▓▒▓▓█████▓▓▓▓▓▓▒▒▒░░░░░░░░░░░░▒▓▓▓▒▒▒░░░░▓▓▒▒▓█▓▓▓▓▓                          ║
+║                 ░▒▒░ ░▒▓███████▓▓▓████▓▓▒▒▒▒▒▒▒▒░░░░░░░░░░░  ░░▓▓▒▒▒░░░▒▓▓▓▓▒▒████▓                          ║
+║                 ░▒░▒▓████████████▓██████▓▒▒▒▒▒▓▓▒▓▓▓▒▒▒░░░   ░▒▓▓▒▒▒░▒▒▓▓▓█▒▒▒░▒██▓                          ║
+║                  ▒░   ▒▓▓████████▓██████▓▒▒▒▒▒▓███▓█▓▒░░   ░░▒██▓▒▓▒▓▓▓▓██▓▒▒▒▒▒▒░░                          ║
+║                      ░░▒▒█▓██████████████▓▓▒▒████▓▓▓▒▒░  ░░▒▓███▓▓▓▓▓▓▓▓█▓▒▒▒▒▒▒▓▓▓                          ║
+║                      ░ ▒░░███████████████████▓▓▓▓▒▒▒▒▒▒░▒░▒▓██████████▓▓▓▓▓▒▒▒▒░░░░                          ║
+║                        ░▒░▓██████████████████▓█▓▓▒▒▓▓▒▓▒▒▓▓▓█████████▓█▓▒▓▒▒░▒▒▒ ░░                          ║
+║                          ░▓█████████████████████▓▓▓█▓▓▓▓▓▓▓▓▓▓██████████▓▒▒▒▒▒░░░░░░                          ║
+║                          ░░▒▓████████████████████████▓█▓▒▓█▓▓██████████▒▒▒░░       ░                           ║
+║                             ▒████████████████████████▓▓▓█▓████▒██████▓▒▓▒▒▒░░░░░  ░░                          ║
+║                  ░░      ░░ ░███████████▓████████████▓██████▒░▒▓██████▓▒▒▒▓▒    ░░░▒                           ║
+║                 ▒██▓▓██▓▓██████████████▓▓██████████████▓▒▒░ ░███████▓█████▓▒░░░░▒▒▒                           ║
+║                 ▒░▒███████████████████▓▓▒▓█████████████▓▓▓░░░   ▒███████▓▓▓▓█▓██████                           ║
+║                 ████████████████████████▓▒▒▒▒▒▒▒▒▒▓████▓▓▒▓▒░░░     ░████████▓█▓▓███                           ║
+║                 ██████████████████████████▓▒▒▒░░░░░░▒▒░░░░░        ░▓███▓███▓▓██████                           ║
+║                 ████████████████████████████▓▒▒▒▒░░░░░░░░        ░░▒██████▓▓████████                           ║
+║                 ████████████████████████████▓▓▒▒▒▒▒▒▒▒▒░░░░░░░░░░░▓█████▓▒██████▓███                           ║
+║                 ██████████████████████████████▓▒▒▒▒▒░░░░░░░░░░░░▒████▓▓▓███████▓████                           ║
+║                 ███████████████████████████████▓▒▒▒░░░░░░░░░░░░▒███▓▒███▓██████▓▓███                           ║
+║                                                                                                               ║
+║                               🚀 Hands-On Workshop Framework - Built with Salesforce and Cursor AI          ║
+║                               💡 Accelerating Salesforce training delivery                                  ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+        `);
+        
+        console.log('🔗 Project Resources:');
+        console.log('📂 GitHub Repository: https://github.com/not2technical/MFG-Auto-Cloud-Workshops');
+        console.log('📝 Development Story: https://medium.com/@akrys/7-days-with-cursor-and-salesforce-15e905f5250b');
+        console.log('');
+        
         await this.forceRefreshAllData();
     }
 
@@ -136,7 +203,7 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
      * Force complete refresh of all data from server (clears all caches)
      */
     async forceRefreshAllData() {
-        console.log('🔄 Force refreshing all workshop data from server...');
+        // console.log('🔄 Force refreshing all workshop data from server...');
         this.isLoading = true;
         
         try {
@@ -173,14 +240,14 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
      */
     async loadWorkshopsWithProgressFromServer() {
         try {
-            console.log('🔄 Loading workshops with progress from server...');
+            // console.log('🔄 Loading workshops with progress from server...');
             
             // Get fresh workshop data with accurate progress counts
             const data = await getAllWorkshopsWithProgress();
-            console.log('🔍 Raw workshop data with progress from server:', JSON.stringify(data, null, 2));
+            // console.log('🔍 Raw workshop data with progress from server:', JSON.stringify(data, null, 2));
             
             if (!data || !Array.isArray(data) || data.length === 0) {
-                console.warn('⚠️ No workshops found');
+                // console.warn('⚠️ No workshops found');
                 this.workshops = [];
                 this.workshopOptions = [];
                 this.selectedWorkshopId = '';
@@ -204,7 +271,7 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
                 UserProgressCount: ws.UserProgressCount || 0 // This now comes from server!
             }));
 
-            console.log('✅ Mapped workshops with progress:', JSON.stringify(this.workshops, null, 2));
+            // console.log('✅ Mapped workshops with progress:', JSON.stringify(this.workshops, null, 2));
 
             this.workshopOptions = this.workshops.map(ws => ({ 
                 label: ws.Name, 
@@ -238,7 +305,7 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
      */
     async refreshAllWorkshopBadges() {
         try {
-            console.log('🔄 Refreshing badge counts for all workshops...');
+            // console.log('🔄 Refreshing badge counts for all workshops...');
             
             // Get fresh progress data for all workshops
             const freshWorkshopData = await getAllWorkshopsWithProgress();
@@ -252,10 +319,10 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
                 };
             });
             
-            console.log('✅ Badge counts refreshed for all workshops');
+            // console.log('✅ Badge counts refreshed for all workshops');
             
         } catch (error) {
-            console.error('❌ Error refreshing workshop badges:', error);
+            // console.error('❌ Error refreshing workshop badges:', error);
         }
     }
 
@@ -276,19 +343,19 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
         }
 
         try {
-            console.log('🔄 Loading steps from server (bypassing cache) for workshop:', this.selectedWorkshopId);
+            // console.log('🔄 Loading steps from server (bypassing cache) for workshop:', this.selectedWorkshopId);
             
             // Use non-cached method to get fresh data
             const result = await getFreshStepsAndProgress({ workshopId: this.selectedWorkshopId });
             const steps = Array.isArray(result) ? result : [];
-            console.log('✅ Fresh steps loaded from server:', steps);
+            // console.log('✅ Fresh steps loaded from server:', steps);
 
             // Calculate progress counts
             const selectedWs = this.workshops.find(ws => ws.Id === this.selectedWorkshopId);
             const totalSteps = selectedWs ? selectedWs.StepCount : 0;
             const userProgressSteps = steps.filter(s => s.progress).length;
 
-            console.log(`🧮 Total steps: ${totalSteps}, UserProgressCount: ${userProgressSteps}`);
+            // console.log(`🧮 Total steps: ${totalSteps}, UserProgressCount: ${userProgressSteps}`);
 
             // Update step data
             this.steps = steps;
@@ -334,7 +401,7 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
         }
 
         try {
-            console.log('📊 Loading assigned Interest Tags from server for workshop:', this.selectedWorkshopId);
+            // console.log('📊 Loading assigned Interest Tags from server for workshop:', this.selectedWorkshopId);
             
             // Try multiple methods to get fresh data
             let assignedTags = null;
@@ -343,40 +410,40 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
             try {
                 assignedTags = await getAssignedInterestTags({ workshopId: this.selectedWorkshopId });
                 if (assignedTags && assignedTags.length > 0) {
-                    console.log('✅ Got tags from original method');
+                    // console.log('✅ Got tags from original method');
                     this.assignedInterestTags = [...assignedTags];
                     return;
                 }
             } catch (error) {
-                console.log('⚠️ Original method failed, trying alternatives...');
+                // console.log('⚠️ Original method failed, trying alternatives...');
             }
             
             // Method 2: Dynamic method
             try {
                 assignedTags = await getAssignedInterestTagsWithDynamicOrg({ workshopId: this.selectedWorkshopId });
                 if (assignedTags && assignedTags.length > 0) {
-                    console.log('✅ Got tags from Dynamic method');
+                    // console.log('✅ Got tags from Dynamic method');
                     this.assignedInterestTags = [...assignedTags];
                     return;
                 }
             } catch (error) {
-                console.log('⚠️ Dynamic method failed, trying final alternative...');
+                // console.log('⚠️ Dynamic method failed, trying final alternative...');
             }
             
             // Method 3: Named Credential method
             try {
                 assignedTags = await getAssignedInterestTagsWithNamedCredential({ workshopId: this.selectedWorkshopId });
                 if (assignedTags && assignedTags.length > 0) {
-                    console.log('✅ Got tags from Named Credential method');
+                    // console.log('✅ Got tags from Named Credential method');
                     this.assignedInterestTags = [...assignedTags];
                     return;
                 }
             } catch (error) {
-                console.log('⚠️ All methods failed');
+                // console.log('⚠️ All methods failed');
             }
             
             // All methods failed
-            console.log('⚠️ All methods returned empty - no tags found');
+            // console.log('⚠️ All methods returned empty - no tags found');
             this.assignedInterestTags = [];
             
         } catch (error) {
@@ -427,10 +494,10 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
 
         try {
             this.isLoading = true;
-            console.log('🚀 Starting workshop...');
+            // console.log('🚀 Starting workshop...');
             
             await startWorkshop({ workshopId: this.selectedWorkshopId });
-            console.log('✅ Workshop started, forcing complete data refresh...');
+            // console.log('✅ Workshop started, forcing complete data refresh...');
 
             // Force complete refresh from server after starting
             await this.forceRefreshWorkshopData();
@@ -451,10 +518,10 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
     async handleRestartConfirm() {
         try {
             this.isLoading = true;
-            console.log('🔄 Restarting workshop...');
+            // console.log('🔄 Restarting workshop...');
             
             await resetWorkshop({ workshopId: this.selectedWorkshopId });
-            console.log('✅ Workshop reset, forcing complete data refresh...');
+            // console.log('✅ Workshop reset, forcing complete data refresh...');
             
             // Force complete refresh from server after reset
             await this.forceRefreshWorkshopData();
@@ -481,7 +548,7 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
      * Force refresh workshop-specific data (steps and tags)
      */
     async forceRefreshWorkshopData() {
-        console.log('🔄 Force refreshing workshop-specific data...');
+        // console.log('🔄 Force refreshing workshop-specific data...');
         
         // Clear workshop-specific cache references
         this._stepsResult = null;
@@ -542,7 +609,7 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
 
     handleStepComplete(event) {
         const { stepId, isChecked } = event.detail;
-        console.log(`handleStepComplete fired: step ${stepId}, checked ${isChecked}`);
+        // console.log(`handleStepComplete fired: step ${stepId}, checked ${isChecked}`);
         // Directly update local steps
         this.steps = this.steps.map(s =>
             s.Id === stepId ? { ...s, progress: isChecked } : s
@@ -552,14 +619,14 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
     async handleSaveProgress() {
         try {
             this.isLoading = true;
-            console.log('💾 Saving progress...');
+            // console.log('💾 Saving progress...');
             
             const promises = this.steps.map(s => 
                 markStepComplete({ stepId: s.Id, isComplete: s.progress === true })
             );
 
             await Promise.all(promises);
-            console.log('✅ Progress saved, forcing data refresh...');
+            // console.log('✅ Progress saved, forcing data refresh...');
 
             // Force refresh from server after save
             await this.forceRefreshWorkshopData();
@@ -585,10 +652,10 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
 
         try {
             this.isLoading = true;
-            console.log('🗑️ Deleting workshop progress...');
+            // console.log('🗑️ Deleting workshop progress...');
             
             await deleteWorkshopProgress({ workshopId: this.selectedWorkshopId });
-            console.log('✅ Progress deleted, forcing complete data refresh...');
+            // console.log('✅ Progress deleted, forcing complete data refresh...');
             
             // Force complete refresh from server after delete
             await this.forceRefreshWorkshopData();
@@ -627,19 +694,19 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
     handleTagClick(event) {
         const tagName = event.target.textContent;
         
-        console.log('🔗 Tag clicked:', tagName);
-        console.log('🔗 Looking for tagId in assigned tags...');
-        console.log('🔗 Available assigned tags:', this.assignedInterestTags);
+        // console.log('🔗 Tag clicked:', tagName);
+        // console.log('🔗 Looking for tagId in assigned tags...');
+        // console.log('🔗 Available assigned tags:', this.assignedInterestTags);
         
         // Find the tag in assignedInterestTags by name
         const foundTag = this.assignedInterestTags.find(tag => tag.name === tagName);
         const tagId = foundTag ? foundTag.tagId : null;
         
-        console.log('🔗 Found tag:', foundTag);
-        console.log('🔗 Tag ID:', tagId);
+        // console.log('🔗 Found tag:', foundTag);
+        // console.log('🔗 Tag ID:', tagId);
         
         if (tagId) {
-            console.log('✅ Found matching Interest Tag ID:', tagId);
+            // console.log('✅ Found matching Interest Tag ID:', tagId);
             
             // Navigate to the Interest Tag record view
             this[NavigationMixin.Navigate]({
@@ -650,13 +717,13 @@ export default class WorkshopApp extends NavigationMixin(LightningElement) {
                     actionName: 'view'
                 }
             }).then(() => {
-                console.log('✅ Successfully navigated to InterestTag:', tagId);
+                // console.log('✅ Successfully navigated to InterestTag:', tagId);
             }).catch(error => {
                 console.error('❌ Navigation error:', error);
                 // Fallback: try direct URL navigation
                 const baseUrl = window.location.origin;
                 const interestTagUrl = `${baseUrl}/lightning/r/InterestTag/${tagId}/view`;
-                console.log('🔗 Trying fallback URL:', interestTagUrl);
+                // console.log('🔗 Trying fallback URL:', interestTagUrl);
                 window.open(interestTagUrl, '_blank');
             });
             
